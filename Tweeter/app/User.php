@@ -10,6 +10,19 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    function tweet(){
+        return $this->hasMany('App\Tweet');//laravel assumes theres a column called ID.
+    }
+    function like(){
+        return $this->hasMany('App\Like');
+    }
+    function comment(){
+        return $this->hasMany('App\Comment');
+    }
+    function follow(){
+        return $this->hasMany('App\Follow');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

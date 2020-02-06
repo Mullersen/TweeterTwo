@@ -15,6 +15,9 @@
                     @endif
 
                     You are logged in!
+                    <form action="/tweetFeed" method="get">
+                    <input type="submit" value="Go to Feed">
+                    </form>
                 </div>
             </div>
         </div>
