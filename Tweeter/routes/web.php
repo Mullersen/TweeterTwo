@@ -25,7 +25,9 @@ Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion');
 Route::get('/tweet/deleteTweet/yes', 'FeedController@deleteTweet');
 
 Route::post('/comment/addComment', 'FeedController@newComment');
-
+Route::post('/comment/deleteComment', 'FeedController@deleteComment');
+Route::post('/comment/showComment', 'FeedController@showComment');
+Route::post('/comment/editComment', 'FeedController@editComment');
 
 Route::post('/profile/followUser', 'UserController@followUser');
 Route::post('/profile/unfollowUser', 'UserController@unfollowuser');

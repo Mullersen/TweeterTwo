@@ -12,7 +12,7 @@ class Comment extends Model
     return $this->belongsTo('App\User');
     }
 
-    function tweets(){
+    function tweet(){
         return $this->belongsTo('App\Tweet');
     }
 }

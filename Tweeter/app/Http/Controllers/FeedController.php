@@ -34,7 +34,6 @@ class FeedController extends Controller
     }
 
     function showTweet(Request $request){
-         //check if the user that is logged in owns the tweet that you are trying to edit
         if (Auth::check()){
             if(Auth::user()->id == \App\Tweet::find($request->id)->user_id){
             $id = $request->id;
@@ -48,7 +47,6 @@ class FeedController extends Controller
         }
     }
     function editTweet(Request $request){
-            //check if the user that is logged in owns the tweet that you are trying to edit
             if (Auth::check()){
                 if(Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                 $data = $request->validate([
@@ -69,7 +67,6 @@ class FeedController extends Controller
     }
 
     function showDeleteQuestion(Request $request){
-            //ahthenticate user, and make sure the tweet the logged in user is owned by that user
             if (Auth::check()){
                 if (Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                     $id = $request->id;
@@ -88,6 +85,7 @@ class FeedController extends Controller
             if (Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                 $id = $request->id;
                 \App\Tweet::destroy($id);
+               // \App\Tweet::find($id)->comment->delete; -- this is not working.
                 return redirect('/tweetFeed');
             } else {
                 return view('error');
@@ -112,13 +110,39 @@ class FeedController extends Controller
     function deleteComment(Request $request){
         if (Auth::check()){
             $id = $request->id;
-            if(Auth::user()->id == \App\Comment::find($id)->id){
+            if(Auth::user()->id == \App\Comment::find($id)->user_id){
                 \App\Comment::destroy($id);
+                return redirect('/tweetFeed');
             } else {
                 return view('error');
             }
         } else {
             return view('error');
+        }
+    }
+    function showComment(Request $request){
+        if (Auth::check()){
+            $id = $request->id;
+            if(Auth::user()->id == \App\Comment::find($id)->user_id){
+               $comment = \App\Comment::find($id);
+               $tweet = \App\Comment::find($id)->tweet;
+                return view('comment', ['comment' => $comment, 'tweet' => $tweet]);
+            }
+        }
+    }
+    function editComment(Request $request){
+        if (Auth::check()){
+            $id =$request->id;
+            if(Auth::user()->id == \App\Comment::find($id)->user_id){
+                $comment = \App\Comment::find($id);
+                $comment->content = $request->content;
+                $comment->save();
+                return redirect('/tweetFeed');
+            } else {
+                return view('error');
+            }
+        } else {
+        return view('error');
         }
     }
 }

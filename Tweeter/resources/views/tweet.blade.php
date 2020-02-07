@@ -14,7 +14,7 @@
     </form>
     <form action='/tweetFeed' method='get'>
         @csrf
-        <button type='submit'>Home</button>
+        <button type='submit'> Go back</button>
     </form>
 
 @if ($errors->any()) {{--if theform is not validated with the controller will send the user back to the previous view. Flash messages will be shown before the site if compiled. Flash data will be sent with the request and show built in error messages--}}

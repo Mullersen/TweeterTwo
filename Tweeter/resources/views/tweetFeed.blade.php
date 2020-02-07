@@ -60,9 +60,19 @@
             @endif
         @endif
         @foreach ($comments as $comment)
-            @if ($comment->tweet_id == $tweet->id)
+            @if ($comment->tweet_id == $tweet->id) {{--Show only the comments that belong to the tweet--}}
                <p><strong>{{$comment->content}}</strong></p>
                 <p>{{\App\Comment::find($comment->id)->user->name}}</p>
+                @if ($comment->user_id == Auth::user()->id) {{--If the comment belongs to the logged in user--}}
+                <form action="/comment/deleteComment" method="POST">
+                    @csrf
+                    <button name='id' value='{{$comment->id}}'>Delete Comment</button>
+                </form>
+                <form action="/comment/showComment" method="POST">
+                    @csrf
+                    <button name='id' value='{{$comment->id}}'>Edit Comment</button>
+                </form>
+                @endif
             @endif
         @endforeach
         <form action="/comment/addComment" method="POST">

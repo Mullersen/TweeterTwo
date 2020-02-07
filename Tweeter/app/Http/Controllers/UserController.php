@@ -23,10 +23,8 @@ class UserController extends Controller
         if(Auth::check()){
             $authorName = $request->name;
             $matchThese = ['user_id'=> Auth::user()->id, 'followed_user'=> $authorName];
-            $follows = \App\Follow::where($matchThese)->get();
-            foreach ($follows as $follow){
-            \App\Follow::destroy($follow);
-            } return redirect('/tweetFeed');
+            \App\Follow::where($matchThese)->delete();
+             return redirect('/tweetFeed');
         } else {
             return view('error');
         }
