@@ -23,6 +23,9 @@ class UserController extends Controller
         if(Auth::check()){
             $name = $request->name;
             \App\Follow::destroy($name);
+            return redirect('/tweetFeed');
+        } else {
+            return view('error');
         }
     }
 }
