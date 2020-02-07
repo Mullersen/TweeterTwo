@@ -21,9 +21,12 @@ class UserController extends Controller
     }
     function unfollowUser(Request $request){
         if(Auth::check()){
-            $name = $request->name;
-            \App\Follow::destroy($name);
-            return redirect('/tweetFeed');
+            $authorName = $request->name;
+            $matchThese = ['user_id'=> Auth::user()->id, 'followed_user'=> $authorName];
+            $follows = \App\Follow::where($matchThese)->get();
+            foreach ($follows as $follow){
+            \App\Follow::destroy($follow);
+            } return redirect('/tweetFeed');
         } else {
             return view('error');
         }

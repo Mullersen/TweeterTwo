@@ -18,11 +18,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tweetFeed', 'FeedController@showAll');
-Route::post('/addTweet', 'FeedController@newTweet');
+Route::post('/tweet/addTweet', 'FeedController@newTweet');
 Route::get('/tweet/showTweet', 'FeedController@showTweet');
 Route::post('/tweet/editTweet', 'FeedController@editTweet');
 Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion');
 Route::get('/tweet/deleteTweet/yes', 'FeedController@deleteTweet');
+
+Route::post('/comment/addComment', 'FeedController@newComment');
+
 
 Route::post('/profile/followUser', 'UserController@followUser');
 Route::post('/profile/unfollowUser', 'UserController@unfollowuser');
