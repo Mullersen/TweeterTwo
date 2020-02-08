@@ -29,5 +29,8 @@ Route::post('/comment/deleteComment', 'FeedController@deleteComment');
 Route::post('/comment/showComment', 'FeedController@showComment');
 Route::post('/comment/editComment', 'FeedController@editComment');
 
+Route::post('like/likeTweet', 'FeedController@likeTweet');
+Route::post('like/unlikeTweet', 'FeedController@unlikeTweet');
+
 Route::post('/profile/followUser', 'UserController@followUser');
 Route::post('/profile/unfollowUser', 'UserController@unfollowuser');

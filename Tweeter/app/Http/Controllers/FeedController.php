@@ -146,66 +146,26 @@ class FeedController extends Controller
         return view('error');
         }
     }
-}
-
-
-/*
-$id = $request->id;
-function store(Request $request){
-    $data = $request->validate([
-        'author'=> 'max:50',
-        'content'=> 'bail|required|min:5|max:500'
-    ]);
-    $tweet = new \App\Tweet; //we make a new object - which will be our new row.
-    $tweet->author = $request->author; // we assign the values of the new object /the values of the new rows.
-    $tweet->content = $request->content;
-    $tweet->save(); // we save it in our database.
-    return redirect('/profile');
-}
-
-
-function delete(Request $request){
-    $id = $request->id;
-    \App\Tweet::destroy($id);
-    return redirect('/profile');
-}
-
-function edit(Request $request){
-    $id = $request->id;
-    $tweet =  \App\Tweet::find($id);
-    return view('editTweet', ['tweet' => $tweet]);
-}
-function save(Request $request){
-    $data = $request->validate([ //if the validation fails it sends the user back to the previous view(by GET method), with an error message. You can access that message through @error
-        'author'=> 'max:50',
-        'content'=> 'bail|required|min:5|max:500'
-    ]);
-    $id =$request->id;
-    $tweet = \App\Tweet::find($id);
-    $tweet->author = $request->author;
-    $tweet->content = $request->content;
-    $tweet->save();
-
-    return redirect('/profile');
-    //$result = \App\Tweet::all();
-    //return view('profile', ['tweets' => $result]);
-}
-
-function showUsers(){
-    if(Auth::check()){ // checking if the user is logged in, because the following page is protected, and can only show if logged in.
-        $users = \App\User::all();
-        $follows = \App\Follows::where('followingUser', Auth::user()->name)->get(); // we want to get all the rows where FollowingUser's name equals logged in users name.
-        return view ('users', ['users' => $users, 'follows' => $follows]); // the array we pass to the view can hold multiple items.
-    } else {
-        return redirect('/home');
+    function likeTweet(Request $request){
+        if (Auth::check()){
+            //insert check if the person has already liked the tweet
+            $like = new \App\Like;
+            $like->user_id = Auth::user()->id;
+            $like->tweet_id = $request->id;
+            $like->save();
+            return redirect('/tweetFeed');
+        } else {
+            return view('error');
+        }
+    }
+    function unlikeTweet(Request $request){
+        if (Auth::check()){
+            $matchThese = ['user_id'=> Auth::user()->id, 'tweet_id'=> $request->id];
+            \App\Like::where($matchThese)->delete();
+            return redirect('/tweetFeed');
+        } else {
+            return view ('error');
+        }
     }
 }
 
-function followUsers(Request $request){ //adds the followedUser and followingUser to the following table when the button is clicked on the users view.
-    $follow = new \App\Follows;
-    $follow->followingUser = Auth::user()->name;
-    $follow->followedUser = $request->name;
-    $follow->save();
-    return redirect('/profile/users');
-}
-*/

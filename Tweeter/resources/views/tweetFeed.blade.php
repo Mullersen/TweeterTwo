@@ -11,7 +11,7 @@
         }
         return false;
     }
-    function checkTweetForLike($tweetToCheck, $likes){
+    function checkTweet($tweetToCheck, $likes){
         foreach($likes as $checkedTweet){
             if($checkedTweet->tweet_id == $tweetToCheck){
                 return false;
@@ -54,7 +54,7 @@
             </form>
         @endif
         @if (Auth::user()->id !== $tweet->user_id)
-            @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows))
+            @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows)) {{--Follow/unfollow--}}
                 <form action="/profile/unfollowUser" method="POST">
                     @csrf
                     <button name='name' value='{{App\Tweet::find($tweet->id)->user->name}}'>Unfollow User</button>
@@ -66,14 +66,16 @@
                 </form>
             @endif
         @endif
-        @if (checkTweetForLike(App\Tweet::find($tweet->id), $likes))
-        <form action="/profile/unfollowUser" method="GET">
+        @if (checkTweet($tweet->id, $likes)) {{--Like option--}}
+        <form action="like/likeTweet" method="POST">
             @csrf
-            <input type="checkbox" name="id" id="{{$tweet->id}}">Like this Tweet
-            <input type="submit" value="indsend">
+            <button name='id' value='{{$tweet->id}}'>Like</button>
         </form>
         @else
-        <p>already liked</p>
+        <form action="like/unlikeTweet" method="POST">
+            @csrf
+            <button name='id' value='{{$tweet->id}}'>Unlike</button>
+        </form>
         @endif
         @foreach ($comments as $comment)
             @if ($comment->tweet_id == $tweet->id) {{--Show only the comments that belong to the tweet--}}
