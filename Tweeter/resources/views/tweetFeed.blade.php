@@ -2,14 +2,21 @@
 
 @php // follows is all the rows in Follow where user_id matches the id of logged in user
 
-    function checkUser($UserToCheck, $follows){
+    function checkUser($userToCheck, $follows){
         //we have to pass in the variable $follows above, becuase in a function you dont have access to variables from outside the varibale, unless you pass it in specifically.
         foreach ($follows as $checkedUser) {
-            if($checkedUser->followed_user == $UserToCheck){
+            if($checkedUser->followed_user == $userToCheck){
                 return true;
             }
         }
         return false;
+    }
+    function checkTweetForLike($tweetToCheck, $likes){
+        foreach($likes as $checkedTweet){
+            if($checkedTweet->tweet_id == $tweetToCheck){
+                return false;
+            }
+        } return true;
     }
 @endphp
 
@@ -58,6 +65,15 @@
                     <button name='name' value='{{App\Tweet::find($tweet->id)->user->name}}'>Follow User</button>
                 </form>
             @endif
+        @endif
+        @if (checkTweetForLike(App\Tweet::find($tweet->id), $likes))
+        <form action="/profile/unfollowUser" method="GET">
+            @csrf
+            <input type="checkbox" name="id" id="{{$tweet->id}}">Like this Tweet
+            <input type="submit" value="indsend">
+        </form>
+        @else
+        <p>already liked</p>
         @endif
         @foreach ($comments as $comment)
             @if ($comment->tweet_id == $tweet->id) {{--Show only the comments that belong to the tweet--}}

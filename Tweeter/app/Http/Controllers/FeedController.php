@@ -12,7 +12,8 @@ class FeedController extends Controller
         $tweets = \App\Tweet::all();
         $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
         $comments = \App\Comment::all();
-        return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments]);
+        $likes = \App\Like::where('user_id', Auth::user()->id)->get();
+        return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes]);
         } else {
         $tweets = \App\Tweet::all();
         return view('tweetFeed', ['tweets' => $tweets]);
@@ -85,7 +86,7 @@ class FeedController extends Controller
             if (Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                 $id = $request->id;
                 \App\Tweet::destroy($id);
-               // \App\Tweet::find($id)->comment->delete; -- this is not working.
+                \App\Comment::where('tweet_id', $id)->delete();
                 return redirect('/tweetFeed');
             } else {
                 return view('error');

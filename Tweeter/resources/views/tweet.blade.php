@@ -7,6 +7,7 @@
         @csrf
         <input type='hidden' name='author' value='{{Auth::user()->id}}'>
         <div><textarea id='content' cols='100' name='content'>{{$tweet->content}}</textarea></div>
+        <button name='id' value='{{$tweet->id}}' type='submit'>Save Changes</button>
     </form>
     <form action='/tweet/deleteTweet' method='post'>
         @csrf
