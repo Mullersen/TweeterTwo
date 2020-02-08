@@ -33,4 +33,7 @@ Route::post('like/likeTweet', 'FeedController@likeTweet');
 Route::post('like/unlikeTweet', 'FeedController@unlikeTweet');
 
 Route::post('/profile/followUser', 'UserController@followUser');
-Route::post('/profile/unfollowUser', 'UserController@unfollowuser');
+Route::post('/profile/unfollowUser', 'UserController@unfollowUser');
+Route::get('/profile/show/{id}', 'UserController@showProfile');
+Route::post('/profile/editEmail', 'UserController@editEmail');
+Route::post('/profile/editPassword', 'UserController@editPassword');

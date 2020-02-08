@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -29,4 +30,49 @@ class UserController extends Controller
             return view('error');
         }
     }
+    function showProfile($id){
+        if (\App\User::find($id)){
+            $tweets = \App\Tweet::where('user_id', $id)->get();
+            $user = \App\User::find($id);
+            $follows = \App\Follow::where('user_id', $id)->get();
+            return view('profile', ['tweets' => $tweets, 'user' => $user, 'follows' => $follows]);
+            } else {
+                return view('error');
+            }
+    }
+
+    function editEmail(Request $request){
+        if (Auth::check()){
+            if(Auth::user()->id = $request->id){
+                $id = $request->id;
+                $user = \App\user::find($id);
+                $user->email = $request->email;
+                $user->save();
+                return redirect('/profile/show/'. $id); // concatenates with the current id - replaces the curly braces in the route.
+            } else {
+                return view('error');
+            }
+        } else {
+            return view('error');
+        }
+    }
+    function editPassword(Request $request){
+        if (Auth::check()){
+            if(Auth::user()->id = $request->id){
+                $id = $request->id;
+                $user = \App\user::find($id);
+                $request->validate([
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect('/profile/show/'. $id);
+            } else {
+                return view('error');
+            }
+        } else{
+            return view('error');
+        }
+    }
 }
+

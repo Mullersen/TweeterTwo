@@ -27,7 +27,7 @@
 
     @foreach ($tweets as $tweet)
         <div>{{$tweet->content}}</div>
-        <div>{{App\Tweet::find($tweet->id)->user->name}}</div>
+        <a href="/profile/show/{{{$tweet->user_id}}}"><h4>{{App\Tweet::find($tweet->id)->user->name}}</h4></a>
         <br>
         <br>
     @endforeach
@@ -47,7 +47,7 @@
 
    @foreach ($tweets as $tweet)
         <div><h3>{{$tweet->content}}</h3></div>
-        <div><h4>{{App\Tweet::find($tweet->id)->user->name}}</h4></div>
+        <a href="/profile/show/{{{$tweet->user_id}}}"><h4>{{App\Tweet::find($tweet->id)->user->name}}</h4></a>
         @if (Auth::user()->id == $tweet->user_id)
             <form action="/tweet/showTweet" method="get">
                 <button type="submit" name='id' value='{{$tweet->id}}'>Edit/Delete Tweet</button>
