@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', function () {
+    return view('test');
+});
 
 Route::get('/tweetFeed', 'FeedController@showAll');
 Route::post('/tweet/addTweet', 'FeedController@newTweet');

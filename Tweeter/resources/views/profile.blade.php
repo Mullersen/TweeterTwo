@@ -21,9 +21,11 @@
 @guest
 <h1>{{$user->name}}</h1>
     @foreach ($tweets as $tweet)
-    <div>{{$tweet->content}}</div>
-    <br>
-    <br>
+    <li>
+        <ul>
+            <div>{{$tweet->content}}</div>
+        </ul>
+    </li>
     @endforeach
 <form action='/tweetFeed' method='get'>
     @csrf
