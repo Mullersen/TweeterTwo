@@ -22,20 +22,31 @@
 
 
 @section('content')
-<div class="container my-4">
+<div class="container-md my-4">
     @guest
-    <p>Go log in to edit your tweets</p>
-
-        @foreach ($tweets as $tweet)
-            <div>{{$tweet->content}}</div>
-            <a href="/profile/show/{{{$tweet->user_id}}}"><h4>{{App\Tweet::find($tweet->id)->user->name}}</h4></a>
-            <br>
-            <br>
-        @endforeach
-
+        <div class="alert alert-secondary text-center" role="alert">
+            Log in to tweet, edit, and follow
+        </div>
+    <hr>
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-6">
+            @foreach ($tweets as $tweet)
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="card-text mb-2">{{$tweet->content}}</p>
+                        <hr>
+                        <h5 class="card-subtitle text-muted"><a class="card-link" href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
     @else
-        <p> welcome {{Auth::user()->name}} </p> {{--We are using the auth class, which has a method called user. therefore we can access the user-object through the arrow--}}
-        <p>Create new tweet</p>
+        <div class="alert alert-info text-center" role="alert">
+            welcome {{Auth::user()->name}} {{--We are using the auth class, which has a method called user. therefore we can access the user-object through the arrow--}}
+        </div>
+        <hr>
+        <h5>Create new tweet</h5>
         <form action="/tweet/addTweet" method="POST">
             @csrf
             <input type='hidden' name='user' value='{{Auth::user()->name}}'>

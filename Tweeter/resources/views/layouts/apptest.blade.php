@@ -65,7 +65,7 @@
                     </ul>
                 </div>
             </nav>
-<div class="pyx-2">
+<div class="pyx-4">
 @yield('content')
 </div>
 <footer class="footer mt-auto py-2 bg-dark">
