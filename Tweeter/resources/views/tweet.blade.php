@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <h4 class="text-center mb-2">Edit or Delete your tweet here</h4>
+    <h4 class="text-center mb-4">Edit or Delete your tweet here</h4>
         <form action='/tweet/editTweet' method='POST'>
             @csrf
             <input type='hidden' name='author' value='{{Auth::user()->id}}'>
             <div class="form-group">
-                <div><textarea class="form-control" id='content' name='content'>{{$tweet->content}}</textarea></div>
+                <div><textarea class="form-control" id='content' rows="5" name='content'>{{$tweet->content}}</textarea></div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" name='id' value='{{$tweet->id}}' type='submit'>Save Changes</button>
+                <button class="form-control bg-light" name='id' value='{{$tweet->id}}' type='submit'>Save Changes</button>
             </div>
         </form>
         <form action='/tweet/deleteTweet' method='post'>
             @csrf
             <div class="form-group">
-                <button class="btn btn-primary" name='id' value='{{$tweet->id}}' type='submit'>Delete Tweet</button>
+                <button class="form-control bg-light" name='id' value='{{$tweet->id}}' type='submit'>Delete Tweet</button>
             </div>
         </form>
 

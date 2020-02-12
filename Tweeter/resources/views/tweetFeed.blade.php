@@ -51,7 +51,7 @@
             @csrf
             <input class="form-control" type='hidden' name='user' value='{{Auth::user()->name}}'>
             <div class="form-group">
-                <textarea class="form-control" id='content' cols='100' name='content'>Write something interesting...</textarea>
+                <textarea class="form-control" id='content' name='content'>Write something interesting...</textarea>
             </div>
             <input class="form-control" type='submit' name='submit' value='Post Tweet'>
         </form>
