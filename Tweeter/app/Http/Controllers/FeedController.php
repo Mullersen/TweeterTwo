@@ -9,7 +9,7 @@ class FeedController extends Controller
 {
     function showAll(){
         if (Auth::check()){
-        $tweets = \App\Tweet::all();
+        $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
         $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
         $comments = \App\Comment::all();
         $likes = \App\Like::where('user_id', Auth::user()->id)->get();
@@ -29,9 +29,9 @@ class FeedController extends Controller
         $tweet->content = $request->content;
         $tweet->save();
         return redirect('/tweetFeed');
-        } else {
-            return view('error');
-        }
+            } else {
+                return view('error');
+            }
     }
 
     function showTweet(Request $request){

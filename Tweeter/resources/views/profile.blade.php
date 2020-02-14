@@ -1,55 +1,76 @@
 @extends('layouts.app')
 
 @section('content')
-
-@if ($user == Auth::user())
-<form action='/profile/editEmail' method='POST'>
-    @csrf
-    <input type='hidden' name='id' value='{{$user->id}}'>
-    <input type="email" name="email" id="email">
-    <div><button type='submit'>Edit Email</button></div>
-</form>
-<form action='/profile/editPassword' method='POST'>
-    @csrf
-    <input type='hidden' name='id' value='{{$user->id}}'>
-    <input type="password" name="password" id="password" required autocomplete="new-password">
-    <input type="password" name="password_confirmation" id="password-confirm" required autocomplete="new-password">
-    @error('password') {{$message}} @enderror
-    <div><button type='submit'>Edit Password</button></div>
-@endif
-
 @guest
-<h1>{{$user->name}}</h1>
-    @foreach ($tweets as $tweet)
-    <li>
-        <ul>
-            <div>{{$tweet->content}}</div>
+    <h3 class="text-center mb-4">{{$user->name}}'s profile</h3>
+    <hr>
+    @if ($tweets->isEmpty())
+        <h5 class="text-center mb-2">This user has no tweets yet...</h5>
+    @else
+        <ul class="list-group">
+            <li class="list-group-item active"><h5>{{$user->name}}'s tweets</h5></li>
+            @foreach ($tweets as $tweet)
+                <li class="list-group-item">{{$tweet->content}}</li>
+            @endforeach
         </ul>
-    </li>
-    @endforeach
-<form action='/tweetFeed' method='get'>
-    @csrf
-    <button type='submit'> Go back</button>
-</form>
+@endif
 @else
-<h1>{{$user->name}}</h1>
-<h3>{{$user->email}}</h3>
-<h3>{{$user->created_at}}</h3>
+    <h3 class="text-center mb-4">Your profile {{$user->name}}</h3>
+    <hr>
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Username: {{$user->name}}</h3>
+            <h4 class="text-center mb-4"> Email: {{$user->email}}</h4>
+            <h4 class="text-center mb-4"> Created at: {{$user->created_at}}</h4>
 
-@foreach ($follows as $follow)
-    <div>{{$follow->followed_user}}</div>
-    <br>
-@endforeach
+            @if ($user == Auth::user())
+                <form action='/profile/editEmail' method='POST'>
+                    @csrf
+                    <input type='hidden' name='id' value='{{$user->id}}'>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" id="email" placeholder="New Email Address">
+                    </div>
+                    @error('email') {{$message}} @enderror
+                    <button class="form-control" type='submit'>Update Email</button>
+                </form>
+                <hr>
+                <form action='/profile/editPassword' method='POST'>
+                    @csrf
+                    <input type='hidden' name='id' value='{{$user->id}}'>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="New Password" required autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password_confirmation" id="password-confirm" placeholder="Confirm New Password" required autocomplete="new-password">
+                    </div>
+                    @error('password') {{$message}} @enderror
+                    <button class="form-control mb-3" type='submit'>Update Password</button>
+                </form>
+            @endif
+        </div>
+    </div>
 
-@foreach ($tweets as $tweet)
-    <div>{{$tweet->content}}</div>
-    <br>
-    <br>
-@endforeach
-<form action='/tweetFeed' method='get'>
-    @csrf
-    <button type='submit'> Feed</button>
-</form>
+    @if ($follows->isEmpty())
+        <a class="btn btn-outline-primary" role="button" href="/tweetFeed">Go follow some new users!</a>
+    @else
+        <ul class="list-group">
+            <li class="list-group-item active"><h5>You are following</h5></li>
+            @foreach ($follows as $follow)
+                    <li class="list-group-item">{{$follow->followed_user}}</li>
+            @endforeach
+        </ul>
+    @endif
+    <hr>
+    @if ($tweets->isEmpty())
+        <a class="btn btn-outline-primary" role="button" href="/tweetFeed">Go make some new tweets!</a>
+    @else
+        <ul class="list-group">
+            <li class="list-group-item active"><h5>Your tweets</h5></li>
+            @foreach ($tweets as $tweet)
+                <li class="list-group-item">{{$tweet->content}}</li>
+            @endforeach
+        </ul>
+    @endif
 @endguest
 
 @endsection

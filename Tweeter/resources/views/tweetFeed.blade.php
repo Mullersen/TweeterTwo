@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@php // follows is all the rows in Follow where user_id matches the id of logged in user
+@php // $follows is all the rows in Follow where user_id matches the id of logged in user
 
     function checkUser($userToCheck, $follows){
         //we have to pass in the variable $follows above, becuase in a function you dont have access to variables from outside the varibale, unless you pass it in specifically.
@@ -11,6 +11,7 @@
         }
         return false;
     }
+    //$likes are all the rows in Likes where user_id matches Auth::user()->id.
     function checkTweet($tweetToCheck, $likes){
         foreach($likes as $checkedTweet){
             if($checkedTweet->tweet_id == $tweetToCheck){
@@ -26,39 +27,49 @@
         <div class="alert alert-secondary text-center" role="alert">
             Log in to tweet, edit, and follow
         </div>
-    <hr>
-    <div class="row mb-4 justify-content-center">
-        <div class="col-md-6">
-            @foreach ($tweets as $tweet)
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p class="card-text mb-2">{{$tweet->content}}</p>
-                        <hr>
-                        <h5 class="card-subtitle text-muted"><a class="card-link" href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-    @else
-    <div>
-        <div class="alert alert-info text-center" role="alert">
-            Welcome {{Auth::user()->name}}! {{--We are using the auth class, which has a method called user. therefore we can access the user-object through the arrow--}}
-        </div>
-        <hr>
-        <h5>New Tweet</h5>
-        <form action="/tweet/addTweet" method="POST">
-            @csrf
-            <input class="form-control" type='hidden' name='user' value='{{Auth::user()->name}}'>
-            <div class="form-group">
-                <textarea class="form-control" id='content' name='content'>Write something interesting...</textarea>
-            </div>
-            <input class="form-control" type='submit' name='submit' value='Post Tweet'>
-        </form>
         <hr>
         <div class="row mb-4 justify-content-center">
             <div class="col-md-6">
                 @foreach ($tweets as $tweet)
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p class="card-text mb-2">{{$tweet->content}}</p>
+                            <hr>
+                            <h5 class="card-subtitle text-muted"><a class="card-link" href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @else
+        <div>
+        {{--Welcome message--}}
+        <div class="alert alert-info text-center" role="alert">
+            Welcome {{Auth::user()->name}}! {{--We are using the auth class, which has a method called user. therefore we can access the user-object through the arrow--}}
+        </div>
+        <hr>
+        {{--Create new Tweet--}}
+        <h5>New Tweet</h5>
+        <form action="/tweet/addTweet" method="GET">
+            @csrf
+            <input class="form-control" type='hidden' name='name' value='{{Auth::user()->name}}'>
+            <div class="form-group">
+            <textarea class="form-control" id='content' name='content' placeholder="Share something interesting...">{{old('content')}}</textarea>
+            </div>
+            @if ($errors->any()) {{--if theform is not validated with the controller will send the user back to the previous view. Flash messages will be shown before the site if compiled. Flash data will be sent with the request and show built in error messages--}}
+                @foreach ($errors->all() as $error)
+                <div class="alert alert-warning text-center" role="alert">
+                    {{$error}}
+                </div>
+                @endforeach
+            @endif
+            <button class="form-control"  name='id' value='{{Auth::user()->id}}'>Post Tweet</button>
+        </form>
+        <hr>
+        {{--Show tweets--}}
+        <div class="row mb-4 justify-content-center">
+            <div class="col-md-6">
+                @foreach ($tweets as $tweet){{--everything below here is part of the foreach loop showing the tweets--}}
                     <div class="card mb-2">
                         <div class="card-body">
                             {{--Edit Tweet if owner--}}
@@ -70,9 +81,10 @@
                             {{--Show the tweet and author--}}
                             <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
                             <p class="card-text mb-2">{{$tweet->content}}</p>
+                            <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
                             {{--Follow/unfollow--}}
                             @if (Auth::user()->id !== $tweet->user_id)
-                                @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows))
+                                @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows)){{--check all the current followed authors against the current tweets author--}}
                                     <form class="mr-auto" action="/profile/unfollowUser" method="POST"style="display:inline">
                                         @csrf
                                         <button class="btn btn-outline-primary btn-sm mb-3"  name='name' value='{{App\Tweet::find($tweet->id)->user->name}}'>Unfollow User</button>
@@ -96,13 +108,13 @@
                                     <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>Unlike</button>
                                 </form>
                             @endif
-                            {{--Show only the comments that belong to the tweet--}}
+                            {{--Show only the comments that belongs to the tweet--}}
                             @foreach ($comments as $comment)
                                 @if ($comment->tweet_id == $tweet->id)
                                     <div class="container mb-2">
                                         <p class="card-text small mb-1 font-weight-bold">{{\App\Comment::find($comment->id)->user->name}}</p>
                                         <p class="card-text small mb-2 border-bottom">- {{$comment->content}}</p>
-                                    {{--If the comment belongs to the logged in user--}}
+                                    {{--Edit comment it belongs to the logged in user--}}
                                         @if ($comment->user_id == Auth::user()->id)
                                             <form action="/comment/deleteComment" method="POST" style="display:inline">
                                                 @csrf

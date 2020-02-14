@@ -55,6 +55,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item" href="/profile/show/{{{Auth::user()->id}}}">Profile</a>
                                 </div>
                             </li>
                         @endguest
@@ -62,7 +63,7 @@
                 </div>
             </nav>
 <div class="pyx-4">
-    <div class="container-md my-4">
+    <div class="container-md mt-4 mb-5">
 @yield('content')
     </div>
 </div>

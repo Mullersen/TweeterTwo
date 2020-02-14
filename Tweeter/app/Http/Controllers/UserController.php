@@ -44,6 +44,9 @@ class UserController extends Controller
     function editEmail(Request $request){
         if (Auth::check()){
             if(Auth::user()->id = $request->id){
+                $data = $request->validate([
+                    'email' => 'required|unique:users'
+                ]);
                 $id = $request->id;
                 $user = \App\user::find($id);
                 $user->email = $request->email;

@@ -11,14 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tweetFeed', 'FeedController@showAll');
-Route::post('/tweet/addTweet', 'FeedController@newTweet');
+Route::get('/tweet/addTweet', 'FeedController@newTweet');
 Route::get('/tweet/showTweet', 'FeedController@showTweet');
 Route::post('/tweet/editTweet', 'FeedController@editTweet');
 Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion');
@@ -37,3 +33,5 @@ Route::post('/profile/unfollowUser', 'UserController@unfollowUser');
 Route::get('/profile/show/{id}', 'UserController@showProfile');
 Route::post('/profile/editEmail', 'UserController@editEmail');
 Route::post('/profile/editPassword', 'UserController@editPassword');
+
+Route::get('/', 'HomeController@index');
