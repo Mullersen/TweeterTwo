@@ -19,8 +19,8 @@ class FeedController extends Controller
         return view('tweetFeed', ['tweets' => $tweets]);
         }
     }
+
     function newTweet(Request $request){
-        if (Auth::check()){
         $data = $request->validate([
             'content' => 'required|min:5|max:500'
         ]);
@@ -29,13 +29,9 @@ class FeedController extends Controller
         $tweet->content = $request->content;
         $tweet->save();
         return redirect('/tweetFeed');
-            } else {
-                return view('error');
-            }
     }
 
     function showTweet(Request $request){
-        if (Auth::check()){
             if(Auth::user()->id == \App\Tweet::find($request->id)->user_id){
             $id = $request->id;
             $tweet = \App\Tweet::find($id);
@@ -43,12 +39,9 @@ class FeedController extends Controller
             } else {
                 return view('error');
             }
-        } else {
-            return view('error');
-        }
     }
+
     function editTweet(Request $request){
-            if (Auth::check()){
                 if(Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                 $data = $request->validate([
                     'content' => 'required|min:5|max:500'
@@ -62,13 +55,9 @@ class FeedController extends Controller
             } else{
                 return view('error');
             }
-        } else {
-            return view('error');
-        }
     }
 
     function showDeleteQuestion(Request $request){
-            if (Auth::check()){
                 if (Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                     $id = $request->id;
                     $tweet = \App\Tweet::find($id);
@@ -77,13 +66,9 @@ class FeedController extends Controller
                 } else {
                     return view('error');
                 }
-        } else {
-            return view('error');
-        }
     }
 
     function deleteTweet(Request $request){
-        if (Auth::check()){
             if (Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                 $id = $request->id;
                 \App\Tweet::destroy($id);
@@ -92,25 +77,18 @@ class FeedController extends Controller
             } else {
                 return view('error');
             }
-        } else {
-            return view('error');
-        }
     }
 
     function newComment(Request $request){
-        if (Auth::check()){
             $comment = new \App\Comment;
             $comment->user_id = Auth::user()->id;
             $comment->tweet_id = $request->id;
             $comment->content = $request->content;
             $comment->save();
             return redirect('/tweetFeed');
-        } else{
-            return view('error');
-        }
     }
+
     function deleteComment(Request $request){
-        if (Auth::check()){
             $id = $request->id;
             if(Auth::user()->id == \App\Comment::find($id)->user_id){
                 \App\Comment::destroy($id);
@@ -118,22 +96,20 @@ class FeedController extends Controller
             } else {
                 return view('error');
             }
-        } else {
-            return view('error');
-        }
     }
+
     function showComment(Request $request){
-        if (Auth::check()){
             $id = $request->id;
             if(Auth::user()->id == \App\Comment::find($id)->user_id){
                $comment = \App\Comment::find($id);
                $tweet = \App\Comment::find($id)->tweet;
                 return view('comment', ['comment' => $comment, 'tweet' => $tweet]);
+            } else {
+                return view('error');
             }
-        }
     }
+
     function editComment(Request $request){
-        if (Auth::check()){
             $id =$request->id;
             if(Auth::user()->id == \App\Comment::find($id)->user_id){
                 $comment = \App\Comment::find($id);
@@ -143,30 +119,20 @@ class FeedController extends Controller
             } else {
                 return view('error');
             }
-        } else {
-        return view('error');
-        }
     }
     function likeTweet(Request $request){
-        if (Auth::check()){
             //insert check if the person has already liked the tweet
             $like = new \App\Like;
             $like->user_id = Auth::user()->id;
             $like->tweet_id = $request->id;
             $like->save();
             return redirect('/tweetFeed');
-        } else {
-            return view('error');
-        }
     }
+
     function unlikeTweet(Request $request){
-        if (Auth::check()){
             $matchThese = ['user_id'=> Auth::user()->id, 'tweet_id'=> $request->id];
             \App\Like::where($matchThese)->delete();
             return redirect('/tweetFeed');
-        } else {
-            return view ('error');
-        }
     }
 }
 

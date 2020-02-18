@@ -56,7 +56,7 @@
             <div class="form-group">
             <textarea class="form-control" id='content' name='content' placeholder="Share something interesting...">{{old('content')}}</textarea>
             </div>
-            @if ($errors->any()) {{--if theform is not validated with the controller will send the user back to the previous view. Flash messages will be shown before the site if compiled. Flash data will be sent with the request and show built in error messages--}}
+            @if ($errors->any()) {{--if theform is not validated with the controller, it will send the user back to the previous view. Flash messages will be shown before the site if compiled. Flash data will be sent with the request and show built in error messages--}}
                 @foreach ($errors->all() as $error)
                 <div class="alert alert-warning text-center" role="alert">
                     {{$error}}

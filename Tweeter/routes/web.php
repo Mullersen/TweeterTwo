@@ -14,24 +14,24 @@
 Auth::routes();
 
 Route::get('/tweetFeed', 'FeedController@showAll');
-Route::get('/tweet/addTweet', 'FeedController@newTweet');
-Route::get('/tweet/showTweet', 'FeedController@showTweet');
-Route::post('/tweet/editTweet', 'FeedController@editTweet');
-Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion');
-Route::get('/tweet/deleteTweet/yes', 'FeedController@deleteTweet');
+Route::get('/tweet/addTweet', 'FeedController@newTweet')->middleware('auth');
+Route::get('/tweet/showTweet', 'FeedController@showTweet')->middleware('auth');
+Route::post('/tweet/editTweet', 'FeedController@editTweet')->middleware('auth');
+Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion')->middleware('auth');
+Route::get('/tweet/deleteTweet/yes', 'FeedController@deleteTweet')->middleware('auth');
 
-Route::post('/comment/addComment', 'FeedController@newComment');
-Route::post('/comment/deleteComment', 'FeedController@deleteComment');
-Route::post('/comment/showComment', 'FeedController@showComment');
-Route::post('/comment/editComment', 'FeedController@editComment');
+Route::post('/comment/addComment', 'FeedController@newComment')->middleware('auth');
+Route::post('/comment/deleteComment', 'FeedController@deleteComment')->middleware('auth');
+Route::post('/comment/showComment', 'FeedController@showComment')->middleware('auth');
+Route::post('/comment/editComment', 'FeedController@editComment')->middleware('auth');
 
-Route::post('like/likeTweet', 'FeedController@likeTweet');
-Route::post('like/unlikeTweet', 'FeedController@unlikeTweet');
+Route::post('like/likeTweet', 'FeedController@likeTweet')->middleware('auth');
+Route::post('like/unlikeTweet', 'FeedController@unlikeTweet')->middleware('auth');
 
-Route::post('/profile/followUser', 'UserController@followUser');
-Route::post('/profile/unfollowUser', 'UserController@unfollowUser');
+Route::post('/profile/followUser', 'UserController@followUser')->middleware('auth');
+Route::post('/profile/unfollowUser', 'UserController@unfollowUser')->middleware('auth');
 Route::get('/profile/show/{id}', 'UserController@showProfile');
-Route::post('/profile/editEmail', 'UserController@editEmail');
-Route::post('/profile/editPassword', 'UserController@editPassword');
+Route::post('/profile/editEmail', 'UserController@editEmail')->middleware('auth');
+Route::post('/profile/editPassword', 'UserController@editPassword')->middleware('auth');
 
 Route::get('/', 'HomeController@index');
