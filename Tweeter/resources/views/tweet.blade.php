@@ -15,7 +15,7 @@
         <form action='/tweet/deleteTweet' method='post'>
             @csrf
             <div class="form-group">
-                <button class="form-control bg-light" name='id' value='{{$tweet->id}}' type='submit'>Delete Tweet</button>
+                <button class="form-control bg-light btn btn-outline-danger" name='id' value='{{$tweet->id}}' type='submit'>Delete Tweet</button>
             </div>
         </form>
 

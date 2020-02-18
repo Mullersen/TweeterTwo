@@ -15,13 +15,17 @@
         </ul>
 @endif
 @else
-    <h3 class="text-center mb-4">Your profile {{$user->name}}</h3>
+    @if ($user == Auth::user())
+        <h3 class="text-center mb-4">Your profile {{$user->name}}</h3>
+    @else
+        <h3 class="text-center mb-4">{{$user->name}}'s profile</h3>
+    @endif
     <hr>
     <div class="row mb-4 justify-content-center">
         <div class="col-md-6">
             <h3 class="text-center mb-4">Username: {{$user->name}}</h3>
-            <h4 class="text-center mb-4"> Email: {{$user->email}}</h4>
-            <h4 class="text-center mb-4"> Created at: {{$user->created_at}}</h4>
+            <h4 class="text-center mb-4">Email: {{$user->email}}</h4>
+            <h4 class="text-center mb-4">Created at: {{$user->created_at}}</h4>
 
             @if ($user == Auth::user())
                 <form action='/profile/editEmail' method='POST'>
@@ -30,7 +34,9 @@
                     <div class="form-group">
                         <input class="form-control" type="email" name="email" id="email" placeholder="New Email Address">
                     </div>
-                    @error('email') {{$message}} @enderror
+                    <div class="alert alert-warning text-center" role="alert">
+                        @error('email') {{$message}} @enderror
+                    </div>
                     <button class="form-control" type='submit'>Update Email</button>
                 </form>
                 <hr>
@@ -50,11 +56,16 @@
         </div>
     </div>
 
+    {{--Show the users follows and tweets--}}
     @if ($follows->isEmpty())
-        <a class="btn btn-outline-primary" role="button" href="/tweetFeed">Go follow some new users!</a>
+        @if (Auth::user()->name == $user->name)
+            <a class="btn btn-outline-primary" role="button" href="/tweetFeed">Go follow some new users!</a>
+        @else
+            <p>This user has no follows yet</p>
+        @endif
     @else
         <ul class="list-group">
-            <li class="list-group-item active"><h5>You are following</h5></li>
+            <li class="list-group-item active"><h5>{{$user->name}} is following</h5></li>
             @foreach ($follows as $follow)
                     <li class="list-group-item">{{$follow->followed_user}}</li>
             @endforeach
@@ -62,10 +73,14 @@
     @endif
     <hr>
     @if ($tweets->isEmpty())
-        <a class="btn btn-outline-primary" role="button" href="/tweetFeed">Go make some new tweets!</a>
+        @if (Auth::user()->name == $user->name)
+            <a class="btn btn-outline-primary" role="button" href="/tweetFeed">Go make some new tweets!</a>
+        @else
+            <p>This user has no tweets yet</p>
+        @endif
     @else
         <ul class="list-group">
-            <li class="list-group-item active"><h5>Your tweets</h5></li>
+            <li class="list-group-item active"><h5>{{$user->name}}'s tweets</h5></li>
             @foreach ($tweets as $tweet)
                 <li class="list-group-item">{{$tweet->content}}</li>
             @endforeach

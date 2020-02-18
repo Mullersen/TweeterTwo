@@ -100,12 +100,16 @@
                             @if (checkTweet($tweet->id, $likes))
                                 <form action="like/likeTweet" method="POST" style="display:inline">
                                     @csrf
-                                    <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>Like</button>
+                                    <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>
+                                        Like <span class="badge badge-pill badge-secondary">{{App\Tweet::find($tweet->id)->like->count()}}</span>
+                                    </button>
                                 </form>
                             @else
                                 <form action="like/unlikeTweet" method="POST" style="display:inline">
                                     @csrf
-                                    <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>Unlike</button>
+                                    <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>
+                                        Unlike <span class="badge badge-pill badge-secondary">{{App\Tweet::find($tweet->id)->like->count()}}</span>
+                                    </button>
                                 </form>
                             @endif
                             {{--Show only the comments that belongs to the tweet--}}

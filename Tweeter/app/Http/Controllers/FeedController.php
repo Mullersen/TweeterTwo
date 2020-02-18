@@ -72,7 +72,8 @@ class FeedController extends Controller
                 if (Auth::user()->id == \App\Tweet::find($request->id)->user_id){
                     $id = $request->id;
                     $tweet = \App\Tweet::find($id);
-                    return view('deleteTweet', ['tweet' => $tweet]);
+                    $comments = \App\Comment::all();
+                    return view('deleteTweet', ['tweet' => $tweet, 'comments' => $comments]);
                 } else {
                     return view('error');
                 }
