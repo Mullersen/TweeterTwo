@@ -15,14 +15,14 @@ class UserController extends Controller
         $follow->user_id = Auth::user()->id;
         $follow->followed_user = $request->name;
         $follow->save();
-        return redirect('/tweetFeed');
+        return redirect()->back();
     }
 
     function unfollowUser(Request $request){
             $authorName = $request->name;
             $matchThese = ['user_id'=> Auth::user()->id, 'followed_user'=> $authorName];
             \App\Follow::where($matchThese)->delete();
-             return redirect('/tweetFeed');
+            return redirect()->back();
     }
 
     function showProfile($id){

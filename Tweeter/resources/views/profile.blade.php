@@ -2,6 +2,11 @@
 
 @section('content')
 @guest
+<div class="row mb-1 justify-content-center">
+    <div class="col-4">
+        <img class="mb-1" style="display:inline" width="100%" src="{{url('/images/feather.png')}}" alt="feather">
+    </div>
+</div>
     <h3 class="text-center mb-4">{{$user->name}}'s profile</h3>
     <hr>
     @if ($tweets->isEmpty())
@@ -15,6 +20,11 @@
         </ul>
 @endif
 @else
+    <div class="row mb-1 justify-content-center">
+        <div class="col-4">
+            <img class="mb-1" style="display:inline" width="100%" src="{{url('/images/feather.png')}}" alt="feather">
+        </div>
+    </div>
     @if ($user == Auth::user())
         <h3 class="text-center mb-4">Your profile {{$user->name}}</h3>
     @else
@@ -34,9 +44,9 @@
                     <div class="form-group">
                         <input class="form-control" type="email" name="email" id="email" placeholder="New Email Address">
                     </div>
-                    <div class="alert alert-warning text-center" role="alert">
-                        @error('email') {{$message}} @enderror
-                    </div>
+                        @error('email')
+                        <div class="alert alert-warning text-center" role="alert"> {{$message}} </div>
+                        @enderror
                     <button class="form-control" type='submit'>Update Email</button>
                 </form>
                 <hr>
@@ -67,7 +77,7 @@
         <ul class="list-group">
             <li class="list-group-item active"><h5>{{$user->name}} is following</h5></li>
             @foreach ($follows as $follow)
-                    <li class="list-group-item">{{$follow->followed_user}}</li>
+                    <li class="list-group-item">{{$follow->followed_user}} @include('partials.unfollowButton')</li>
             @endforeach
         </ul>
     @endif

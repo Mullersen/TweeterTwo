@@ -9,15 +9,20 @@ class FeedController extends Controller
 {
     function showAll(){
         if (Auth::check()){
-        $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
-        $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
-        $comments = \App\Comment::all();
-        $likes = \App\Like::where('user_id', Auth::user()->id)->get();
-        return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes]);
+            $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
+            $followCount = $follows->count();
+            if ($followCount == 0){
+                return redirect('/discoveryFeed');
+            } else {
+                $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
+                $comments = \App\Comment::all();
+                $likes = \App\Like::where('user_id', Auth::user()->id)->get();
+                return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes]);
+                }
         } else {
-        $tweets = \App\Tweet::all();
-        return view('tweetFeed', ['tweets' => $tweets]);
-        }
+            $tweets = \App\Tweet::all();
+            return view('tweetFeed', ['tweets' => $tweets]);
+            }
     }
 
     function newTweet(Request $request){
@@ -126,13 +131,21 @@ class FeedController extends Controller
             $like->user_id = Auth::user()->id;
             $like->tweet_id = $request->id;
             $like->save();
-            return redirect('/tweetFeed');
+            return redirect()->back();
     }
 
     function unlikeTweet(Request $request){
             $matchThese = ['user_id'=> Auth::user()->id, 'tweet_id'=> $request->id];
             \App\Like::where($matchThese)->delete();
-            return redirect('/tweetFeed');
+            return redirect()->back();
+    }
+
+    function discover(){
+        $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
+        $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
+        $comments = \App\Comment::all();
+        $likes = \App\Like::where('user_id', Auth::user()->id)->get();
+        return view('discoveryFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes]);
     }
 }
 

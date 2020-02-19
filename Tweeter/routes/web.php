@@ -20,6 +20,8 @@ Route::post('/tweet/editTweet', 'FeedController@editTweet')->middleware('auth');
 Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion')->middleware('auth');
 Route::get('/tweet/deleteTweet/yes', 'FeedController@deleteTweet')->middleware('auth');
 
+Route::get('/discoveryFeed', 'FeedController@discover')->middleware('auth');
+
 Route::post('/comment/addComment', 'FeedController@newComment')->middleware('auth');
 Route::post('/comment/deleteComment', 'FeedController@deleteComment')->middleware('auth');
 Route::post('/comment/showComment', 'FeedController@showComment')->middleware('auth');

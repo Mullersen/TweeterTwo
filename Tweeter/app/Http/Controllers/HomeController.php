@@ -23,8 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $image = \App\Image::all();
-        return view('welcome', ['image' => $image]);
+        return view('welcome');
     }
 
 }

@@ -49,7 +49,8 @@
         </div>
         <hr>
         {{--Create new Tweet--}}
-        <h5>New Tweet</h5>
+        <img class="mb-1" style="display:inline" height="40px" src="{{url('/images/bird.png')}}" alt="Bird">
+        <h5 style="display:inline">Tweet @ {{Auth::user()->name}}</h5>
         <form action="/tweet/addTweet" method="GET">
             @csrf
             <input class="form-control" type='hidden' name='name' value='{{Auth::user()->name}}'>
@@ -70,79 +71,25 @@
         <div class="row mb-4 justify-content-center">
             <div class="col-md-6">
                 @foreach ($tweets as $tweet){{--everything below here is part of the foreach loop showing the tweets--}}
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            {{--Edit Tweet if owner--}}
-                            @if (Auth::user()->id == $tweet->user_id)
-                                <form class="float-right" action="/tweet/showTweet" method="get">
-                                    <button class="btn btn-link btn-sm mb-2"  type="submit" name='id' value='{{$tweet->id}}'>Edit/Delete Tweet</button>
-                                </form>
-                            @endif
-                            {{--Show the tweet and author--}}
-                            <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
-                            <p class="card-text mb-2">{{$tweet->content}}</p>
-                            <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
-                            {{--Follow/unfollow--}}
-                            @if (Auth::user()->id !== $tweet->user_id)
-                                @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows)){{--check all the current followed authors against the current tweets author--}}
-                                    <form class="mr-auto" action="/profile/unfollowUser" method="POST"style="display:inline">
-                                        @csrf
-                                        <button class="btn btn-outline-primary btn-sm mb-3"  name='name' value='{{App\Tweet::find($tweet->id)->user->name}}'>Unfollow User</button>
-                                    </form>
-                                @else
-                                    <form action="/profile/followUser" method="POST"style="display:inline">
-                                        @csrf
-                                        <button class="btn btn-outline-primary btn-sm mb-3"  name='name' value='{{App\Tweet::find($tweet->id)->user->name}}'>Follow User</button>
+                    @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows) or Auth::user()->id == $tweet->user_id)
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                {{--Edit Tweet if owner--}}
+                                @if (Auth::user()->id == $tweet->user_id)
+                                    <form class="float-right" action="/tweet/showTweet" method="get">
+                                        <button class="btn btn-link btn-sm mb-2"  type="submit" name='id' value='{{$tweet->id}}'>Edit/Delete Tweet</button>
                                     </form>
                                 @endif
-                            @endif
-                            {{--Like option--}}
-                            @if (checkTweet($tweet->id, $likes))
-                                <form action="like/likeTweet" method="POST" style="display:inline">
-                                    @csrf
-                                    <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>
-                                        Like <span class="badge badge-pill badge-secondary">{{App\Tweet::find($tweet->id)->like->count()}}</span>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="like/unlikeTweet" method="POST" style="display:inline">
-                                    @csrf
-                                    <button class="btn btn-outline-primary btn-sm mb-3"  name='id' value='{{$tweet->id}}'>
-                                        Unlike <span class="badge badge-pill badge-secondary">{{App\Tweet::find($tweet->id)->like->count()}}</span>
-                                    </button>
-                                </form>
-                            @endif
-                            {{--Show only the comments that belongs to the tweet--}}
-                            @foreach ($comments as $comment)
-                                @if ($comment->tweet_id == $tweet->id)
-                                    <div class="container mb-2">
-                                        <p class="card-text small mb-1 font-weight-bold">{{\App\Comment::find($comment->id)->user->name}}</p>
-                                        <p class="card-text small mb-2 border-bottom">- {{$comment->content}}</p>
-                                    {{--Edit comment it belongs to the logged in user--}}
-                                        @if ($comment->user_id == Auth::user()->id)
-                                            <form action="/comment/deleteComment" method="POST" style="display:inline">
-                                                @csrf
-                                                <button class="btn btn-link btn-sm"  name='id' value='{{$comment->id}}'>Delete Comment</button>
-                                            </form>
-                                            <form action="/comment/showComment" method="POST" style="display:inline">
-                                                @csrf
-                                                <button class="btn btn-link btn-sm"  name='id' value='{{$comment->id}}'>Edit Comment</button>
-                                            </form>
-                                        @endif
-                                    </div>
-                                @endif
-                            @endforeach
-                            {{--add comment to tweet--}}
-                                <form class="form-inline mt-3" action="/comment/addComment" method="POST">
-                                    @csrf
-                                    <input type='hidden' name='user' value='{{Auth::user()->name}}'>
-                                    <div class="form-group mb-0">
-                                        <textarea class="form-control form-control-sm rounded-pill" style="width: 100%" rows="1" id='content' name='content'></textarea>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm ml-2 rounded-pill"  name='id' value='{{$tweet->id}}'>Comment</button>
-                                </form>
+                                {{--Show the tweet and author--}}
+                                    <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
+                                    <p class="card-text mb-2">{{$tweet->content}}</p>
+                                    <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
+                                @include('partials.followUnfollow')
+                                @include('partials.tweetLike')
+                                @include('partials.tweetComment')
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
