@@ -62,6 +62,11 @@
                     @error('password') {{$message}} @enderror
                     <button class="form-control mb-3" type='submit'>Update Password</button>
                 </form>
+                <form action='/profile/deleteProfile' method='POST'>
+                    @csrf
+                    <input type='hidden' name='id' value='{{$user->id}}'>
+                    <button class="form-control mb-3 btn btn-outline-danger" type='submit'>Delete Profile</button>
+                </form>
             @endif
         </div>
     </div>

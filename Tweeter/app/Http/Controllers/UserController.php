@@ -65,5 +65,27 @@ class UserController extends Controller
                 return view('error');
             }
     }
+
+    function showDeleteQuestion(Request $request){
+        if (Auth::user()->id == \App\User::find($request->id)->id){
+            return view('deleteProfile');
+        } else {
+            return view ('error');
+        }
+    }
+
+    function deleteProfile(Request $request){
+        if (Auth::user()->id == \App\User::find($request->id)->id){
+            $id = $request->id;
+            \App\Like::where('user_id', $id)->delete();
+            \App\Follow::where('user_id', $id)->delete();
+            \App\Comment::where('user_id', $id)->delete();
+            \App\Tweet::where('user_id', $id)->delete();
+            \App\User::destroy($id);
+            return redirect('/');
+        } else {
+            return view('error');
+        }
+    }
 }
 

@@ -21,7 +21,7 @@
         <form action='/tweet/deleteTweet/yes' method='get'>
             @csrf
             <div class="form-group">
-                <button class="form-control bg-light" type='submit' name='id' value='{{$tweet->id}}'>Yes</button>
+                <button class="form-control btn btn-outline-danger" type='submit' name='id' value='{{$tweet->id}}'>Yes</button>
             </div>
         </form>
         <form action='/tweet/showTweet' method='get'>

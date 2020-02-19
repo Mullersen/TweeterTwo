@@ -84,8 +84,8 @@
                                     <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
                                     <p class="card-text mb-2">{{$tweet->content}}</p>
                                     <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
-                                @include('partials.followUnfollow')
                                 @include('partials.tweetLike')
+                                @include('partials.followUnfollow')
                                 @include('partials.tweetComment')
                             </div>
                         </div>

@@ -35,5 +35,7 @@ Route::post('/profile/unfollowUser', 'UserController@unfollowUser')->middleware(
 Route::get('/profile/show/{id}', 'UserController@showProfile');
 Route::post('/profile/editEmail', 'UserController@editEmail')->middleware('auth');
 Route::post('/profile/editPassword', 'UserController@editPassword')->middleware('auth');
+Route::post('/profile/deleteProfile', 'UserController@showDeleteQuestion')->middleware('auth');
+Route::post('/profile/deleteProfile/yes', 'UserController@deleteProfile')->middleware('auth');
 
 Route::get('/', 'HomeController@index');
