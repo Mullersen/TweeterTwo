@@ -1,8 +1,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
+$theme-colors:( "primary": #077187,
+"light": #F0F7F4,
+);
 @import '~bootstrap/scss/bootstrap';
