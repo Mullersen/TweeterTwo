@@ -17,6 +17,25 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $prime: #077187;
+$light-prime: #70ABAF;
+$light: #F0F7F4;
+$dark: #1C1C1C;
 .bg-prime {
     background-color: $prime;
+}
+
+.bg-light {
+    background-color: $light;
+}
+
+.bg-light-prime {
+    background-color: $light-prime;
+}
+
+.bg-dark {
+    background-color: $dark;
+}
+
+.light {
+    color: $light;
 }

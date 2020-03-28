@@ -67,7 +67,7 @@
             </nav>
 <div class="pyx-4">
     <div class="container-md mt-4 mb-5">
-@yield('content')
+        @yield('content')
     </div>
 </div>
 <footer class="footer mt-auto py-2 bg-dark fixed-bottom">

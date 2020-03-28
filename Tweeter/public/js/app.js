@@ -1912,6 +1912,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -1925,9 +1929,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -1986,7 +1987,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      image_src: '/images/retweet.jpg'
+    };
+  }
+});
 
 /***/ }),
 
@@ -2045,6 +2060,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6648,7 +6673,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#grid-wrapper{\n    background-color: #F0F7F4;\n}\n", ""]);
+exports.push([module.i, "\n#headerOne{\n    margin-top: 44vh;\n}\n", ""]);
 
 // exports
 
@@ -38120,9 +38145,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-dark" }, [
+      _c("span", { staticClass: "container align-middle" }, [
+        _c("p", { staticClass: "light ml-2" }, [
+          _vm._v("All rights reserved - Tweeter")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38144,7 +38182,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "nav",
+    {
+      staticClass: "navbar navbar-expand-md sticky-top navbar-light bg-prime",
+      attrs: { id: "header" }
+    },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", [
+          _c(
+            "a",
+            {
+              staticClass: "navbar-brand text-white font-weight-bolder",
+              attrs: { href: "#header" }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticStyle: { height: "80px" },
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("defs", [
+                    _c(
+                      "filter",
+                      {
+                        attrs: {
+                          id: "shadow-1",
+                          height: "300%",
+                          width: "300%",
+                          x: "-100%",
+                          y: "-100%"
+                        }
+                      },
+                      [
+                        _c("feFlood", {
+                          attrs: {
+                            "flood-color": "rgba(255, 255, 255, 1)",
+                            result: "flood"
+                          }
+                        }),
+                        _c("feComposite", {
+                          attrs: {
+                            in: "flood",
+                            in2: "SourceGraphic",
+                            operator: "atop",
+                            result: "composite"
+                          }
+                        }),
+                        _c("feGaussianBlur", {
+                          attrs: {
+                            in: "composite",
+                            stdDeviation: "15",
+                            result: "blur"
+                          }
+                        }),
+                        _c("feOffset", {
+                          attrs: { dx: "1", dy: "1", result: "offset" }
+                        }),
+                        _c("feComposite", {
+                          attrs: {
+                            in: "SourceGraphic",
+                            in2: "offset",
+                            operator: "over"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _c(
+                    "g",
+                    {
+                      staticStyle: { "touch-action": "none" },
+                      attrs: { transform: "translate(0,0)" }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M96.18 22.49C264.6 98.36 403.1 214.8 40.11 270.5 153 268 191.6 291.1 64.12 382.6c230.18-128 331.68-189 318.98 106.9 30.5-54.4 114.6-241 36.4-268.3 6.2-7.4 15.5-19.4 22.1-31.9 13.1-5.7 22.6-13.6 30.3-23.7-8.7-2-16-2.5-22.8-2.3-.2-2.8-.8-5.5-2.1-7.9-8.7-16.5-48.1-13.7-62.4-12.1 4.7-81-226.8-117.09-288.42-120.81z",
+                          fill: "#ecd444",
+                          transform:
+                            "translate(0, 0) scale(1, 1) rotate(45, 256, 256)",
+                          "fill-opacity": "1",
+                          filter: "url(#shadow-1)"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -38152,70 +38293,31 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "nav",
-      {
-        staticClass: "navbar navbar-expand-md sticky-top navbar-light bg-prime",
-        attrs: { id: "header" }
-      },
+      "ul",
+      { staticClass: "navbar-nav nav-tabs ml-auto inline-list" },
       [
-        _c("div", { staticClass: "container" }, [
-          _c("h1", [
-            _c("a", {
-              staticClass: "navbar-brand text-white font-weight-bolder",
-              attrs: { href: "#header" }
-            })
-          ]),
-          _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
           _c(
-            "button",
-            {
-              staticClass: "navbar-toggler",
-              attrs: {
-                type: "button",
-                "data-toggle": "collapse",
-                "data-target": "#navbarCollapse",
-                "aria-controls": "navbarCollapse",
-                "aria-expanded": "false",
-                "aria-label": "Toggle navigation"
-              }
-            },
-            [_c("span", { staticClass: "navbar-toggler-icon" })]
-          ),
-          _vm._v(" "),
-          _c("ul", { staticClass: "navbar-nav nav-tabs ml-auto inline-list" }, [
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link text-white",
-                  attrs: { href: "#newest" }
-                },
-                [_vm._v("Newest feature")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link text-white",
-                  attrs: { href: "#stats" }
-                },
-                [_vm._v("Stats")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link text-white",
-                  attrs: { href: "#login" }
-                },
-                [_vm._v("Login")]
-              )
-            ])
-          ])
+            "a",
+            { staticClass: "nav-link text-white", attrs: { href: "#newest" } },
+            [_vm._v("Newest feature")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link text-white", attrs: { href: "#stats" } },
+            [_vm._v("Stats")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link text-white", attrs: { href: "#login" } },
+            [_vm._v("Login")]
+          )
         ])
       ]
     )
@@ -38242,9 +38344,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "login" } })
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "login" } }, [
+      _c("h1", [_vm._v("Log in here")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38266,9 +38377,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "newest" } })
+  return _c("div", { staticClass: "bg-light-prime", attrs: { id: "newest" } }, [
+    _c("div", { staticClass: "container py-5 text-center" }, [
+      _c("img", {
+        staticClass: "my-5 img-fluid",
+        attrs: { src: _vm.image_src, alt: "The new retweeting function" }
+      }),
+      _vm._v(" "),
+      _c("h2", { staticClass: "pt-4" }, [
+        _vm._v("Now introducing: The Retweet")
+      ]),
+      _vm._v(" "),
+      _c("h4", [
+        _vm._v(
+          "Liking another Users tweets? Now you can re-tweet them to your own account."
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-light py-5 text-center" }, [
+      _c("h1", { attrs: { "mt-5": "" } }, [
+        _vm._v("The place to be, to see...")
+      ]),
+      _vm._v(" "),
+      _c("h2", [_vm._v("What's happening in the world and who are in it")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38297,9 +38440,9 @@ var render = function() {
       _vm._v(" "),
       _c("WelcomeBanner"),
       _vm._v(" "),
-      _c("Newest"),
-      _vm._v(" "),
       _c("Stats"),
+      _vm._v(" "),
+      _c("Newest"),
       _vm._v(" "),
       _c("Login"),
       _vm._v(" "),
@@ -38337,47 +38480,57 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "stats" } }, [
-      _c("div", [
-        _c("h2", [
-          _c("strong", [_vm._v("Tweeter")]),
-          _vm._v(
-            " has been the place to share thoughts and ideas since 2001..."
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-3" }, [
-          _c("h4", [_vm._v("FOUNDED")]),
-          _vm._v(" "),
-          _c("h2", [_vm._v("2001")]),
-          _vm._v(" "),
-          _c("h6", [_vm._v("Founded in 2001")])
+    return _c("div", { staticClass: "bg-light", attrs: { id: "stats" } }, [
+      _c("div", { staticClass: "container py-5" }, [
+        _c("div", { staticClass: "container my-5 ml-2" }, [
+          _c("h2", [
+            _c("strong", [_vm._v("Tweeter")]),
+            _vm._v(
+              " has been the place to share thoughts and ideas since 2001..."
+            )
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-3" }, [
-          _c("h4", [_vm._v("TWEETS")]),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "ml-4" }, [
+              _c("h4", [_vm._v("FOUNDED")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("2001")]),
+              _vm._v(" "),
+              _c("h6", [_vm._v("Founded in 2001")])
+            ])
+          ]),
           _vm._v(" "),
-          _c("h2", [_vm._v("90M+")]),
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "ml-4" }, [
+              _c("h4", [_vm._v("TWEETS")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("90M+")]),
+              _vm._v(" "),
+              _c("h6", [_vm._v("Now more than 90M+ tweets")])
+            ])
+          ]),
           _vm._v(" "),
-          _c("h6", [_vm._v("Now more than 90M+ tweets")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3" }, [
-          _c("h4", [_vm._v("DEVICES")]),
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "ml-4" }, [
+              _c("h4", [_vm._v("DEVICES")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("8")]),
+              _vm._v(" "),
+              _c("h6", [_vm._v("Available on all devices")])
+            ])
+          ]),
           _vm._v(" "),
-          _c("h2", [_vm._v("8")]),
-          _vm._v(" "),
-          _c("h6", [_vm._v("Available on all devices")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3" }, [
-          _c("h4", [_vm._v("USERS")]),
-          _vm._v(" "),
-          _c("h2", [_vm._v("21M")]),
-          _vm._v(" "),
-          _c("h6", [_vm._v("21 Million users on a daily basis")])
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "ml-4" }, [
+              _c("h4", [_vm._v("USERS")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("21M")]),
+              _vm._v(" "),
+              _c("h6", [_vm._v("21 Million users on a daily basis")])
+            ])
+          ])
         ])
       ])
     ])
@@ -38409,88 +38562,95 @@ var render = function() {
       "div",
       { staticClass: "row align-items-center", attrs: { id: "grid-wrapper" } },
       [
-        _c("div", { staticClass: "col-6" }, [
-          _c(
-            "svg",
-            {
-              staticStyle: { height: "512px", width: "512px" },
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 512 512"
-              }
-            },
-            [
-              _c("defs", [
+        _c(
+          "div",
+          {
+            staticClass: "col-6 bg-light-prime",
+            staticStyle: { height: "90vh" }
+          },
+          [
+            _c(
+              "svg",
+              {
+                staticStyle: { height: "512px", width: "512px" },
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 512 512"
+                }
+              },
+              [
+                _c("defs", [
+                  _c(
+                    "filter",
+                    {
+                      attrs: {
+                        id: "shadow-1",
+                        height: "300%",
+                        width: "300%",
+                        x: "-100%",
+                        y: "-100%"
+                      }
+                    },
+                    [
+                      _c("feFlood", {
+                        attrs: {
+                          "flood-color": "rgba(255, 255, 255, 1)",
+                          result: "flood"
+                        }
+                      }),
+                      _c("feComposite", {
+                        attrs: {
+                          in: "flood",
+                          in2: "SourceGraphic",
+                          operator: "atop",
+                          result: "composite"
+                        }
+                      }),
+                      _c("feGaussianBlur", {
+                        attrs: {
+                          in: "composite",
+                          stdDeviation: "15",
+                          result: "blur"
+                        }
+                      }),
+                      _c("feOffset", {
+                        attrs: { dx: "1", dy: "1", result: "offset" }
+                      }),
+                      _c("feComposite", {
+                        attrs: {
+                          in: "SourceGraphic",
+                          in2: "offset",
+                          operator: "over"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
                 _c(
-                  "filter",
+                  "g",
                   {
-                    attrs: {
-                      id: "shadow-1",
-                      height: "300%",
-                      width: "300%",
-                      x: "-100%",
-                      y: "-100%"
-                    }
+                    staticStyle: { "touch-action": "none" },
+                    attrs: { transform: "translate(0,0)" }
                   },
                   [
-                    _c("feFlood", {
+                    _c("path", {
                       attrs: {
-                        "flood-color": "rgba(255, 255, 255, 1)",
-                        result: "flood"
-                      }
-                    }),
-                    _c("feComposite", {
-                      attrs: {
-                        in: "flood",
-                        in2: "SourceGraphic",
-                        operator: "atop",
-                        result: "composite"
-                      }
-                    }),
-                    _c("feGaussianBlur", {
-                      attrs: {
-                        in: "composite",
-                        stdDeviation: "15",
-                        result: "blur"
-                      }
-                    }),
-                    _c("feOffset", {
-                      attrs: { dx: "1", dy: "1", result: "offset" }
-                    }),
-                    _c("feComposite", {
-                      attrs: {
-                        in: "SourceGraphic",
-                        in2: "offset",
-                        operator: "over"
+                        d:
+                          "M96.18 22.49C264.6 98.36 403.1 214.8 40.11 270.5 153 268 191.6 291.1 64.12 382.6c230.18-128 331.68-189 318.98 106.9 30.5-54.4 114.6-241 36.4-268.3 6.2-7.4 15.5-19.4 22.1-31.9 13.1-5.7 22.6-13.6 30.3-23.7-8.7-2-16-2.5-22.8-2.3-.2-2.8-.8-5.5-2.1-7.9-8.7-16.5-48.1-13.7-62.4-12.1 4.7-81-226.8-117.09-288.42-120.81z",
+                        fill: "#ecd444",
+                        transform:
+                          "translate(0, 0) scale(1, 1) rotate(45, 256, 256)",
+                        "fill-opacity": "1",
+                        filter: "url(#shadow-1)"
                       }
                     })
-                  ],
-                  1
+                  ]
                 )
-              ]),
-              _c(
-                "g",
-                {
-                  staticStyle: { "touch-action": "none" },
-                  attrs: { transform: "translate(0,0)" }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M96.18 22.49C264.6 98.36 403.1 214.8 40.11 270.5 153 268 191.6 291.1 64.12 382.6c230.18-128 331.68-189 318.98 106.9 30.5-54.4 114.6-241 36.4-268.3 6.2-7.4 15.5-19.4 22.1-31.9 13.1-5.7 22.6-13.6 30.3-23.7-8.7-2-16-2.5-22.8-2.3-.2-2.8-.8-5.5-2.1-7.9-8.7-16.5-48.1-13.7-62.4-12.1 4.7-81-226.8-117.09-288.42-120.81z",
-                      fill: "#ecd444",
-                      transform:
-                        "translate(0, 0) scale(1, 1) rotate(45, 256, 256)",
-                      "fill-opacity": "1",
-                      filter: "url(#shadow-1)"
-                    }
-                  })
-                ]
-              )
-            ]
-          )
-        ]),
+              ]
+            )
+          ]
+        ),
         _vm._v(" "),
         _vm._m(0)
       ]
@@ -38502,9 +38662,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 ", attrs: { id: "right" } }, [
-      _c("h1", { staticClass: "ml-5" }, [_vm._v("Tweeter")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "col-6 bg-light",
+        staticStyle: { height: "90vh" },
+        attrs: { id: "right" }
+      },
+      [
+        _c("h1", { staticClass: "ml-5", attrs: { id: "headerOne" } }, [
+          _vm._v("Tweeter")
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

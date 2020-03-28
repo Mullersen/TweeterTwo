@@ -2,8 +2,8 @@
     <div>
         <Header/>
         <WelcomeBanner/>
-        <Newest/>
         <Stats/>
+        <Newest/>
         <Login/>
         <Footer/>
     </div>
