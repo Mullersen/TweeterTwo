@@ -68,7 +68,7 @@
         </form>
         <hr>
         {{--Show tweets--}}
-        <div class="row mb-4 justify-content-center">
+        <div class="row mb-4 justify-content-center" id="tweet-like">
             <div class="col-md-6">
                 @foreach ($tweets as $tweet){{--everything below here is part of the foreach loop showing the tweets--}}
                     @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows) or Auth::user()->id == $tweet->user_id)
@@ -84,7 +84,10 @@
                                     <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
                                     <p class="card-text mb-2">{{$tweet->content}}</p>
                                     <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
-                                @include('partials.tweetLike')
+
+                                    <Like :tweetid="{{ $tweet->id }}"></like>
+
+                                {{-- @include('partials.tweetLike') --}}
                                 @include('partials.followUnfollow')
                                 @include('partials.tweetComment')
                             </div>

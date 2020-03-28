@@ -25,6 +25,12 @@ class FeedController extends Controller
             }
     }
 
+    function getMyLikes(){
+        return response()->json([
+        'myLikes' => \App\Like::where('user_id', Auth::user()->id)->get()
+        ]);
+    }
+
     function newTweet(Request $request){
         $data = $request->validate([
             'content' => 'required|min:5|max:500'
