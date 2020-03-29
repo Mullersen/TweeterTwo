@@ -141,9 +141,9 @@ class FeedController extends Controller
     }
 
     function unlikeTweet(Request $request){
-            $matchThese = ['user_id'=> Auth::user()->id, 'tweet_id'=> $request->id];
+            $matchThese = ['user_id'=> Auth::user()->id, 'tweet_id'=> $request->key];
             \App\Like::where($matchThese)->delete();
-            return redirect()->back();
+            return response()->json(['status' => 'success']);
     }
 
     function discover(){
