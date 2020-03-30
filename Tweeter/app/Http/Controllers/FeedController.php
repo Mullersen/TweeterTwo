@@ -135,9 +135,9 @@ class FeedController extends Controller
             //insert check if the person has already liked the tweet
             $like = new \App\Like;
             $like->user_id = Auth::user()->id;
-            $like->tweet_id = $request->id;
+            $like->tweet_id = $request->key;
             $like->save();
-            return redirect()->back();
+            return response()->json(['status' => 'deleted']);
     }
 
     function unlikeTweet(Request $request){

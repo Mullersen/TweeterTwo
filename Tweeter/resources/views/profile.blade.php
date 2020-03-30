@@ -82,7 +82,12 @@
         <ul class="list-group">
             <li class="list-group-item active"><h5>{{$user->name}} is following</h5></li>
             @foreach ($follows as $follow)
-                    <li class="list-group-item">{{$follow->followed_user}} @include('partials.unfollowButton')</li>
+                    <li class="list-group-item">{{$follow->followed_user}}
+                        <form class="mr-auto" action="/profile/unfollowUser" method="POST" style="display:inline">
+                            @csrf
+                            <button class="btn btn-outline-primary btn-sm"  name='name' value='{{$follow->followed_user}}'>Unfollow User</button>
+                        </form>
+                    </li>
             @endforeach
         </ul>
     @endif

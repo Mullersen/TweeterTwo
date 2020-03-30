@@ -21,7 +21,7 @@
 
 
 @section('content')
-<div class="row mb-4 justify-content-center">
+<div id="tweet-like" class="row mb-4 justify-content-center">
     <div class="col-md-6">
         <h3 class="text-center mb-4">Discover new users and tweets</h3>
         <hr>
@@ -33,7 +33,7 @@
                     <p class="card-text mb-2">{{$tweet->content}}</p>
                     <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
                     @include('partials.followUnfollow')
-                    @include('partials.tweetLike')
+                    <Like :tweetid="{{ $tweet->id }}"></Like>
                 </div>
             </div>
         @endif
