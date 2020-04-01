@@ -21,7 +21,7 @@
 
 
 @section('content')
-<div id="tweet-like" class="row mb-4 justify-content-center">
+<div id="tweet-vue" class="row mb-4 justify-content-center">
     <div class="col-md-6">
         <h3 class="text-center mb-4">Discover new users and tweets</h3>
         <hr>

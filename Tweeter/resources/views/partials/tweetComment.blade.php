@@ -27,3 +27,4 @@
     </div>
     <button class="btn btn-primary btn-sm ml-2 rounded-pill"  name='id' value='{{$tweet->id}}'>Comment</button>
 </form>
+<Giphy :tweetid="{{ $tweet->id }}" />

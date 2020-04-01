@@ -68,7 +68,7 @@
         </form>
         <hr>
         {{--Show tweets--}}
-        <div class="row mb-4 justify-content-center" id="tweet-like">
+        <div class="row mb-4 justify-content-center" id="tweet-vue">
             <div class="col-md-6">
                 @foreach ($tweets as $tweet){{--everything below here is part of the foreach loop showing the tweets--}}
                     @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows) or Auth::user()->id == $tweet->user_id)

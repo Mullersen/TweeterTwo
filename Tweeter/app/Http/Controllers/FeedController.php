@@ -99,6 +99,15 @@ class FeedController extends Controller
             return redirect('/tweetFeed');
     }
 
+    function newGifComment(Request $request){
+        $GIF = new \App\GIF;
+        $GIF->user_id = Auth::user()->id;
+        $GIF->tweet_id = $request->id;
+        $GIF->URL = $request->URL;
+        $GIF->save();
+        return response()->json(["status" => "gif inserted in DB"]);
+    }
+
     function deleteComment(Request $request){
             $id = $request->id;
             if(Auth::user()->id == \App\Comment::find($id)->user_id){
