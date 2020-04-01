@@ -16,8 +16,9 @@ class FeedController extends Controller
             } else {
                 $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
                 $comments = \App\Comment::all();
+                $gifs = \App\GIF::all();
                 $likes = \App\Like::where('user_id', Auth::user()->id)->get();
-                return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes]);
+                return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes, 'gifs' => $gifs]);
                 }
         } else {
             $tweets = \App\Tweet::all();

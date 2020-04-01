@@ -2,8 +2,11 @@
     <div>
         <input v-model="gifsearch" placeholder="Search for a GIF">
         <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 rounded-pill">comment with GIF</button>
-        <div id="gifs">
+        <!-- <div id="gifs">
             <img @click="sendToDB" :src="gifs" :alt="gifsearch">
+        </div> -->
+        <div v-for="giphy in gifsArray" :key="giphy" class="show">
+            <div><img :src="giphy" alt="Searched Gifs"></div>
         </div>
     </div>
 </template>
@@ -14,7 +17,8 @@ export default {
     data: function(){
         return {
             gifsearch: "",
-            gifs: String,
+            //gifs: String,
+            gifsArray: [],
         }
     },
     props :{
@@ -23,10 +27,17 @@ export default {
     methods: {
         sendSearch: function(){
             var slugified = this.slugify(this.gifsearch);
-            axios.get("http://api.giphy.com/v1/gifs/search?q="+ slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6")
+            axios.get("http://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6")
             .then(response => {
-                console.log(response.data);
-                this.gifs = response.data.data[0].images.original.url;
+                console.log(response.data.data);
+                //this.gifs = response.data.data[0].images.original.url;
+                // for (let i=0; i<=response.data.data.length; i++){
+                //     var urlArray = response.data.data[i].images.preview_webp.url;
+                // };
+                let newGifArray = response.data.data.map(gif =>{
+                    return gif.images.downsized_medium.url;
+                });
+                this.gifsArray = newGifArray;
             })
             .catch(error => {
                 console.log(error); // change to error message on screen
@@ -66,6 +77,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    .show{
+        position: relative;
+    }
+</style>>
 
 </style>
