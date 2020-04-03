@@ -23,14 +23,16 @@
     @if ($gif->tweet_id == $tweet->id)
         <div class="container mb-2">
             <p class="card-text small mb-1 font-weight-bold">{{\App\GIF::find($gif->id)->user->name}}</p>
-            <img class="card-img border-bottom" src="{{$gif->URL}}" alt="commented Gif">
-            {{--Edit gif comment if it belongs to the logged in user--}}
-            @if ($gif->user_id == Auth::user()->id)
-                <form action="/comment/deleteGifComment" method="POST" style="display:inline">
-                    @csrf
-                    <button class="btn btn-link btn-sm"  name='id' value='{{$gif->id}}'>Delete GIF</button>
-                </form>
-            @endif
+            <div class="col-sm-6">
+                <img class="card-img border-bottom" src="{{$gif->URL}}" alt="commented Gif">
+            </div>
+                {{--Delete gif comment if it belongs to the logged in user--}}
+                @if ($gif->user_id == Auth::user()->id)
+                    <form action="/comment/deleteGifComment" method="POST" style="display:inline">
+                        @csrf
+                        <button class="btn btn-link btn-sm"  name='id' value='{{$gif->id}}'>Delete GIF</button>
+                    </form>
+                @endif
         </div>
     @endif
 @endforeach
@@ -38,7 +40,7 @@
 <div>
     <Giphy :tweetid="{{ $tweet->id }}" />
 </div>
-<form class="form-inline mt-3" action="/comment/addComment" method="POST">
+<form class="form-inline mt-1" action="/comment/addComment" method="POST">
     @csrf
     <input type='hidden' name='user' value='{{Auth::user()->name}}'>
     <div class="form-group mb-0">

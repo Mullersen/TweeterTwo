@@ -2,14 +2,18 @@
     <div>
         <div v-if="gifToggle == true">
             <div class="container mb-2">
+                <div class="col-sm-6">
                     <img class='card-img border-bottom' :src="injectedGif" alt='commented Gif'>
-                    <button @click='deleteGif' class='btn btn-link btn-sm'>Delete GIF</button>
+                </div>
+                <button @click='deleteGif' class='btn btn-link btn-sm' style="display:inline">Delete GIF</button>
             </div>
         </div>
+        <div class="form-inline">
             <div class="form-group mb-0">
                 <input class="form-control form-control-sm rounded-pill my-2" v-model="gifsearch" placeholder="Search for a GIF">
             </div>
-            <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 mb-2 rounded-pill">comment with GIF</button>
+            <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 rounded-pill">comment with GIF</button>
+        </div>
         <div v-if="gridToggle == true" class="gridContainer">
             <div class="gifGrid bg-primary">
                 <img v-for="(giphy, index) in gifsArray" :key="giphy" @click="sendToDB(index)" class="gif" :src="giphy" alt="Searched Gifs">

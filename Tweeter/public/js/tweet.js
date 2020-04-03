@@ -1928,6 +1928,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Giphy",
   data: function data() {
@@ -38118,15 +38122,18 @@ var render = function() {
     _vm.gifToggle == true
       ? _c("div", [
           _c("div", { staticClass: "container mb-2" }, [
-            _c("img", {
-              staticClass: "card-img border-bottom",
-              attrs: { src: _vm.injectedGif, alt: "commented Gif" }
-            }),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c("img", {
+                staticClass: "card-img border-bottom",
+                attrs: { src: _vm.injectedGif, alt: "commented Gif" }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "button",
               {
                 staticClass: "btn btn-link btn-sm",
+                staticStyle: { display: "inline" },
                 on: { click: _vm.deleteGif }
               },
               [_vm._v("Delete GIF")]
@@ -38135,38 +38142,40 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group mb-0" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.gifsearch,
-            expression: "gifsearch"
-          }
-        ],
-        staticClass: "form-control form-control-sm rounded-pill my-2",
-        attrs: { placeholder: "Search for a GIF" },
-        domProps: { value: _vm.gifsearch },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "form-inline" }, [
+      _c("div", { staticClass: "form-group mb-0" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.gifsearch,
+              expression: "gifsearch"
             }
-            _vm.gifsearch = $event.target.value
+          ],
+          staticClass: "form-control form-control-sm rounded-pill my-2",
+          attrs: { placeholder: "Search for a GIF" },
+          domProps: { value: _vm.gifsearch },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.gifsearch = $event.target.value
+            }
           }
-        }
-      })
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-sm ml-2 rounded-pill",
+          on: { click: _vm.sendSearch }
+        },
+        [_vm._v("comment with GIF")]
+      )
     ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary btn-sm ml-2 mb-2 rounded-pill",
-        on: { click: _vm.sendSearch }
-      },
-      [_vm._v("comment with GIF")]
-    ),
     _vm._v(" "),
     _vm.gridToggle == true
       ? _c("div", { staticClass: "gridContainer" }, [
