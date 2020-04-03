@@ -106,13 +106,23 @@ class FeedController extends Controller
         $GIF->tweet_id = $request->id;
         $GIF->URL = $request->URL;
         $GIF->save();
-        return response()->json(["status" => "gif inserted in DB"]);
+        return response()->json(["URL" => $request->URL, "gifs_tweet_id" => $request->id, "gifs_id" => $GIF->id]);
     }
 
     function deleteComment(Request $request){
             $id = $request->id;
             if(Auth::user()->id == \App\Comment::find($id)->user_id){
                 \App\Comment::destroy($id);
+                return redirect('/tweetFeed');
+            } else {
+                return view('error');
+            }
+    }
+
+    function deleteGifComment(Request $request){
+            $id = $request->id;
+            if(Auth::user()->id == \App\GIF::find($id)->user_id){
+                \App\GIF::destroy($id);
                 return redirect('/tweetFeed');
             } else {
                 return view('error');

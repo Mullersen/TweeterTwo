@@ -1921,13 +1921,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Giphy",
   data: function data() {
     return {
       gifsearch: "",
-      //gifs: String,
-      gifsArray: []
+      gifsArray: [],
+      injectedGif: "",
+      gifId: Number,
+      gifToggle: false,
+      gridToggle: false
     };
   },
   props: {
@@ -1939,28 +1949,43 @@ __webpack_require__.r(__webpack_exports__);
 
       var slugified = this.slugify(this.gifsearch);
       axios.get("http://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6").then(function (response) {
-        console.log(response.data.data); //this.gifs = response.data.data[0].images.original.url;
-        // for (let i=0; i<=response.data.data.length; i++){
-        //     var urlArray = response.data.data[i].images.preview_webp.url;
-        // };
-
+        console.log(response.data.data);
         var newGifArray = response.data.data.map(function (gif) {
           return gif.images.downsized_medium.url;
         });
         _this.gifsArray = newGifArray;
+        _this.gridToggle = true;
       })["catch"](function (error) {
         console.log(error); // change to error message on screen
       });
     },
-    sendToDB: function sendToDB() {
+    sendToDB: function sendToDB(index) {
+      var _this2 = this;
+
       console.log('send to DB has been called');
       axios.post('/comment/addGifComment', {
         id: this.tweetid,
-        URL: this.gifs
+        URL: this.gifsArray[index]
       }).then(function (response) {
         console.log(response.data);
+        _this2.injectedGif = response.data.URL;
+        _this2.gifId = response.data.gifs_id;
+        _this2.gifToggle = true;
+        _this2.gridToggle = false;
       })["catch"](function (error) {
         console.log(error); // change to error message on screen
+      });
+    },
+    deleteGif: function deleteGif() {
+      var _this3 = this;
+
+      console.log("delete gif has been evoked");
+      axios.post('/comment/deleteGifComment', {
+        id: this.gifId
+      }).then(function (response) {
+        _this3.gifToggle = false;
+      })["catch"](function (error) {
+        console.log(error.quote); // change to error message on screen
       });
     },
     slugify: function slugify(text) {
@@ -6617,7 +6642,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.show[data-v-1b84daf8]{\n    position: relative;\n}\n", ""]);
+exports.push([module.i, "\n.gridContainer[data-v-1b84daf8]{\n}\n/* in smaller screens put as position float bottom: 0; */\n.gifGrid[data-v-1b84daf8]{\n        display: grid;\n        grid-template-columns:1fr 1fr 1fr;\n        grid-template-rows:1fr 1fr;\n        justify-items: center;\n        -webkit-box-align: center;\n                align-items: center;\n        z-index: 10000;\n}\n.gif[data-v-1b84daf8]{\n        width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -38089,9 +38114,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
+  return _c("div", [
+    _vm.gifToggle == true
+      ? _c("div", [
+          _c("div", { staticClass: "container mb-2" }, [
+            _c("img", {
+              staticClass: "card-img border-bottom",
+              attrs: { src: _vm.injectedGif, alt: "commented Gif" }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link btn-sm",
+                on: { click: _vm.deleteGif }
+              },
+              [_vm._v("Delete GIF")]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group mb-0" }, [
       _c("input", {
         directives: [
           {
@@ -38101,6 +38145,7 @@ var render = function() {
             expression: "gifsearch"
           }
         ],
+        staticClass: "form-control form-control-sm rounded-pill my-2",
         attrs: { placeholder: "Search for a GIF" },
         domProps: { value: _vm.gifsearch },
         on: {
@@ -38111,27 +38156,40 @@ var render = function() {
             _vm.gifsearch = $event.target.value
           }
         }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-sm ml-2 rounded-pill",
-          on: { click: _vm.sendSearch }
-        },
-        [_vm._v("comment with GIF")]
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.gifsArray, function(giphy) {
-        return _c("div", { key: giphy, staticClass: "show" }, [
-          _c("div", [
-            _c("img", { attrs: { src: giphy, alt: "Searched Gifs" } })
-          ])
-        ])
       })
-    ],
-    2
-  )
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-sm ml-2 mb-2 rounded-pill",
+        on: { click: _vm.sendSearch }
+      },
+      [_vm._v("comment with GIF")]
+    ),
+    _vm._v(" "),
+    _vm.gridToggle == true
+      ? _c("div", { staticClass: "gridContainer" }, [
+          _c(
+            "div",
+            { staticClass: "gifGrid bg-primary" },
+            _vm._l(_vm.gifsArray, function(giphy, index) {
+              return _c("img", {
+                key: giphy,
+                staticClass: "gif",
+                attrs: { src: giphy, alt: "Searched Gifs" },
+                on: {
+                  click: function($event) {
+                    return _vm.sendToDB(index)
+                  }
+                }
+              })
+            }),
+            0
+          )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

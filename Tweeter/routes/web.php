@@ -24,6 +24,7 @@ Route::get('/discoveryFeed', 'FeedController@discover')->middleware('auth');
 
 Route::post('/comment/addComment', 'FeedController@newComment')->middleware('auth');
 Route::post('/comment/addGifComment', 'FeedController@newGifComment')->middleware('auth');
+Route::post('/comment/deleteGifComment','FeedController@deleteGifComment')->middleware('auth');
 Route::post('/comment/deleteComment', 'FeedController@deleteComment')->middleware('auth');
 Route::post('/comment/showComment', 'FeedController@showComment')->middleware('auth');
 Route::post('/comment/editComment', 'FeedController@editComment')->middleware('auth');
