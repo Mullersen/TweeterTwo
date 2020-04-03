@@ -2,6 +2,7 @@
     <div>
         <div v-if="gifToggle == true">
             <div class="container mb-2">
+                <p class="card-text small mb-1 font-weight-bold">{{username}}</p>
                 <div class="col-sm-6">
                     <img class='card-img border-bottom' :src="injectedGif" alt='commented Gif'>
                 </div>
@@ -10,14 +11,20 @@
         </div>
         <div class="form-inline">
             <div class="form-group mb-0">
-                <input class="form-control form-control-sm rounded-pill my-2" v-model="gifsearch" placeholder="Search for a GIF">
+                <textarea class="form-control form-control-sm rounded-pill my-2" v-model="gifsearch" rows="1" placeholder="Search for a GIF"></textarea>
             </div>
-            <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 rounded-pill">comment with GIF</button>
+            <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 rounded-pill">Search for GIF</button>
         </div>
-        <div v-if="gridToggle == true" class="gridContainer">
-            <div class="gifGrid bg-primary">
+        <div v-if="gridToggle == true">
+            <div class="gifGrid bg-dark">
                 <img v-for="(giphy, index) in gifsArray" :key="giphy" @click="sendToDB(index)" class="gif" :src="giphy" alt="Searched Gifs">
             </div>
+            <svg class="closeIcon mt-1" @click="gridToggle = false" height="20px" width="20px" x="0px" y="0px" viewBox="0 0 26 26" style="enable-background:new 0 0 26 26;" xml:space="preserve"><g><path style="fill:#030104;" d="M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25
+		        C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0
+		        L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467
+		        L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468
+		        c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467
+		        C19.033,16.725,19.033,17.138,18.78,17.394z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
         </div>
     </div>
 </template>
@@ -37,6 +44,7 @@ export default {
     },
     props :{
         tweetid : Number,
+        username: "",
     },
     methods: {
         sendSearch: function(){
@@ -104,19 +112,22 @@ export default {
 </script>
 
 <style scoped>
-    .gridContainer{
-
-    }
-/* in smaller screens put as position float bottom: 0; */
     .gifGrid{
         display: grid;
         grid-template-columns:1fr 1fr 1fr;
         grid-template-rows:1fr 1fr;
+        grid-row-gap: 1vh;
+        grid-column-gap: 1vw;
         justify-items: center;
         align-items: center;
-        z-index: 10000;
+        padding: 1vh 1vw 1vh 1vw;
+        border-radius: 6px;
+        margin-bottom:3vh;
     }
     .gif{
         width: 100%;
+    }
+    .closeIcon{
+        float:right;
     }
 </style>

@@ -70,7 +70,7 @@
         @yield('content')
     </div>
 </div>
-<footer class="footer mt-auto py-2 bg-dark fixed-bottom">
+<footer class="footer mt-auto py-2 bg-dark">
     <div class="container">
         <span class="text-muted">All rights reserved @Tweeter</span>
     </div>

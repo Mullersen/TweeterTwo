@@ -11,17 +11,18 @@ class FeedController extends Controller
         if (Auth::check()){
             $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
             $followCount = $follows->count();
-            if ($followCount == 0){
+            if ($followCount === 0){
                 return redirect('/discoveryFeed');
             } else {
-                $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
+                $tweets = \App\Tweet::orderBy('created_at', 'DESC')->simplePaginate(5);
+                //->sortBy('created_at')->reverse();
                 $comments = \App\Comment::all();
                 $gifs = \App\GIF::all();
                 $likes = \App\Like::where('user_id', Auth::user()->id)->get();
                 return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes, 'gifs' => $gifs]);
                 }
         } else {
-            $tweets = \App\Tweet::all();
+            $tweets = \App\Tweet::simplePaginate(5);
             return view('tweetFeed', ['tweets' => $tweets]);
             }
     }

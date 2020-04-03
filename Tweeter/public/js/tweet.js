@@ -1932,6 +1932,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Giphy",
   data: function data() {
@@ -1945,7 +1952,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    tweetid: Number
+    tweetid: Number,
+    username: ""
   },
   methods: {
     sendSearch: function sendSearch() {
@@ -2042,7 +2050,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    tweetid: Number
+    tweetid: Number,
+    likecount: Number
   },
   methods: {
     checkTweet: function checkTweet() {
@@ -2078,6 +2087,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response.data);
         _this3.togglestate = false;
+        _this3.likecount--;
       })["catch"](function (error) {
         console.log(error.quote); // change to error message on screen
       });
@@ -2090,6 +2100,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response.data);
         _this4.togglestate = true;
+        _this4.likecount++;
       })["catch"](function (error) {
         console.log(error.quote); // change to error message on screen
       });
@@ -6646,7 +6657,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.gridContainer[data-v-1b84daf8]{\n}\n/* in smaller screens put as position float bottom: 0; */\n.gifGrid[data-v-1b84daf8]{\n        display: grid;\n        grid-template-columns:1fr 1fr 1fr;\n        grid-template-rows:1fr 1fr;\n        justify-items: center;\n        -webkit-box-align: center;\n                align-items: center;\n        z-index: 10000;\n}\n.gif[data-v-1b84daf8]{\n        width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.gifGrid[data-v-1b84daf8]{\n    display: grid;\n    grid-template-columns:1fr 1fr 1fr;\n    grid-template-rows:1fr 1fr;\n    grid-row-gap: 1vh;\n    grid-column-gap: 1vw;\n    justify-items: center;\n    -webkit-box-align: center;\n            align-items: center;\n    padding: 1vh 1vw 1vh 1vw;\n    border-radius: 6px;\n    margin-bottom:3vh;\n}\n.gif[data-v-1b84daf8]{\n    width: 100%;\n}\n.closeIcon[data-v-1b84daf8]{\n    float:right;\n}\n", ""]);
 
 // exports
 
@@ -38122,6 +38133,10 @@ var render = function() {
     _vm.gifToggle == true
       ? _c("div", [
           _c("div", { staticClass: "container mb-2" }, [
+            _c("p", { staticClass: "card-text small mb-1 font-weight-bold" }, [
+              _vm._v(_vm._s(_vm.username))
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "col-sm-6" }, [
               _c("img", {
                 staticClass: "card-img border-bottom",
@@ -38144,7 +38159,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-inline" }, [
       _c("div", { staticClass: "form-group mb-0" }, [
-        _c("input", {
+        _c("textarea", {
           directives: [
             {
               name: "model",
@@ -38154,7 +38169,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control form-control-sm rounded-pill my-2",
-          attrs: { placeholder: "Search for a GIF" },
+          attrs: { rows: "1", placeholder: "Search for a GIF" },
           domProps: { value: _vm.gifsearch },
           on: {
             input: function($event) {
@@ -38173,15 +38188,15 @@ var render = function() {
           staticClass: "btn btn-primary btn-sm ml-2 rounded-pill",
           on: { click: _vm.sendSearch }
         },
-        [_vm._v("comment with GIF")]
+        [_vm._v("Search for GIF")]
       )
     ]),
     _vm._v(" "),
     _vm.gridToggle == true
-      ? _c("div", { staticClass: "gridContainer" }, [
+      ? _c("div", [
           _c(
             "div",
-            { staticClass: "gifGrid bg-primary" },
+            { staticClass: "gifGrid bg-dark" },
             _vm._l(_vm.gifsArray, function(giphy, index) {
               return _c("img", {
                 key: giphy,
@@ -38195,6 +38210,53 @@ var render = function() {
               })
             }),
             0
+          ),
+          _vm._v(" "),
+          _c(
+            "svg",
+            {
+              staticClass: "closeIcon mt-1",
+              staticStyle: { "enable-background": "new 0 0 26 26" },
+              attrs: {
+                height: "20px",
+                width: "20px",
+                x: "0px",
+                y: "0px",
+                viewBox: "0 0 26 26",
+                "xml:space": "preserve"
+              },
+              on: {
+                click: function($event) {
+                  _vm.gridToggle = false
+                }
+              }
+            },
+            [
+              _c("g", [
+                _c("path", {
+                  staticStyle: { fill: "#030104" },
+                  attrs: {
+                    d:
+                      "M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25\n\t\t        C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0\n\t\t        L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467\n\t\t        L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468\n\t\t        c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467\n\t\t        C19.033,16.725,19.033,17.138,18.78,17.394z"
+                  }
+                })
+              ]),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g"),
+              _c("g")
+            ]
           )
         ])
       : _vm._e()
@@ -38257,7 +38319,11 @@ var render = function() {
                   }
                 })
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge badge-pill badge-secondary" }, [
+              _vm._v(_vm._s(_vm.likecount))
+            ])
           ]
         )
       : _c(
@@ -38285,7 +38351,11 @@ var render = function() {
                   }
                 })
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge badge-pill badge-secondary" }, [
+              _vm._v(_vm._s(_vm.likecount))
+            ])
           ]
         )
   ])
