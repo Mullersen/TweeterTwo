@@ -24,7 +24,7 @@
 </head>
 <body>
     <body>
-            <nav class="navbar navbar-expand-md sticky-top navbar-light bg-primary">
+            <nav class="navbar navbar-expand-md fixed-top navbar-light bg-primary">
                 <div class="container">
                     <h1><a class="navbar-brand text-white font-weight-bolder" href="/tweetFeed">Tweeter</a></h1>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -65,12 +65,12 @@
                     </div>
                 </div>
             </nav>
-<div class="pyx-4">
-    <div class="container-md mt-4 mb-5">
+<div class="pyx-4" style="padding-top:60px; min-height:95vh;" >
+    <div class="container-md mt-4 mb-5" >
         @yield('content')
     </div>
 </div>
-<footer class="footer mt-auto py-2 bg-dark">
+<footer class="footer bg-dark" style=" height:5vh; line-height:5vh;">
     <div class="container">
         <span class="text-muted">All rights reserved @Tweeter</span>
     </div>

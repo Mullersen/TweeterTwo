@@ -15,7 +15,6 @@ class FeedController extends Controller
                 return redirect('/discoveryFeed');
             } else {
                 $tweets = \App\Tweet::orderBy('created_at', 'DESC')->simplePaginate(5);
-                //->sortBy('created_at')->reverse();
                 $comments = \App\Comment::all();
                 $gifs = \App\GIF::all();
                 $likes = \App\Like::where('user_id', Auth::user()->id)->get();
@@ -42,6 +41,17 @@ class FeedController extends Controller
         $tweet->content = $request->content;
         $tweet->save();
         return redirect('/tweetFeed');
+    }
+
+    function newRetweet(Request $request){
+        $retweet = new \App\Tweet;
+        $retweet->user_id = Auth::user()->id;
+        $retweet->content = $request->newcontent;
+        $retweet->is_retweet = 1;
+        $retweet->original_author = $request->author;
+        $retweet->original_content = $request->content;
+        $retweet->save();
+        return response()->json(["response" => "success"]);
     }
 
     function showTweet(Request $request){
@@ -158,13 +168,13 @@ class FeedController extends Controller
             $like->user_id = Auth::user()->id;
             $like->tweet_id = $request->key;
             $like->save();
-            return response()->json(['status' => 'deleted']);
+            return response()->json(['status' => 'liked']);
     }
 
     function unlikeTweet(Request $request){
             $matchThese = ['user_id'=> Auth::user()->id, 'tweet_id'=> $request->key];
             \App\Like::where($matchThese)->delete();
-            return response()->json(['status' => 'success']);
+            return response()->json(['status' => 'unliked']);
     }
 
     function discover(){

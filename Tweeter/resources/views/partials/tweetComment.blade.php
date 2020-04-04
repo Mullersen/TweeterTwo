@@ -38,7 +38,7 @@
 @endforeach
 {{--add comment to tweet--}}
 <div>
-<Giphy :tweetid="{{ $tweet->id }}" :username="{{ Auth::user()->name }}"/>
+<Giphy :tweetid="{{ $tweet->id }}" username="{{ Auth::user()->name }}"/>
 </div>
 <form class="form-inline mt-1" action="/comment/addComment" method="POST">
     @csrf

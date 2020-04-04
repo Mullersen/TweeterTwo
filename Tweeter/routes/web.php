@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/tweetFeed', 'FeedController@showAll');
 Route::get('/tweet/addTweet', 'FeedController@newTweet')->middleware('auth');
+Route::post('/tweet/addRetweet', 'FeedController@newRetweet')->middleware('auth');
 Route::get('/tweet/showTweet', 'FeedController@showTweet')->middleware('auth');
 Route::post('/tweet/editTweet', 'FeedController@editTweet')->middleware('auth');
 Route::post('/tweet/deleteTweet', 'FeedController@showDeleteQuestion')->middleware('auth');

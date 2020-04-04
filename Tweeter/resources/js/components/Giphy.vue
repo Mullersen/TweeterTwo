@@ -2,7 +2,7 @@
     <div>
         <div v-if="gifToggle == true">
             <div class="container mb-2">
-                <p class="card-text small mb-1 font-weight-bold">{{username}}</p>
+                <p class="card-text small mb-1 font-weight-bold">{{user}}</p>
                 <div class="col-sm-6">
                     <img class='card-img border-bottom' :src="injectedGif" alt='commented Gif'>
                 </div>
@@ -17,14 +17,14 @@
         </div>
         <div v-if="gridToggle == true">
             <div class="gifGrid bg-dark">
-                <img v-for="(giphy, index) in gifsArray" :key="giphy" @click="sendToDB(index)" class="gif" :src="giphy" alt="Searched Gifs">
+                <img v-for="(giphy, index) in gifsArray" :key="giphy" @click.once="sendToDB(index)" class="gif" :src="giphy" alt="Searched Gifs">
             </div>
             <svg class="closeIcon mt-1" @click="gridToggle = false" height="20px" width="20px" x="0px" y="0px" viewBox="0 0 26 26" style="enable-background:new 0 0 26 26;" xml:space="preserve"><g><path style="fill:#030104;" d="M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25
 		        C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0
 		        L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467
 		        L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468
 		        c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467
-		        C19.033,16.725,19.033,17.138,18.78,17.394z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+		        C19.033,16.725,19.033,17.138,18.78,17.394z"/></g></svg>
         </div>
     </div>
 </template>
@@ -40,18 +40,19 @@ export default {
             gifId: Number,
             gifToggle: false,
             gridToggle: false,
+            user: this.username,
         }
     },
     props :{
         tweetid : Number,
-        username: "",
+        username: String,
     },
     methods: {
         sendSearch: function(){
             var slugified = this.slugify(this.gifsearch);
             axios.get("http://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6")
             .then(response => {
-                console.log(response.data.data);
+                //console.log(response.data.data);
                 let newGifArray = response.data.data.map(gif =>{
                     return gif.images.downsized_medium.url;
                 });
@@ -62,8 +63,11 @@ export default {
                 console.log(error); // change to error message on screen
                 });
         },
+        clicked: function(){
+
+        },
         sendToDB: function(index){
-            console.log('send to DB has been called');
+            //console.log('send to DB has been called');
              axios.post('/comment/addGifComment', {
                 id : this.tweetid,
                 URL : this.gifsArray[index],
@@ -74,6 +78,10 @@ export default {
                 this.gifId = response.data.gifs_id;
                 this.gifToggle = true;
                 this.gridToggle = false;
+                var scope = this;
+                setTimeout(function(){
+                    scope.hasBeenClicked = false;
+                }, 5000)
             })
             .catch(error => {
                 console.log(error); // change to error message on screen

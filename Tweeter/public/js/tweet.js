@@ -1948,12 +1948,13 @@ __webpack_require__.r(__webpack_exports__);
       injectedGif: "",
       gifId: Number,
       gifToggle: false,
-      gridToggle: false
+      gridToggle: false,
+      user: this.username
     };
   },
   props: {
     tweetid: Number,
-    username: ""
+    username: String
   },
   methods: {
     sendSearch: function sendSearch() {
@@ -1961,7 +1962,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var slugified = this.slugify(this.gifsearch);
       axios.get("http://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6").then(function (response) {
-        console.log(response.data.data);
+        //console.log(response.data.data);
         var newGifArray = response.data.data.map(function (gif) {
           return gif.images.downsized_medium.url;
         });
@@ -1971,10 +1972,11 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error); // change to error message on screen
       });
     },
+    clicked: function clicked() {},
     sendToDB: function sendToDB(index) {
       var _this2 = this;
 
-      console.log('send to DB has been called');
+      //console.log('send to DB has been called');
       axios.post('/comment/addGifComment', {
         id: this.tweetid,
         URL: this.gifsArray[index]
@@ -1984,6 +1986,10 @@ __webpack_require__.r(__webpack_exports__);
         _this2.gifId = response.data.gifs_id;
         _this2.gifToggle = true;
         _this2.gridToggle = false;
+        var scope = _this2;
+        setTimeout(function () {
+          scope.hasBeenClicked = false;
+        }, 5000);
       })["catch"](function (error) {
         console.log(error); // change to error message on screen
       });
@@ -2046,12 +2052,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       likesList: [],
-      togglestate: Boolean
+      togglestate: Boolean,
+      count: this.likecount
     };
   },
   props: {
-    tweetid: Number,
-    likecount: Number
+    tweetid: String,
+    likecount: String
   },
   methods: {
     checkTweet: function checkTweet() {
@@ -2087,7 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response.data);
         _this3.togglestate = false;
-        _this3.likecount--;
+        _this3.count--;
       })["catch"](function (error) {
         console.log(error.quote); // change to error message on screen
       });
@@ -2100,7 +2107,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response.data);
         _this4.togglestate = true;
-        _this4.likecount++;
+        _this4.count++;
       })["catch"](function (error) {
         console.log(error.quote); // change to error message on screen
       });
@@ -2109,6 +2116,74 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     this.getUsersLikes();
     console.log('calling getUsersLikes');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Myretweet.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Myretweet",
+  data: function data() {
+    return {
+      toggleView: false,
+      newTweet: ""
+    };
+  },
+  props: {
+    retweetcontent: String,
+    retweetauthor: String
+  },
+  methods: {
+    toggle: function toggle() {
+      this.toggleView = true;
+    },
+    toggleBack: function toggleBack() {
+      this.toggleView = false;
+    },
+    sendRetweet: function sendRetweet() {
+      var _this = this;
+
+      axios.post('/tweet/addRetweet', {
+        content: this.retweetcontent,
+        author: this.retweetauthor,
+        newcontent: this.newTweet
+      }).then(function (response) {
+        console.log(response.data);
+        _this.toggleView = false;
+      })["catch"](function (error) {
+        console.log(error); // change to error message on screen
+      });
+    }
   }
 });
 
@@ -6658,6 +6733,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.gifGrid[data-v-1b84daf8]{\n    display: grid;\n    grid-template-columns:1fr 1fr 1fr;\n    grid-template-rows:1fr 1fr;\n    grid-row-gap: 1vh;\n    grid-column-gap: 1vw;\n    justify-items: center;\n    -webkit-box-align: center;\n            align-items: center;\n    padding: 1vh 1vw 1vh 1vw;\n    border-radius: 6px;\n    margin-bottom:3vh;\n}\n.gif[data-v-1b84daf8]{\n    width: 100%;\n}\n.closeIcon[data-v-1b84daf8]{\n    float:right;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.absolute{\n    position:fixed;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 60vh;\n    z-index: 1000;\n}\n.closeIcon{\n        float:bottom;\n}\n", ""]);
 
 // exports
 
@@ -37530,6 +37624,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Myretweet.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -38134,7 +38258,7 @@ var render = function() {
       ? _c("div", [
           _c("div", { staticClass: "container mb-2" }, [
             _c("p", { staticClass: "card-text small mb-1 font-weight-bold" }, [
-              _vm._v(_vm._s(_vm.username))
+              _vm._v(_vm._s(_vm.user))
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-6" }, [
@@ -38203,7 +38327,7 @@ var render = function() {
                 staticClass: "gif",
                 attrs: { src: giphy, alt: "Searched Gifs" },
                 on: {
-                  click: function($event) {
+                  "~click": function($event) {
                     return _vm.sendToDB(index)
                   }
                 }
@@ -38240,22 +38364,7 @@ var render = function() {
                       "M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25\n\t\t        C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0\n\t\t        L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467\n\t\t        L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468\n\t\t        c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467\n\t\t        C19.033,16.725,19.033,17.138,18.78,17.394z"
                   }
                 })
-              ]),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g"),
-              _c("g")
+              ])
             ]
           )
         ])
@@ -38322,7 +38431,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("span", { staticClass: "badge badge-pill badge-secondary" }, [
-              _vm._v(_vm._s(_vm.likecount))
+              _vm._v(_vm._s(_vm.count))
             ])
           ]
         )
@@ -38354,10 +38463,119 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("span", { staticClass: "badge badge-pill badge-secondary" }, [
-              _vm._v(_vm._s(_vm.likecount))
+              _vm._v(_vm._s(_vm.count))
             ])
           ]
         )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-primary btn-sm mb-3",
+        on: { click: _vm.toggle }
+      },
+      [_vm._v("Retweet")]
+    ),
+    _vm._v(" "),
+    _vm.toggleView == true
+      ? _c("div", [
+          _c("div", { staticClass: "absolute bg-light-prime" }, [
+            _c("h2", [_vm._v("Retweet")]),
+            _vm._v(" "),
+            _c("h5", [_vm._v(_vm._s(_vm.retweetauthor))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.retweetcontent))]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newTweet,
+                  expression: "newTweet"
+                }
+              ],
+              staticClass: "rounded my-4",
+              staticStyle: { width: "100%" },
+              attrs: { rows: "5" },
+              domProps: { value: _vm.newTweet },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.newTweet = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary btn-sm my-2",
+                on: {
+                  "~click": function($event) {
+                    return _vm.sendRetweet($event)
+                  }
+                }
+              },
+              [_vm._v("Go")]
+            ),
+            _vm._v(" "),
+            _c(
+              "svg",
+              {
+                staticClass: "closeIcon mt-1",
+                staticStyle: { "enable-background": "new 0 0 26 26" },
+                attrs: {
+                  height: "20px",
+                  width: "20px",
+                  x: "0px",
+                  y: "0px",
+                  viewBox: "0 0 26 26",
+                  "xml:space": "preserve"
+                },
+                on: { click: _vm.toggleBack }
+              },
+              [
+                _c("g", [
+                  _c("path", {
+                    staticStyle: { fill: "#030104" },
+                    attrs: {
+                      d:
+                        "M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25\n\t\t        C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0\n\t\t        L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467\n\t\t        L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468\n\t\t        c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467\n\t\t        C19.033,16.725,19.033,17.138,18.78,17.394z"
+                    }
+                  })
+                ])
+              ]
+            )
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -50758,6 +50976,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Myretweet.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Myretweet.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Myretweet_vue_vue_type_template_id_17b47a17___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Myretweet.vue?vue&type=template&id=17b47a17& */ "./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17&");
+/* harmony import */ var _Myretweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Myretweet.vue?vue&type=script&lang=js& */ "./resources/js/components/Myretweet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Myretweet.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Myretweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Myretweet_vue_vue_type_template_id_17b47a17___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Myretweet_vue_vue_type_template_id_17b47a17___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Myretweet.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Myretweet.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Myretweet.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Myretweet.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Myretweet.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_template_id_17b47a17___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Myretweet.vue?vue&type=template&id=17b47a17& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_template_id_17b47a17___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Myretweet_vue_vue_type_template_id_17b47a17___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/tweet.js":
 /*!*******************************!*\
   !*** ./resources/js/tweet.js ***!
@@ -50769,6 +51074,7 @@ __webpack_require__(/*! ./app.js */ "./resources/js/app.js");
 
 Vue.component('Like', __webpack_require__(/*! ./components/Like.vue */ "./resources/js/components/Like.vue")["default"]);
 Vue.component('Giphy', __webpack_require__(/*! ./components/Giphy.vue */ "./resources/js/components/Giphy.vue")["default"]);
+Vue.component('Myretweet', __webpack_require__(/*! ./components/Myretweet.vue */ "./resources/js/components/Myretweet.vue")["default"]);
 var app = new Vue({
   el: '#tweet-vue'
 });
