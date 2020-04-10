@@ -2151,6 +2151,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Myretweet",
   data: function data() {
@@ -6751,7 +6754,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.absolute{\n    position:fixed;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 60vh;\n    z-index: 1000;\n}\n.closeIcon{\n        float:bottom;\n}\n", ""]);
+exports.push([module.i, "\n.absolute{\n    position: fixed !important;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 50vh;\n    z-index: 1000;\n    background-color: #F0F7F4 !important;\n}\n.closeIcon{\n        float:right !important;\n        margin-top: 10vh !important;\n}\n", ""]);
 
 // exports
 
@@ -38503,76 +38506,82 @@ var render = function() {
     _vm._v(" "),
     _vm.toggleView == true
       ? _c("div", [
-          _c("div", { staticClass: "absolute bg-light-prime" }, [
-            _c("h2", [_vm._v("Retweet")]),
-            _vm._v(" "),
-            _c("h5", [_vm._v(_vm._s(_vm.retweetauthor))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.retweetcontent))]),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newTweet,
-                  expression: "newTweet"
-                }
-              ],
-              staticClass: "rounded my-4",
-              staticStyle: { width: "100%" },
-              attrs: { rows: "5" },
-              domProps: { value: _vm.newTweet },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.newTweet = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary btn-sm my-2",
-                on: {
-                  "~click": function($event) {
-                    return _vm.sendRetweet($event)
-                  }
-                }
-              },
-              [_vm._v("Go")]
-            ),
-            _vm._v(" "),
-            _c(
-              "svg",
-              {
-                staticClass: "closeIcon mt-1",
-                staticStyle: { "enable-background": "new 0 0 26 26" },
-                attrs: {
-                  height: "20px",
-                  width: "20px",
-                  x: "0px",
-                  y: "0px",
-                  viewBox: "0 0 26 26",
-                  "xml:space": "preserve"
-                },
-                on: { click: _vm.toggleBack }
-              },
-              [
-                _c("g", [
-                  _c("path", {
-                    staticStyle: { fill: "#030104" },
-                    attrs: {
-                      d:
-                        "M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25\n\t\t        C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0\n\t\t        L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467\n\t\t        L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468\n\t\t        c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467\n\t\t        C19.033,16.725,19.033,17.138,18.78,17.394z"
-                    }
-                  })
+          _c("div", { staticClass: "card bg-light-prime absolute" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h3", { staticClass: "card-title mt-3" }, [
+                _vm._v("Retweet @" + _vm._s(_vm.retweetauthor) + "'s tweet")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card mb-3" }, [
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(_vm._s(_vm.retweetcontent))
                 ])
-              ]
-            )
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newTweet,
+                    expression: "newTweet"
+                  }
+                ],
+                staticClass: "form-control",
+                staticStyle: { width: "100%" },
+                attrs: { rows: "5" },
+                domProps: { value: _vm.newTweet },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newTweet = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary btn-sm my-3",
+                  on: {
+                    "~click": function($event) {
+                      return _vm.sendRetweet($event)
+                    }
+                  }
+                },
+                [_vm._v("Tweet it!")]
+              ),
+              _vm._v(" "),
+              _c(
+                "svg",
+                {
+                  staticClass: "closeIcon",
+                  staticStyle: { "enable-background": "new 0 0 26 26" },
+                  attrs: {
+                    height: "20px",
+                    width: "20px",
+                    x: "0px",
+                    y: "0px",
+                    viewBox: "0 0 26 26",
+                    "xml:space": "preserve"
+                  },
+                  on: { click: _vm.toggleBack }
+                },
+                [
+                  _c("g", [
+                    _c("path", {
+                      staticStyle: { fill: "#030104" },
+                      attrs: {
+                        d:
+                          "M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25\n                C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0\n                L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467\n                L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468\n                c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467\n                C19.033,16.725,19.033,17.138,18.78,17.394z"
+                      }
+                    })
+                  ])
+                ]
+              )
+            ])
           ])
         ])
       : _vm._e()

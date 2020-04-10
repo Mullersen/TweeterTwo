@@ -20,6 +20,7 @@ $prime: #077187;
 $light-prime: #70ABAF;
 $light: #F0F7F4;
 $dark: #1C1C1C;
+$no-gap: 0px;
 .bg-prime {
     background-color: $prime;
 }
@@ -38,4 +39,8 @@ $dark: #1C1C1C;
 
 .light {
     color: $light;
+}
+
+.no-column-gap {
+    column-gap: $no-gap;
 }
