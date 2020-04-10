@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="bg-light">
         <Header/>
         <WelcomeBanner/>
-        <Stats/>
+        <Stats />
         <Newest/>
         <Login/>
         <Footer/>
@@ -15,7 +15,6 @@ import WelcomeBanner from './WelcomeBanner.vue';
 import Newest from './Newest.vue';
 import Stats from './Stats.vue';
 import Login from './Login.vue';
-import Footer from './Footer.vue'
 
     export default {
         name: "Root",
@@ -25,7 +24,9 @@ import Footer from './Footer.vue'
             Newest,
             Stats,
             Login,
-            Footer
         },
     }
 </script>
+<style>
+
+</style>
