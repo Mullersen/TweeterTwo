@@ -17,4 +17,7 @@ class Tweet extends Model
     function comment(){
         return $this->hasMany('App\Comment');
     }
+    function gif(){
+        return $this->hasMany('App\Gif');
+    }
 }
