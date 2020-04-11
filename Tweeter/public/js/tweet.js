@@ -2159,6 +2159,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Messaging",
   data: function data() {
@@ -2168,36 +2178,48 @@ __webpack_require__.r(__webpack_exports__);
       follows: Array,
       myUser: String,
       otherUser: String,
-      messageContent: String
+      messageContent: "",
+      errors: []
     };
   },
   methods: {
     loadMessages: function loadMessages(index) {
-      var _this = this;
-
       this.messageToggle = true;
       this.otherUser = this.follows[index].followed_user;
       console.log("other user is: " + this.otherUser);
-      axios.post('/messages/getMessages', {
-        user: this.otherUser
-      }).then(function (response) {
-        console.log(response.data);
-        _this.messages = response.data.messages;
-        _this.myUser = response.data.myUser;
-      })["catch"](function (error) {
-        console.log(error.message); // change to error message on screen
-      });
+      var instance = this;
+      setInterval(function () {
+        axios.post('/messages/getMessages', {
+          user: instance.otherUser
+        }).then(function (response) {
+          console.log(response.data);
+          instance.messages = response.data.messages;
+          instance.myUser = response.data.myUser;
+        })["catch"](function (error) {
+          console.log(error.message); // change to error message on screen
+        });
+      }, 1000);
     },
     sendMessage: function sendMessage() {
-      //console.log('send to DB has been called');
-      axios.post('/messages/sendMessage', {
-        content: this.messageContent,
-        receiver: this.otherUser
-      }).then(function (response) {
-        console.log(response.data);
-      })["catch"](function (error) {
-        console.log(error.message); // change to error message on screen
-      });
+      var _this = this;
+
+      if (!this.messageContent) {
+        this.errors.push("Write something to send a message");
+      } else {
+        axios.post('/messages/sendMessage', {
+          content: this.messageContent,
+          receiver: this.otherUser
+        }).then(function (response) {
+          console.log(response.data);
+          _this.messageContent = "";
+
+          _this.loadMessages();
+
+          _this.errors = _this.errors.splice(0, 1);
+        })["catch"](function (error) {
+          console.log(error.message); // change to error message on screen
+        });
+      }
     }
   },
   beforeMount: function beforeMount() {
@@ -38637,8 +38659,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h2", { staticClass: "text-center my-4" }, [_vm._v("Your messages")]),
+    _vm._v(" "),
+    _c("h5", { staticClass: "my-4" }, [
+      _vm._v(
+        "Click on a user below to start a conversation or add new users by following more"
+      )
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-4 bg-prime-light" }, [
+      _c("div", { staticClass: "col-4" }, [
         _c(
           "ul",
           { staticClass: " list-group list-group-flush" },
@@ -38661,28 +38691,38 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-6 bg-light" }, [
+      _c("div", { staticClass: "col-8 border rounded-sm" }, [
         _vm.messageToggle == true
           ? _c("div", [
-              _c("h1", [_vm._v("Messages with " + _vm._s(_vm.otherUser))]),
+              _c("h2", [_vm._v("Messages with " + _vm._s(_vm.otherUser))]),
               _vm._v(" "),
               _vm.messages.length > -1
                 ? _c(
                     "div",
                     _vm._l(_vm.messages, function(message) {
                       return _c("div", { key: message.id }, [
-                        message.sender === _vm.otherUser ||
-                        message.receiver === _vm.myUser
+                        message.sender === _vm.otherUser
                           ? _c("div", [
-                              _c("p", { staticClass: "text-right" }, [
-                                _vm._v(_vm._s(message.message))
+                              _c("h5", { staticClass: "text-right" }, [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "badge badge-pill badge-light"
+                                  },
+                                  [_vm._v(_vm._s(message.message))]
+                                )
                               ])
                             ])
-                          : message.sender === _vm.myUser ||
-                            message.receiver === _vm.otherUser
+                          : message.sender === _vm.myUser
                           ? _c("div", [
-                              _c("p", { staticClass: "text-left" }, [
-                                _vm._v(_vm._s(message.message))
+                              _c("h5", { staticClass: "text-left" }, [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "badge badge-pill badge-light"
+                                  },
+                                  [_vm._v(_vm._s(message.message))]
+                                )
                               ])
                             ])
                           : _vm._e()
@@ -38692,38 +38732,60 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.messageContent,
-                    expression: "messageContent"
-                  }
-                ],
-                attrs: { rows: "4", placeholder: "write you text here" },
-                domProps: { value: _vm.messageContent },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "form-group" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.messageContent,
+                      expression: "messageContent"
                     }
-                    _vm.messageContent = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "newMessageText",
+                    rows: "3",
+                    placeholder: "Write your message here"
+                  },
+                  domProps: { value: _vm.messageContent },
                   on: {
-                    "~click": function($event) {
-                      return _vm.sendMessage($event)
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.messageContent = $event.target.value
                     }
                   }
-                },
-                [_vm._v("Send")]
-              )
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-primary my-2",
+                    on: { click: _vm.sendMessage }
+                  },
+                  [_vm._v("Send")]
+                ),
+                _vm._v(" "),
+                _vm.errors.length
+                  ? _c("p", [
+                      _c("b", [
+                        _vm._v("Please correct the following error(s):")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        _vm._l(_vm.errors, function(error) {
+                          return _c("li", { key: error }, [
+                            _vm._v(_vm._s(error))
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  : _vm._e()
+              ])
             ])
           : _vm._e()
       ])
