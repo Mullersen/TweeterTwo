@@ -17,7 +17,7 @@ class CreateTweetsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->string('content');
-            $table->boolean('is_retweet')
+            $table->boolean('is_retweet');
             $table->string('original_author');
             $table->string('original_content');
             $table->timestamps();
