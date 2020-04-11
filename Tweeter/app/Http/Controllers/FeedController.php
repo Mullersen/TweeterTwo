@@ -16,7 +16,7 @@ class FeedController extends Controller
             } else {
                 $tweets = \App\Tweet::orderBy('created_at', 'DESC')->simplePaginate(5);
                 $comments = \App\Comment::all();
-                $gifs = \App\GIF::all();
+                $gifs = \App\Gif::all();
                 $likes = \App\Like::where('user_id', Auth::user()->id)->get();
                 return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes, 'gifs' => $gifs]);
                 }
@@ -112,7 +112,7 @@ class FeedController extends Controller
     }
 
     function newGifComment(Request $request){
-        $GIF = new \App\GIF;
+        $GIF = new \App\Gif;
         $GIF->user_id = Auth::user()->id;
         $GIF->tweet_id = $request->id;
         $GIF->URL = $request->URL;
@@ -132,8 +132,8 @@ class FeedController extends Controller
 
     function deleteGifComment(Request $request){
             $id = $request->id;
-            if(Auth::user()->id == \App\GIF::find($id)->user_id){
-                \App\GIF::destroy($id);
+            if(Auth::user()->id == \App\Gif::find($id)->user_id){
+                \App\Gif::destroy($id);
                 return redirect('/tweetFeed');
             } else {
                 return view('error');

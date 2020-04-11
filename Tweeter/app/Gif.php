@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GIF extends Model
+class Gif extends Model
 {
     protected $table = '_g_i_f';
 

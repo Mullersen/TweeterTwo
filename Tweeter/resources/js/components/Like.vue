@@ -37,7 +37,7 @@ export default {
              return this.togglestate;
          },
         getUsersLikes : function() {
-            axios.get('/like/my-likes')
+            axios.get('/like/myLikes')
             .then(response => {
                 //console.log(response.data);
                 this.likesList = response.data.myLikes;

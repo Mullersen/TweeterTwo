@@ -104,7 +104,7 @@
                                         </div>
                                         @if ($tweet->is_retweet ==0)
                                             <div class="col-4 text-center">
-                                                <Myretweet retweetid="{{ $tweet->id }}" retweetcontent="{{$tweet->content}}" retweetauthor="{{App\Tweet::find($tweet->id)->user->name}}"/>
+                                                <Myretweet retweetid={{ $tweet->id }} retweetcontent="{{$tweet->content}}" retweetauthor="{{App\Tweet::find($tweet->id)->user->name}}"/>
                                             </div>
                                         @endif
                                     </div>

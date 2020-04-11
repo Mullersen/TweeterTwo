@@ -2077,7 +2077,7 @@ __webpack_require__.r(__webpack_exports__);
     getUsersLikes: function getUsersLikes() {
       var _this2 = this;
 
-      axios.get('/like/my-likes').then(function (response) {
+      axios.get('/like/myLikes').then(function (response) {
         //console.log(response.data);
         _this2.likesList = response.data.myLikes;
 
@@ -2116,6 +2116,90 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     this.getUsersLikes();
     console.log('calling getUsersLikes');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messaging.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Messaging.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Messaging",
+  data: function data() {
+    return {
+      sender: String,
+      content: String,
+      messageToggle: false,
+      follows: Array,
+      otherUser: String,
+      messageContent: String
+    };
+  },
+  methods: {
+    loadMessages: function loadMessages(index) {
+      this.messageToggle = true;
+      this.otherUser = this.follows[index].followed_user;
+      console.log(this.follows[index].followed_user); // axios.get('/messages/getMessages', {
+      //     user : this.follows[index].followed_user,
+      // })
+      // .then(response => {
+      //     console.log(response.data);
+      //     // if(!Null){
+      //     //     this.content = response.data.message;
+      //     //     this.sender = response.data;
+      //     // }
+      // })
+      // .catch(error => {
+      //         console.log(error.message); // change to error message on screen
+      //     });
+    },
+    sendMessage: function sendMessage() {
+      //console.log('send to DB has been called');
+      axios.post('/message/sendMessage', {
+        content: this.messageContent,
+        receiver: this.otheruser
+      }).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error); // change to error message on screen
+      });
+    }
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get('/messages/getFollows').then(function (response) {
+      //console.log(response.data.follows);
+      _this.follows = response.data.follows;
+    })["catch"](function (error) {
+      console.log(error.message); // change to error message on screen
+    });
   }
 });
 
@@ -38479,6 +38563,86 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messaging.vue?vue&type=template&id=5c5a81ae&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Messaging.vue?vue&type=template&id=5c5a81ae& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-4 bg-prime-light" }, [
+        _c(
+          "ul",
+          { staticClass: " list-group list-group-flush" },
+          _vm._l(_vm.follows, function(follow, index) {
+            return _c(
+              "li",
+              {
+                key: follow.followed_user,
+                staticClass: "list-group-item",
+                on: {
+                  click: function($event) {
+                    return _vm.loadMessages(index)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(follow.followed_user))]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 bg-light" }, [
+        _vm.messageToggle == true
+          ? _c("div", [
+              _c("h1", [_vm._v("Messages with" + _vm._s(_vm.otherUser))]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.messageContent,
+                    expression: "messageContent"
+                  }
+                ],
+                attrs: { cols: "10", rows: "30" },
+                domProps: { value: _vm.messageContent },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.messageContent = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("button", { on: { click: _vm.sendMessage } }, [_vm._v("Send")])
+            ])
+          : _vm._e()
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Myretweet.vue?vue&type=template&id=17b47a17& ***!
@@ -50985,6 +51149,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Messaging.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Messaging.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Messaging_vue_vue_type_template_id_5c5a81ae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Messaging.vue?vue&type=template&id=5c5a81ae& */ "./resources/js/components/Messaging.vue?vue&type=template&id=5c5a81ae&");
+/* harmony import */ var _Messaging_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Messaging.vue?vue&type=script&lang=js& */ "./resources/js/components/Messaging.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Messaging_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Messaging_vue_vue_type_template_id_5c5a81ae___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Messaging_vue_vue_type_template_id_5c5a81ae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Messaging.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Messaging.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Messaging.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Messaging_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Messaging.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messaging.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Messaging_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Messaging.vue?vue&type=template&id=5c5a81ae&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Messaging.vue?vue&type=template&id=5c5a81ae& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messaging_vue_vue_type_template_id_5c5a81ae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Messaging.vue?vue&type=template&id=5c5a81ae& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messaging.vue?vue&type=template&id=5c5a81ae&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messaging_vue_vue_type_template_id_5c5a81ae___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messaging_vue_vue_type_template_id_5c5a81ae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Myretweet.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/Myretweet.vue ***!
@@ -51084,6 +51317,7 @@ __webpack_require__(/*! ./app.js */ "./resources/js/app.js");
 Vue.component('Like', __webpack_require__(/*! ./components/Like.vue */ "./resources/js/components/Like.vue")["default"]);
 Vue.component('Giphy', __webpack_require__(/*! ./components/Giphy.vue */ "./resources/js/components/Giphy.vue")["default"]);
 Vue.component('Myretweet', __webpack_require__(/*! ./components/Myretweet.vue */ "./resources/js/components/Myretweet.vue")["default"]);
+Vue.component('Messaging', __webpack_require__(/*! ./components/Messaging.vue */ "./resources/js/components/Messaging.vue")["default"]);
 var app = new Vue({
   el: '#tweet-vue'
 });

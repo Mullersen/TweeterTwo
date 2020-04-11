@@ -32,7 +32,7 @@ Route::post('/comment/editComment', 'FeedController@editComment')->middleware('a
 
 Route::post('like/likeTweet', 'FeedController@likeTweet')->middleware('auth');
 Route::post('like/unlikeTweet', 'FeedController@unlikeTweet')->middleware('auth');
-Route::get('like/my-likes', 'FeedController@getMyLikes')->middleware('auth');
+Route::get('like/myLikes', 'FeedController@getMyLikes')->middleware('auth');
 
 Route::post('/profile/followUser', 'UserController@followUser')->middleware('auth');
 Route::post('/profile/unfollowUser', 'UserController@unfollowUser')->middleware('auth');
@@ -41,5 +41,9 @@ Route::post('/profile/editEmail', 'UserController@editEmail')->middleware('auth'
 Route::post('/profile/editPassword', 'UserController@editPassword')->middleware('auth');
 Route::post('/profile/deleteProfile', 'UserController@showDeleteQuestion')->middleware('auth');
 Route::post('/profile/deleteProfile/yes', 'UserController@deleteProfile')->middleware('auth');
+
+Route::get('/messages/home', 'MessageController@showMessages')->middleware('auth');
+Route::get('/messages/getFollows', 'MessageController@getFollows')->middleware('auth');
+Route::get('/messages/getMessages', 'MessageController@getMessages')->middleware('auth');
 
 Route::get('/', 'HomeController@index');

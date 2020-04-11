@@ -22,6 +22,12 @@ class User extends Authenticatable
     function follow(){
         return $this->hasMany('App\Follow');
     }
+    function message(){
+        return $this->belongsTo('App\Message');
+    }
+    function gif(){
+        return $this->hasMany('App\Gif');
+    }
 
     /**
      * The attributes that are mass assignable.
