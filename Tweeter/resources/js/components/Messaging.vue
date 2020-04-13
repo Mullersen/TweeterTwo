@@ -8,9 +8,19 @@
           </div>
           <div class="col-6 bg-light">
               <div v-if="messageToggle == true">
-                  <h1>Messages with{{otherUser}}</h1>
-                  <textarea v-model="messageContent" cols="10" rows="30"></textarea>
-                  <button @click="sendMessage">Send</button>
+                  <h1>Messages with {{otherUser}}</h1>
+                  <div v-if="messages.length > -1">
+                      <div v-for="message in messages" :key="message.id">
+                          <div v-if="message.sender === otherUser || message.receiver === myUser">
+                              <p class="text-right">{{message.message}}</p>
+                          </div>
+                          <div v-else-if="message.sender === myUser || message.receiver === otherUser">
+                              <p class="text-left">{{message.message}}</p>
+                          </div>
+                      </div>
+                  </div>
+                  <textarea v-model="messageContent" rows="4" placeholder="write you text here"></textarea>
+                  <button @click.once="sendMessage">Send</button>
               </div>
           </div>
       </div>
@@ -22,10 +32,10 @@ export default {
     name: "Messaging",
     data: function(){
         return{
-            sender: String,
-            content: String,
+            messages: Array,
             messageToggle: false,
             follows: Array,
+            myUser: String,
             otherUser: String,
             messageContent: String,
         }
@@ -34,32 +44,31 @@ export default {
         loadMessages: function(index){
             this.messageToggle = true;
             this.otherUser = this.follows[index].followed_user;
-            console.log(this.follows[index].followed_user);
-            // axios.get('/messages/getMessages', {
-            //     user : this.follows[index].followed_user,
-            // })
-            // .then(response => {
-            //     console.log(response.data);
-            //     // if(!Null){
-            //     //     this.content = response.data.message;
-            //     //     this.sender = response.data;
-            //     // }
-            // })
-            // .catch(error => {
-            //         console.log(error.message); // change to error message on screen
-            //     });
+            console.log("other user is: " +this.otherUser);
+            axios.get('/messages/getMessages', {
+                user : this.otherUser,
+            })
+            .then(response => {
+                console.log(response.data);
+                this.messages = response.data.messages;
+                this.myUser = response.data.myUser;
+
+            })
+            .catch(error => {
+                    console.log(error.message); // change to error message on screen
+                });
         },
         sendMessage: function(){
             //console.log('send to DB has been called');
-             axios.post('/message/sendMessage', {
+             axios.post('/messages/sendMessage', {
                 content : this.messageContent,
-                receiver : this.otheruser,
+                receiver : this.otherUser,
                 })
             .then(response => {
                 console.log(response.data);
             })
             .catch(error => {
-                console.log(error); // change to error message on screen
+                console.log(error.message); // change to error message on screen
                 });
         }
     },
@@ -77,42 +86,10 @@ export default {
 </script>
 
 <style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#floatRight{
+    text-align: left;
+}
+#floatLeft{
+    text-align: right;
+}
 </style>

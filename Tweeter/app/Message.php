@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $table = 'private_messages';
+    protected $table = 'messages';
 
-    function user(){
-        return $this->hasMany('App\User');
-        }
 }
