@@ -28,5 +28,19 @@ import Login from './Login.vue';
     }
 </script>
 <style>
+.markers{
+    position:absolute;
+    top:90px;
+    background-color: black;
+    color:white;
+    display:inline-block;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    padding-top:13px;
+}
+.panel{
+
+}
 
 </style>

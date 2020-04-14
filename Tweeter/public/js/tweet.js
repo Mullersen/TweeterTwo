@@ -1939,6 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Giphy",
   data: function data() {
@@ -6735,7 +6736,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.gifGrid[data-v-1b84daf8]{\n    display: grid;\n    grid-template-columns:1fr 1fr 1fr;\n    grid-template-rows:1fr 1fr;\n    grid-row-gap: 1vh;\n    grid-column-gap: 1vw;\n    justify-items: center;\n    -webkit-box-align: center;\n            align-items: center;\n    padding: 1vh 1vw 1vh 1vw;\n    border-radius: 6px;\n    margin-bottom:3vh;\n}\n.gif[data-v-1b84daf8]{\n    width: 100%;\n}\n.closeIcon[data-v-1b84daf8]{\n    float:right;\n}\n", ""]);
+exports.push([module.i, "\n.gifGrid[data-v-1b84daf8]{\n    display: grid;\n    grid-template-columns:1fr 1fr 1fr;\n    grid-template-rows:1fr 1fr;\n    grid-row-gap: 1vh;\n    grid-column-gap: 1vw;\n    justify-items: center;\n    -webkit-box-align: center;\n            align-items: center;\n    padding: 1vh 1vw 1vh 1vw;\n    border-radius: 6px;\n}\n.gif[data-v-1b84daf8]{\n    width: 100%;\n}\n.closeIcon[data-v-1b84daf8]{\n    float:right;\n}\n", ""]);
 
 // exports
 
@@ -38369,7 +38370,9 @@ var render = function() {
                 })
               ])
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("Powered By GIPHY")])
         ])
       : _vm._e()
   ])

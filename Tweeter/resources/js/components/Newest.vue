@@ -1,13 +1,11 @@
 <template>
   <div id="newest" class="panel bg-light-prime">
-      <div class="container py-5 text-center">
-        <img class="my-5 img-fluid" :src="image_src" alt="The new retweeting function">
-        <h2 class="pt-4">Now introducing: The Retweet</h2>
-        <h4>Liking another Users tweets? Now you can re-tweet them to your own account.</h4>
-      </div>
-      <div class=" py-5 my-5 text-center">
-          <h1 mt-5>The place to be, to see...</h1>
-          <h2>What's happening in the world and who are in it</h2>
+      <div class="markers">NEW</div>
+      <div id="new-content" class="container text-center">
+        <h2 class="revealStats pt-4">Now introducing: The Retweet</h2>
+        <h4 class="revealStats">Liking another Users tweets? Now you can re-tweet them to your own account.</h4>
+        <img class="my-5 img-fluid shadow-sm" :src="image_src" alt="The new retweeting function">
+        <p class="revealStats">We have always loved showing respect to our fellow tweeters. Do like us and make your friends messages clearer to your own followers</p>
       </div>
   </div>
 </template>
@@ -24,6 +22,9 @@ export default {
 
 <style>
 #newest{
-    height:100vh;
+    height:130vh;
+}
+#new-content{
+    padding-top:20vh;
 }
 </style>

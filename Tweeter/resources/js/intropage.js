@@ -25,7 +25,7 @@ $(function() { // wait for document ready
     var controller = new ScrollMagic.Controller({
         globalSceneOptions: {
             triggerHook: 'onLeave',
-            duration: "150%" // this works just fine with duration 0 as well
+            duration: "150%"
         }
     });
 

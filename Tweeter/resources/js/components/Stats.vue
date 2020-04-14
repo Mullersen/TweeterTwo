@@ -1,7 +1,8 @@
 <template>
   <div id="stats" class="panel">
-        <div class="container py-5">
-            <div class="container my-5">
+       <div class="markers">STATS</div>
+        <div id="statsContent" class="container">
+            <div class="container my-4">
                 <h2 id="statsHeader"><strong>Tweeter</strong> has been the place to share thoughts and ideas since 2001, and it is not about to stop.</h2>
             </div>
             <div id="trigger1"></div>
@@ -51,7 +52,10 @@ export default {
     margin-left: 5vw;
 }
 #stats{
-    height:100vh;
+    height:150vh;
+}
+#statsContent{
+    padding-top: 20vh;
 }
 @media (max-width: 430px){
     .stats{
@@ -84,7 +88,7 @@ export default {
 	.revealStats.visible {
 		opacity: 1;
 		-webkit-transform: none;
-			 -moz-transform: none; 
+			 -moz-transform: none;
 				-ms-transform: none;
 				 -o-transform: none;
 						transform: none;
