@@ -3,13 +3,21 @@
 @section('content')
 <div class="alert alert-danger" role="alert">
     Are you sure you want to delete the following tweet and all its comments?
-</div>
+</div> 
 <div class="card mb-4">
-    <div class="card-header">
-        {{App\Tweet::find($tweet->id)->user->name}}
-    </div>
     <div class="card-body">
-            <p class="font-weight-bold">{{$tweet->content}}</p>
+            <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">@ {{App\Tweet::find($tweet->id)->user->name}}</a></h5>
+                @if ($tweet->is_retweet == 1)
+                    <p class="card-text mb-2">{{$tweet->content}}</p>
+                        <div class="card my-3">
+                            <div class="card-body bg-light">
+                                <p class="card-subtitle mb-2">{{$tweet->original_author}}</p>
+                                <p class="card-text text-muted mb-2">{{$tweet->original_content}}</p>
+                            </div>
+                        </div>
+                @else
+                    <p class="card-text mb-2">{{$tweet->content}}</p>
+                @endif
             @foreach ($comments as $comment)
                 @if ($comment->tweet_id == $tweet->id)
                     <div class="container mb-2">

@@ -9,7 +9,7 @@
                         <p class="card-text">{{retweetcontent}}</p>
                     </div>
                     <textarea  class="form-control" v-model="newTweet" style="width:100%;" rows="5"></textarea>
-                    <button @click.once="sendRetweet" class="btn btn-outline-primary btn-sm my-3">Tweet it!</button>
+                    <button @click.once="sendRetweet" class="btn btn-primary btn-sm my-3">Tweet it!</button>
                     <svg class="closeIcon" @click="toggleBack" height="20px" width="20px" x="0px" y="0px" viewBox="0 0 26 26" style="enable-background:new 0 0 26 26;" xml:space="preserve"><g><path style="fill:#030104;" d="M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25
                     C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0
                     L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467
@@ -28,7 +28,7 @@ export default {
     data: function(){
         return {
             toggleView: false,
-            newTweet: "",
+            newTweet:" ",
         }
     },
     props: {
@@ -43,6 +43,7 @@ export default {
             this.toggleView = false;
         },
         sendRetweet: function(){
+            
             axios.post('/tweet/addRetweet', {
                 content: this.retweetcontent,
                 author: this.retweetauthor,
@@ -53,7 +54,7 @@ export default {
                 this.toggleView = false;
             })
             .catch(error => {
-                console.log(error); // change to error message on screen
+                console.log(error.message);
                 });
         }
     }

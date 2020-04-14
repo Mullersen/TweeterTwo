@@ -46,7 +46,11 @@ class FeedController extends Controller
     function newRetweet(Request $request){
         $retweet = new \App\Tweet;
         $retweet->user_id = Auth::user()->id;
-        $retweet->content = $request->newcontent;
+        if(empty($request->newcontent)){
+            $retweet->content = "Retweet";
+        } else {
+            $retweet->content = $request->newcontent;
+        }
         $retweet->is_retweet = 1;
         $retweet->original_author = $request->author;
         $retweet->original_content = $request->content;

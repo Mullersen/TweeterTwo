@@ -2160,7 +2160,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       toggleView: false,
-      newTweet: ""
+      newTweet: " "
     };
   },
   props: {
@@ -2185,7 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
         _this.toggleView = false;
       })["catch"](function (error) {
-        console.log(error); // change to error message on screen
+        console.log(error.message);
       });
     }
   }
@@ -38547,7 +38547,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-outline-primary btn-sm my-3",
+                  staticClass: "btn btn-primary btn-sm my-3",
                   on: {
                     "~click": function($event) {
                       return _vm.sendRetweet($event)
