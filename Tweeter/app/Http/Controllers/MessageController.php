@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class MessageController extends Controller
 {
@@ -17,13 +19,14 @@ class MessageController extends Controller
 
     function getMessages(Request $request){
         $matchThese = ['sender'=> $request->user, 'receiver'=> Auth::user()->name];
-        //$matchTheseToo = ['sender'=> Auth::user()->name, 'receiver'=> $request->user];
-        $messages = \App\Message::where($matchThese)
-                                ->get();
+        $receivedMessages = \App\Message::where($matchThese)->get();
 
-        // $messages = \App\Message::where(['sender'=> $request->user, 'receiver'=> Auth::user()->name])
-        //                                     ->orWhere(['sender'=> Auth::user()->name, 'receiver'=> $request->user])
-        //                                     ->get();
+        //error_log($request);
+
+        $matchTheseToo = ['sender'=> Auth::user()->name, 'receiver'=> $request->user];
+        $sentMessages = \App\Message::where($matchTheseToo)->get(); 
+
+        $messages = $receivedMessages->concat($sentMessages);
         return response()->json(['messages' => $messages, 'myUser' => Auth::user()->name]);
     }
 

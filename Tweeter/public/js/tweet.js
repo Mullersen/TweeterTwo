@@ -2178,7 +2178,7 @@ __webpack_require__.r(__webpack_exports__);
       this.messageToggle = true;
       this.otherUser = this.follows[index].followed_user;
       console.log("other user is: " + this.otherUser);
-      axios.get('/messages/getMessages', {
+      axios.post('/messages/getMessages', {
         user: this.otherUser
       }).then(function (response) {
         console.log(response.data);

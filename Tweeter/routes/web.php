@@ -44,7 +44,7 @@ Route::post('/profile/deleteProfile/yes', 'UserController@deleteProfile')->middl
 
 Route::get('/messages/home', 'MessageController@showMessages')->middleware('auth');
 Route::get('/messages/getFollows', 'MessageController@getFollows')->middleware('auth');
-Route::get('/messages/getMessages', 'MessageController@getMessages')->middleware('auth');
+Route::post('/messages/getMessages', 'MessageController@getMessages')->middleware('auth');
 Route::post('/messages/sendMessage', 'MessageController@sendMessage')->middleware('auth');
 
 Route::get('/', 'HomeController@index');

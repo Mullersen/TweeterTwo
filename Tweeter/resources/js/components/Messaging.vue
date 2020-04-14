@@ -45,7 +45,7 @@ export default {
             this.messageToggle = true;
             this.otherUser = this.follows[index].followed_user;
             console.log("other user is: " +this.otherUser);
-            axios.get('/messages/getMessages', {
+            axios.post('/messages/getMessages', {
                 user : this.otherUser,
             })
             .then(response => {
