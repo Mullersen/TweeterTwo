@@ -39,8 +39,5 @@ import Login from './Login.vue';
     text-align: center;
     padding-top:13px;
 }
-.panel{
-
-}
 
 </style>

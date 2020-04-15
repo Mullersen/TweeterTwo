@@ -70,7 +70,7 @@
         <hr>
         {{--Show tweets--}}
         <div class="row mb-4 justify-content-center" id="tweet-vue">
-            <div class="col-md-6">
+            <div id="tweetGrid" class="col-md-6">
                 @foreach ($tweets as $tweet){{--everything below here is part of the foreach loop showing the tweets--}}
                     @if (checkUser(App\Tweet::find($tweet->id)->user->name, $follows) or Auth::user()->id == $tweet->user_id)
                         <div class="card mb-2">
@@ -104,7 +104,7 @@
                                         </div>
                                         @if ($tweet->is_retweet ==0)
                                             <div class="col-4 text-center">
-                                                <Myretweet retweetid={{ $tweet->id }} retweetcontent="{{$tweet->content}}" retweetauthor="{{App\Tweet::find($tweet->id)->user->name}}"/>
+                                                <Myretweet username={{ Auth::user()->name}} retweetcontent="{{$tweet->content}}" retweetauthor="{{App\Tweet::find($tweet->id)->user->name}}"/>
                                             </div>
                                         @endif
                                     </div>

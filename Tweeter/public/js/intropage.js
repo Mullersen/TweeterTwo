@@ -6720,7 +6720,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.markers{\n    position:absolute;\n    top:90px;\n    background-color: black;\n    color:white;\n    display:inline-block;\n    width: 150px;\n    height: 50px;\n    text-align: center;\n    padding-top:13px;\n}\n.panel{\n}\n\n", ""]);
+exports.push([module.i, "\n.markers{\n    position:absolute;\n    top:90px;\n    background-color: black;\n    color:white;\n    display:inline-block;\n    width: 150px;\n    height: 50px;\n    text-align: center;\n    padding-top:13px;\n}\n\n", ""]);
 
 // exports
 

@@ -34,6 +34,7 @@ export default {
     props: {
             retweetcontent: String,
             retweetauthor: String,
+            username: String,
     },
     methods: {
         toggle: function(){
@@ -51,6 +52,12 @@ export default {
                 })
             .then(response => {
                 console.log(response.data);
+                var tweetGrid = document.getElementById("tweetGrid");
+                var newCard = document.createElement('div');
+                newCard.classList.add("card");
+                newCard.classList.add("mb-2");
+                newCard.innerHTML="<div class='card-body'><h5 class='card-subtitle text-muted'>@" + this.username + "</h5><p class='card-text mb-2'>"+ this.newTweet + "</p><div class='card my-3'><div class='card-body bg-light'><p class='card-subtitle mb-2'>" + this.retweetauthor + "</p><p class='card-text text-muted mb-2'>" + this.retweetcontent + "</p></div></div></div>";
+                tweetGrid.insertBefore(newCard, tweetGrid.childNodes[0]);
                 this.toggleView = false;
             })
             .catch(error => {
@@ -75,4 +82,5 @@ export default {
         float:right !important;
         margin-top: 10vh !important;
     }
+
 </style>

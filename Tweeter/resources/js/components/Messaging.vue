@@ -85,7 +85,7 @@ export default {
                     console.log(response.data);
                     this.messageContent = "";
                     this.loadMessages();
-                    this.errors = this.errors.splice(0,1);
+                    this.errors.splice(0,1);
                 })
                 .catch(error => {
                     console.log(error.message); // change to error message on screen

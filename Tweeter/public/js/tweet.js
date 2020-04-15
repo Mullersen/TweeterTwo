@@ -2216,7 +2216,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.loadMessages();
 
-          _this.errors = _this.errors.splice(0, 1);
+          _this.errors.splice(0, 1);
         })["catch"](function (error) {
           console.log(error.message); // change to error message on screen
         });
@@ -2280,7 +2280,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     retweetcontent: String,
-    retweetauthor: String
+    retweetauthor: String,
+    username: String
   },
   methods: {
     toggle: function toggle() {
@@ -2298,6 +2299,12 @@ __webpack_require__.r(__webpack_exports__);
         newcontent: this.newTweet
       }).then(function (response) {
         console.log(response.data);
+        var tweetGrid = document.getElementById("tweetGrid");
+        var newCard = document.createElement('div');
+        newCard.classList.add("card");
+        newCard.classList.add("mb-2");
+        newCard.innerHTML = "<div class='card-body'><h5 class='card-subtitle text-muted'>@" + _this.username + "</h5><p class='card-text mb-2'>" + _this.newTweet + "</p><div class='card my-3'><div class='card-body bg-light'><p class='card-subtitle mb-2'>" + _this.retweetauthor + "</p><p class='card-text text-muted mb-2'>" + _this.retweetcontent + "</p></div></div></div>";
+        tweetGrid.insertBefore(newCard, tweetGrid.childNodes[0]);
         _this.toggleView = false;
       })["catch"](function (error) {
         console.log(error.message);
@@ -6889,7 +6896,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.absolute{\n    position: fixed !important;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 50vh;\n    z-index: 1000;\n    background-color: #F0F7F4 !important;\n}\n.closeIcon{\n        float:right !important;\n        margin-top: 10vh !important;\n}\n", ""]);
+exports.push([module.i, "\n.absolute{\n    position: fixed !important;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 50vh;\n    z-index: 1000;\n    background-color: #F0F7F4 !important;\n}\n.closeIcon{\n        float:right !important;\n        margin-top: 10vh !important;\n}\n\n", ""]);
 
 // exports
 
