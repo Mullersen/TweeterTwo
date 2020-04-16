@@ -21,7 +21,7 @@ for (i = 0; i <= revealElements.length; i++) {
 }
 
 $(function() {
-    // init
+    //!! You have to reload the chrome page for the destinction below to work, if you are toggling screensizes in the chrome console. !!
 
     if($(window).width() > 370){
         var controller = new ScrollMagic.Controller({

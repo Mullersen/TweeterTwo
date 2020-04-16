@@ -37,9 +37,13 @@ export default {
     margin-top:20vh;
 }
 @media (max-width: 430px){
-    #login{
+    #loginBox{
         height:100vh;
     }
 }
-
+@media (max-width: 350px){
+    #login{
+        height:83vh;
+    }
+}
 </style>

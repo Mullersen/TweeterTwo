@@ -6696,7 +6696,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#login{\n    height:80vh;\n}\n#login-text{\n    margin-top:20vh;\n}\n@media (max-width: 430px){\n#login{\n        height:100vh;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n#login{\n    height:80vh;\n}\n#login-text{\n    margin-top:20vh;\n}\n@media (max-width: 430px){\n#loginBox{\n        height:100vh;\n}\n}\n@media (max-width: 350px){\n#login{\n        height:83vh;\n}\n}\n", ""]);
 
 // exports
 
@@ -6753,7 +6753,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#statsHeader{\n    margin-left: 5vw;\n}\n#statsHeaderTwo{\n    display:none;\n}\n#stats{\n    height:150vh;\n}\n#statsContent{\n    padding-top: 20vh;\n}\n@media (max-width: 430px){\n.stats{\n        border-bottom: #1C1C1C 1px dotted;\n}\n#header{\n        margin-left:0;\n}\n#birdsOnWire{\n        display:none !important;\n}\n#stats{\n    height:150vh;\n}\n#statsHeader{\n        display:none;\n}\n#statsHeaderTwo{\n        display:block;\n        text-align: center;\n}\n#birdsOnWire{\n        display:none;\n}\n#statsContent{\n        padding-top:0vh;\n}\n}\n@media (max-width: 350px){\n#stats{\n        height: 150vh;\n}\n}\n.revealStats {\n\t\topacity: 0;\n\t\t-webkit-transform: scale(0.9);\n\t\t\t\t\t\ttransform: scale(0.9);\n\t\t-webkit-transition: all 1s ease-in-out;\n\t\t\t\t\t\ttransition: all 1s ease-in-out;\n}\n.revealStats.visible {\n\t\topacity: 1;\n\t\t-webkit-transform: none;\n\t\t\t\t\t\ttransform: none;\n}\n\n", ""]);
+exports.push([module.i, "\n#statsHeader{\n    margin-left: 5vw;\n}\n#statsHeaderTwo{\n    display:none;\n}\n#stats{\n    height:150vh;\n}\n#statsContent{\n    padding-top: 20vh;\n}\n@media (max-width: 430px){\n.stats{\n        border-bottom: #1C1C1C 1px dotted;\n}\n#header{\n        margin-left:0;\n}\n#birdsOnWire{\n        display:none !important;\n}\n#stats{\n    height:130vh;\n}\n#statsHeader{\n        display:none;\n}\n#statsHeaderTwo{\n        display:block;\n        text-align: center;\n}\n#birdsOnWire{\n        display:none;\n}\n#statsContent{\n        padding-top:0vh;\n}\n}\n@media (max-width: 350px){\n#stats{\n        height: 150vh;\n}\n}\n.revealStats {\n\t\topacity: 0;\n\t\t-webkit-transform: scale(0.9);\n\t\t\t\t\t\ttransform: scale(0.9);\n\t\t-webkit-transition: all 1s ease-in-out;\n\t\t\t\t\t\ttransition: all 1s ease-in-out;\n}\n.revealStats.visible {\n\t\topacity: 1;\n\t\t-webkit-transform: none;\n\t\t\t\t\t\ttransform: none;\n}\n\n", ""]);
 
 // exports
 
@@ -51932,7 +51932,7 @@ for (i = 0; i <= revealElements.length; i++) {
 }
 
 $(function () {
-  // init
+  //!! You have to reload the chrome page for the destinction below to work, if you are toggling screensizes in the chrome console. !!
   if ($(window).width() > 370) {
     var controller = new ScrollMagic.Controller({
       globalSceneOptions: {

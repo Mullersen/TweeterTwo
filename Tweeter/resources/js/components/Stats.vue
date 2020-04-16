@@ -74,7 +74,7 @@ export default {
         display:none !important;
     }
     #stats{
-    height:150vh;
+    height:130vh;
     }
     #statsHeader{
         display:none;
