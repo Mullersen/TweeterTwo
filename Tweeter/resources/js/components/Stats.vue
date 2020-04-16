@@ -9,28 +9,28 @@
             </div>
             <div id="trigger1"></div>
             <div class="row">
-                <div class=" revealStats col-md-3 mt-2">
+                <div class="revealStats col-md-3 mt-2">
                     <div class="mx-4">
                     <h4>FOUNDED</h4>
                     <h1>2001</h1>
                     <h6 class="stats">Founded in 2001. We cant believe it either - time flies when you are having fun</h6>
                     </div>
                 </div>
-                <div class=" revealStats col-md-3 mt-2">
+                <div class="revealStats col-md-3 mt-2">
                     <div class="mx-4">
                     <h4>TWEETS</h4>
                     <h1>90M+</h1>
                     <h6 class="stats">Now more than 90M+ tweets! And many many new tweets every day.</h6>
                     </div>
                 </div>
-                <div class=" revealStats col-md-3 mt-2">
+                <div class="revealStats col-md-3 mt-2">
                     <div class="mx-4">
                     <h4>DEVICES</h4>
                     <h1>8</h1>
                     <h6 class="stats">Available on all devices. We come in all shapes and sizes. Tweet on anything.</h6>
                     </div>
                 </div>
-                <div class=" revealStats col-md-3 mt-2">
+                <div class="revealStats col-md-3 mt-2">
                     <div class="mx-4">
                     <h4>USERS</h4>
                     <h1>21M</h1>

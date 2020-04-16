@@ -21,7 +21,6 @@
         <div id="hiddenBlock">
             <h3 class="text-center">Hi there and welcome to</h3>
             <h1 id="headerTwo" class="text-center">Tweeter</h1>
-            <p></p>
             <a role="button" class="btn btn-primary text-center btn-block my-3" href="/login">Login</a>
             <a role="button" class="btn btn-primary text-center btn-block my-3" href="/register">Register</a>
         </div>

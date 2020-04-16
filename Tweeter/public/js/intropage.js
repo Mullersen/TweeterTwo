@@ -2148,7 +2148,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -38867,7 +38866,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: " revealStats col-md-3 mt-2" }, [
+      _c("div", { staticClass: "revealStats col-md-3 mt-2" }, [
         _c("div", { staticClass: "mx-4" }, [
           _c("h4", [_vm._v("FOUNDED")]),
           _vm._v(" "),
@@ -38881,7 +38880,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: " revealStats col-md-3 mt-2" }, [
+      _c("div", { staticClass: "revealStats col-md-3 mt-2" }, [
         _c("div", { staticClass: "mx-4" }, [
           _c("h4", [_vm._v("TWEETS")]),
           _vm._v(" "),
@@ -38895,7 +38894,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: " revealStats col-md-3 mt-2" }, [
+      _c("div", { staticClass: "revealStats col-md-3 mt-2" }, [
         _c("div", { staticClass: "mx-4" }, [
           _c("h4", [_vm._v("DEVICES")]),
           _vm._v(" "),
@@ -38909,7 +38908,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: " revealStats col-md-3 mt-2" }, [
+      _c("div", { staticClass: "revealStats col-md-3 mt-2" }, [
         _c("div", { staticClass: "mx-4" }, [
           _c("h4", [_vm._v("USERS")]),
           _vm._v(" "),
@@ -39136,8 +39135,6 @@ var staticRenderFns = [
       _c("h1", { staticClass: "text-center", attrs: { id: "headerTwo" } }, [
         _vm._v("Tweeter")
       ]),
-      _vm._v(" "),
-      _c("p"),
       _vm._v(" "),
       _c(
         "a",

@@ -33,7 +33,7 @@
                     <p class="card-text mb-2">{{$tweet->content}}</p>
                     <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
                     @include('partials.followUnfollow')
-                    <Like :tweetid="{{ $tweet->id }}"></Like>
+                    <Like tweetid={{ $tweet->id }} likeCount={{App\Tweet::find($tweet->id)->like->count()}}></Like>
                 </div>
             </div>
         @endif
