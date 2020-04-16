@@ -2173,11 +2173,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Messaging",
   data: function data() {
     return {
-      messages: Array,
+      messages: Object,
       messageToggle: false,
       follows: Array,
       myUser: String,
@@ -2196,12 +2198,12 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/messages/getMessages', {
           user: instance.otherUser
         }).then(function (response) {
-          console.log(response.data);
+          console.log(response.data.messages);
           instance.messages = response.data.messages;
           instance.myUser = response.data.myUser;
         })["catch"](function (error) {
           console.log(error.message);
-          document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+          document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. Reload to try again</h1>" + error.message;
         });
       }, 1000);
     },
@@ -2226,8 +2228,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.loadMessages();
         })["catch"](function (error) {
-          console.log(error.message);
-          document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+          console.log(error.message); //document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
         });
       }
     }
@@ -38803,41 +38804,36 @@ var render = function() {
           ? _c("div", [
               _c("h2", [_vm._v("Messages with " + _vm._s(_vm.otherUser))]),
               _vm._v(" "),
-              _vm.messages.length > -1
-                ? _c(
-                    "div",
-                    _vm._l(_vm.messages, function(message) {
-                      return _c("div", { key: message.id }, [
-                        message.sender === _vm.otherUser
-                          ? _c("div", [
-                              _c("h5", { staticClass: "text-right" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "badge badge-pill badge-light"
-                                  },
-                                  [_vm._v(_vm._s(message.message))]
-                                )
-                              ])
-                            ])
-                          : message.sender === _vm.myUser
-                          ? _c("div", [
-                              _c("h5", { staticClass: "text-left" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "badge badge-pill badge-light"
-                                  },
-                                  [_vm._v(_vm._s(message.message))]
-                                )
-                              ])
-                            ])
-                          : _vm._e()
-                      ])
-                    }),
-                    0
-                  )
-                : _vm._e(),
+              _c(
+                "div",
+                { attrs: { id: "v-for-object" } },
+                _vm._l(_vm.messages, function(message) {
+                  return _c("div", { key: message.id }, [
+                    message.sender === _vm.otherUser
+                      ? _c("div", [
+                          _c("h5", { staticClass: "text-right" }, [
+                            _c(
+                              "span",
+                              { staticClass: "badge badge-pill badge-light" },
+                              [_vm._v(_vm._s(message.message))]
+                            )
+                          ])
+                        ])
+                      : message.sender === _vm.myUser
+                      ? _c("div", [
+                          _c("h5", { staticClass: "text-left" }, [
+                            _c(
+                              "span",
+                              { staticClass: "badge badge-pill badge-light" },
+                              [_vm._v(_vm._s(message.message))]
+                            )
+                          ])
+                        ])
+                      : _vm._e()
+                  ])
+                }),
+                0
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("textarea", {

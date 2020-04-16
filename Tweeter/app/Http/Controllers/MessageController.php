@@ -24,10 +24,11 @@ class MessageController extends Controller
         //error_log($request);
 
         $matchTheseToo = ['sender'=> Auth::user()->name, 'receiver'=> $request->user];
-        $sentMessages = \App\Message::where($matchTheseToo)->get(); 
+        $sentMessages = \App\Message::where($matchTheseToo)->get();
 
         $messages = $receivedMessages->concat($sentMessages);
-        return response()->json(['messages' => $messages, 'myUser' => Auth::user()->name]);
+        $sorted = $messages->sortBy('created_at');
+        return response()->json(['messages' => $sorted, 'myUser' => Auth::user()->name]);
     }
 
     function sendMessage(Request $request){

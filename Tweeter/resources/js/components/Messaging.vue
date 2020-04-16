@@ -11,16 +11,18 @@
           <div class="col-sm-8 border rounded-sm">
               <div v-if="messageToggle == true">
                   <h2>Messages with {{otherUser}}</h2>
-                  <div v-if="messages.length > -1">
-                      <div v-for="message in messages" :key="message.id">
-                          <div v-if="message.sender === otherUser">
-                              <h5 class="text-right"><span class="badge badge-pill badge-light">{{message.message}}</span></h5>
-                          </div>
-                          <div v-else-if="message.sender === myUser">
-                              <h5 class="text-left"><span class="badge badge-pill badge-light">{{message.message}}</span></h5>
-                          </div>
+
+                      <div id="v-for-object">
+                            <div v-for="message in messages" :key="message.id">
+                                <div v-if="message.sender === otherUser">
+                                    <h5 class="text-right"><span class="badge badge-pill badge-light">{{message.message}}</span></h5>
+                                </div>
+                                <div v-else-if="message.sender === myUser">
+                                    <h5 class="text-left"><span class="badge badge-pill badge-light">{{message.message}}</span></h5>
+                                </div>
+                            </div>
                       </div>
-                  </div>
+
                   <div class="form-group">
                     <textarea class="form-control" id="newMessageText" v-model="messageContent" rows="3" placeholder="Write your message here"></textarea>
                     <button class="btn btn-outline-primary my-2" @click="sendMessage">Send</button>
@@ -42,7 +44,7 @@ export default {
     name: "Messaging",
     data: function(){
         return{
-            messages: Array,
+            messages: Object,
             messageToggle: false,
             follows: Array,
             myUser: String,
@@ -62,14 +64,14 @@ export default {
                     user : instance.otherUser,
                 })
                 .then(response => {
-                    console.log(response.data);
+                    console.log(response.data.messages);
                     instance.messages = response.data.messages;
                     instance.myUser = response.data.myUser;
 
                 })
                 .catch(error => {
                      console.log(error.message);
-                     document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+                     document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. Reload to try again</h1>" + error.message;
                     });
             }, 1000);
         },
@@ -91,7 +93,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error.message);
-                    document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+                    //document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                     });
             }
         }
