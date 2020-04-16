@@ -23,7 +23,7 @@ for (i = 0; i <= revealElements.length; i++) {
 $(function() {
     //!! You have to reload the chrome page for the destinction below to work, if you are toggling screensizes in the chrome console. !!
 
-    if($(window).width() > 370){
+    if ($(window).width() > 370) {
         var controller = new ScrollMagic.Controller({
             globalSceneOptions: {
                 triggerHook: 'onLeave',
@@ -40,7 +40,7 @@ $(function() {
                     triggerElement: slides[i]
                 })
                 .setPin(slides[i], { pushFollowers: false })
-                .addIndicators() // add indicators (requires plugin)
+                //.addIndicators() // add indicators (requires plugin)
                 .addTo(controller);
         }
     }
