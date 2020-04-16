@@ -8,6 +8,13 @@ use Hash;
 
 class UserController extends Controller
 {
+    function search(){
+        return view("search");
+    }
+    function searchUsername(Request $request){
+        $searchedUser = \App\User::where(['name' => $request->username])->get();
+        return response()->json(["users" => $searchedUser]);
+    }
 
     function followUser(Request $request){
         //do I need to re-check if the logged in user is already following the user they are trying to follow? ( so it doesnt mess up my DB)

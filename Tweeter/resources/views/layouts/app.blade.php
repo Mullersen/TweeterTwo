@@ -60,6 +60,7 @@
                                         </form>
                                         <a class="dropdown-item" href="/profile/show/{{{Auth::user()->id}}}">Profile</a>
                                         <a class="dropdown-item" href="/messages/home">Messages</a>
+                                        <a class="dropdown-item" href="/search">Search</a>
                                     </div>
                                 </li>
                             @endguest

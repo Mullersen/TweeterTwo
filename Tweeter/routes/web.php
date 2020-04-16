@@ -41,6 +41,8 @@ Route::post('/profile/editEmail', 'UserController@editEmail')->middleware('auth'
 Route::post('/profile/editPassword', 'UserController@editPassword')->middleware('auth');
 Route::post('/profile/deleteProfile', 'UserController@showDeleteQuestion')->middleware('auth');
 Route::post('/profile/deleteProfile/yes', 'UserController@deleteProfile')->middleware('auth');
+Route::get('/search', 'UserController@search')->middleware('auth');
+Route::post('/search/searchUsername', 'UserController@searchUsername')->middleware('auth');
 
 Route::get('/messages/home', 'MessageController@showMessages')->middleware('auth');
 Route::get('/messages/getFollows', 'MessageController@getFollows')->middleware('auth');
