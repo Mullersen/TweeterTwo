@@ -1,9 +1,11 @@
 <template>
   <div id="stats" class="panel">
-       <div class="markers">STATS</div>
+      <div class="markers">STATS</div>
+      <div class="container">
         <div id="statsContent" class="container">
             <div class="container my-4">
                 <h2 id="statsHeader"><strong>Tweeter</strong> has been the place to share thoughts and ideas since 2001, and it is not about to stop.</h2>
+                <h4 id="statsHeaderTwo">Tweeter is the place to share thoughts</h4>
             </div>
             <div id="trigger1"></div>
             <div class="row">
@@ -38,6 +40,7 @@
             </div>
             <img id="birdsOnWire" class="rounded mx-auto d-block" :src="'/images/birdonwire.png'" alt="Flying Tweeters">
         </div>
+     </div>
   </div>
 </template>
 
@@ -50,6 +53,9 @@ export default {
 <style>
 #statsHeader{
     margin-left: 5vw;
+}
+#statsHeaderTwo{
+    display:none;
 }
 #stats{
     height:150vh;
@@ -69,7 +75,25 @@ export default {
     }
     #stats{
     height:150vh;
+    }
+    #statsHeader{
+        display:none;
+    }
+    #statsHeaderTwo{
+        display:block;
+        text-align: center;
+    }
+    #birdsOnWire{
+        display:none;
+    }
+    #statsContent{
+        padding-top:0vh;
+    }
 }
+@media (max-width: 350px){
+    #stats{
+        height: 150vh;
+    }
 }
 
 .revealStats {

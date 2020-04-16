@@ -39,5 +39,11 @@ import Login from './Login.vue';
     text-align: center;
     padding-top:13px;
 }
+@media (max-width: 430px){
+    .markers{
+        display:none;
+    }
+}
+
 
 </style>

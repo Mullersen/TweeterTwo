@@ -1970,7 +1970,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.gifsArray = newGifArray;
         _this.gridToggle = true;
       })["catch"](function (error) {
-        console.log(error); // change to error message on screen
+        console.log(error);
+        document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
       });
     },
     clicked: function clicked() {},
@@ -1992,7 +1993,8 @@ __webpack_require__.r(__webpack_exports__);
           scope.hasBeenClicked = false;
         }, 5000);
       })["catch"](function (error) {
-        console.log(error); // change to error message on screen
+        console.log(error);
+        document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
       });
     },
     deleteGif: function deleteGif() {
@@ -2004,7 +2006,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this3.gifToggle = false;
       })["catch"](function (error) {
-        console.log(error.quote); // change to error message on screen
+        console.log(error.quote);
+        document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
       });
     },
     slugify: function slugify(text) {
@@ -2197,12 +2200,19 @@ __webpack_require__.r(__webpack_exports__);
           instance.messages = response.data.messages;
           instance.myUser = response.data.myUser;
         })["catch"](function (error) {
-          console.log(error.message); // change to error message on screen
+          console.log(error.message);
+          document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
         });
       }, 1000);
     },
     sendMessage: function sendMessage() {
       var _this = this;
+
+      if (this.errors.length >= 1) {
+        this.errors.splice(0, 1);
+      }
+
+      ;
 
       if (!this.messageContent) {
         this.errors.push("Write something to send a message");
@@ -2215,10 +2225,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.messageContent = "";
 
           _this.loadMessages();
-
-          _this.errors.splice(0, 1);
         })["catch"](function (error) {
-          console.log(error.message); // change to error message on screen
+          console.log(error.message);
+          document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
         });
       }
     }
@@ -2230,7 +2239,8 @@ __webpack_require__.r(__webpack_exports__);
       //console.log(response.data.follows);
       _this2.follows = response.data.follows;
     })["catch"](function (error) {
-      console.log(error.message); // change to error message on screen
+      console.log(error.message);
+      document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
     });
   }
 });
@@ -2270,12 +2280,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Myretweet",
   data: function data() {
     return {
       toggleView: false,
-      newTweet: " "
+      newTweet: "",
+      errors: []
     };
   },
   props: {
@@ -2293,22 +2307,39 @@ __webpack_require__.r(__webpack_exports__);
     sendRetweet: function sendRetweet() {
       var _this = this;
 
-      axios.post('/tweet/addRetweet', {
-        content: this.retweetcontent,
-        author: this.retweetauthor,
-        newcontent: this.newTweet
-      }).then(function (response) {
-        console.log(response.data);
-        var tweetGrid = document.getElementById("tweetGrid");
-        var newCard = document.createElement('div');
-        newCard.classList.add("card");
-        newCard.classList.add("mb-2");
-        newCard.innerHTML = "<div class='card-body'><h5 class='card-subtitle text-muted'>@" + _this.username + "</h5><p class='card-text mb-2'>" + _this.newTweet + "</p><div class='card my-3'><div class='card-body bg-light'><p class='card-subtitle mb-2'>" + _this.retweetauthor + "</p><p class='card-text text-muted mb-2'>" + _this.retweetcontent + "</p></div></div></div>";
-        tweetGrid.insertBefore(newCard, tweetGrid.childNodes[0]);
-        _this.toggleView = false;
-      })["catch"](function (error) {
-        console.log(error.message);
-      });
+      if (this.errors.length >= 1) {
+        this.errors.splice(0, 1);
+      }
+
+      ;
+
+      if (!this.newTweet) {
+        this.errors.push("Write something to send a message");
+      } else {
+        axios.post('/tweet/addRetweet', {
+          content: this.retweetcontent,
+          author: this.retweetauthor,
+          newcontent: this.newTweet
+        }).then(function (response) {
+          console.log(response.data);
+          var page = window.location.pathname; //console.log(page);
+
+          if (page == "/tweetFeed") {
+            var tweetGrid = document.getElementById("tweetGrid");
+            var newCard = document.createElement('div');
+            newCard.classList.add("card");
+            newCard.classList.add("mb-2");
+            newCard.innerHTML = "<div class='card-body'><h5 class='card-subtitle text-muted'>@ " + _this.username + "</h5><p class='card-text mb-2'>" + _this.newTweet + "</p><div class='card my-3'><div class='card-body bg-light'><p class='card-subtitle mb-2'>" + _this.retweetauthor + "</p><p class='card-text text-muted mb-2'>" + _this.retweetcontent + "</p></div></div></div>";
+            tweetGrid.insertBefore(newCard, tweetGrid.childNodes[0]);
+            document.getElementById("closeIcon").style.margin = 0;
+          }
+
+          _this.toggleView = false;
+        })["catch"](function (error) {
+          document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+          console.log(error.message);
+        });
+      }
     }
   }
 });
@@ -6896,7 +6927,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.absolute{\n    position: fixed !important;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 50vh;\n    z-index: 1000;\n    background-color: #F0F7F4 !important;\n}\n.closeIcon{\n        float:right !important;\n        margin-top: 10vh !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.absolute{\n    position: fixed !important;\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 60vh;\n    z-index: 1000;\n    background-color: #F0F7F4 !important;\n}\n#closeIcon{\n        float:right !important;\n        margin-top: 13vh !important;\n}\n@media (max-width: 1024px){\n.absolute{\n    top: 30vh;\n    left: 20vw;\n    width: 60vw;\n    height: 37vh;\n}\n}\n@media (max-width: 430px){\n.absolute{\n    top:10vh;\n    height:80vh;\n    width:90vw;\n    left:5vw;\n}\n}\n", ""]);
 
 // exports
 
@@ -38487,7 +38518,7 @@ var render = function() {
           staticClass: "btn btn-primary btn-sm ml-2 rounded-pill",
           on: { click: _vm.sendSearch }
         },
-        [_vm._v("Search for GIF")]
+        [_vm._v("Search")]
       )
     ]),
     _vm._v(" "),
@@ -38668,7 +38699,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { attrs: { id: "messagesPage" } }, [
     _c("h2", { staticClass: "text-center my-4" }, [_vm._v("Your messages")]),
     _vm._v(" "),
     _c("h5", { staticClass: "my-4" }, [
@@ -38678,7 +38709,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-4" }, [
+      _c("div", { staticClass: "col-sm-4" }, [
         _c(
           "ul",
           { staticClass: " list-group list-group-flush" },
@@ -38701,7 +38732,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-8 border rounded-sm" }, [
+      _c("div", { staticClass: "col-sm-8 border rounded-sm" }, [
         _vm.messageToggle == true
           ? _c("div", [
               _c("h2", [_vm._v("Messages with " + _vm._s(_vm.otherUser))]),
@@ -38887,9 +38918,9 @@ var render = function() {
               _c(
                 "svg",
                 {
-                  staticClass: "closeIcon",
                   staticStyle: { "enable-background": "new 0 0 26 26" },
                   attrs: {
+                    id: "closeIcon",
                     height: "20px",
                     width: "20px",
                     x: "0px",
@@ -38910,7 +38941,21 @@ var render = function() {
                     })
                   ])
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _vm.errors.length
+                ? _c(
+                    "p",
+                    _vm._l(_vm.errors, function(error) {
+                      return _c("b", { key: error }, [
+                        _vm._v(
+                          "Please correct the following error: " + _vm._s(error)
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e()
             ])
           ])
         ])

@@ -12,7 +12,7 @@ var revealElements = document.getElementsByClassName("revealStats");
 for (i = 0; i <= revealElements.length; i++) {
     new ScrollMagic.Scene({
             triggerElement: revealElements[i],
-            triggerHook: 0.9, // show, when scrolled 10% into view
+            triggerHook: 0.95,
             duration: "90%",
             offset: 10,
         })
@@ -20,25 +20,28 @@ for (i = 0; i <= revealElements.length; i++) {
         .addTo(controller);
 }
 
-$(function() { // wait for document ready
+$(function() {
     // init
-    var controller = new ScrollMagic.Controller({
-        globalSceneOptions: {
-            triggerHook: 'onLeave',
-            duration: "150%"
+
+    if($(window).width() > 370){
+        var controller = new ScrollMagic.Controller({
+            globalSceneOptions: {
+                triggerHook: 'onLeave',
+                duration: "170%"
+            }
+        });
+
+        // get all slides
+        var slides = document.getElementsByClassName("panel");
+
+        // create scene for every slide
+        for (var i = 0; i < slides.length; i++) {
+            new ScrollMagic.Scene({
+                    triggerElement: slides[i]
+                })
+                .setPin(slides[i], { pushFollowers: false })
+                .addIndicators() // add indicators (requires plugin)
+                .addTo(controller);
         }
-    });
-
-    // get all slides
-    var slides = document.getElementsByClassName("panel");
-
-    // create scene for every slide
-    for (var i = 0; i < slides.length; i++) {
-        new ScrollMagic.Scene({
-                triggerElement: slides[i]
-            })
-            .setPin(slides[i], { pushFollowers: false })
-            .addIndicators() // add indicators (requires plugin)
-            .addTo(controller);
     }
 });

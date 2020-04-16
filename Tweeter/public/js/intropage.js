@@ -1962,6 +1962,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -1975,6 +1979,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2049,6 +2060,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -6682,7 +6696,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#login{\n    height:90vh;\n}\n#login-text{\n    padding-top:10vh;\n}\n", ""]);
+exports.push([module.i, "\n#login{\n    height:80vh;\n}\n#login-text{\n    margin-top:20vh;\n}\n@media (max-width: 430px){\n#login{\n        height:100vh;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -6720,7 +6734,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.markers{\n    position:absolute;\n    top:90px;\n    background-color: black;\n    color:white;\n    display:inline-block;\n    width: 150px;\n    height: 50px;\n    text-align: center;\n    padding-top:13px;\n}\n\n", ""]);
+exports.push([module.i, "\n.markers{\n    position:absolute;\n    top:90px;\n    background-color: black;\n    color:white;\n    display:inline-block;\n    width: 150px;\n    height: 50px;\n    text-align: center;\n    padding-top:13px;\n}\n@media (max-width: 430px){\n.markers{\n        display:none;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -6739,7 +6753,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#statsHeader{\n    margin-left: 5vw;\n}\n#stats{\n    height:150vh;\n}\n#statsContent{\n    padding-top: 20vh;\n}\n@media (max-width: 430px){\n.stats{\n        border-bottom: #1C1C1C 1px dotted;\n}\n#header{\n        margin-left:0;\n}\n#birdsOnWire{\n        display:none !important;\n}\n#stats{\n    height:150vh;\n}\n}\n.revealStats {\n\t\topacity: 0;\n\t\t-webkit-transform: scale(0.9);\n\t\t\t\t\t\ttransform: scale(0.9);\n\t\t-webkit-transition: all 1s ease-in-out;\n\t\t\t\t\t\ttransition: all 1s ease-in-out;\n}\n.revealStats.visible {\n\t\topacity: 1;\n\t\t-webkit-transform: none;\n\t\t\t\t\t\ttransform: none;\n}\n\n", ""]);
+exports.push([module.i, "\n#statsHeader{\n    margin-left: 5vw;\n}\n#statsHeaderTwo{\n    display:none;\n}\n#stats{\n    height:150vh;\n}\n#statsContent{\n    padding-top: 20vh;\n}\n@media (max-width: 430px){\n.stats{\n        border-bottom: #1C1C1C 1px dotted;\n}\n#header{\n        margin-left:0;\n}\n#birdsOnWire{\n        display:none !important;\n}\n#stats{\n    height:150vh;\n}\n#statsHeader{\n        display:none;\n}\n#statsHeaderTwo{\n        display:block;\n        text-align: center;\n}\n#birdsOnWire{\n        display:none;\n}\n#statsContent{\n        padding-top:0vh;\n}\n}\n@media (max-width: 350px){\n#stats{\n        height: 150vh;\n}\n}\n.revealStats {\n\t\topacity: 0;\n\t\t-webkit-transform: scale(0.9);\n\t\t\t\t\t\ttransform: scale(0.9);\n\t\t-webkit-transition: all 1s ease-in-out;\n\t\t\t\t\t\ttransition: all 1s ease-in-out;\n}\n.revealStats.visible {\n\t\topacity: 1;\n\t\t-webkit-transform: none;\n\t\t\t\t\t\ttransform: none;\n}\n\n", ""]);
 
 // exports
 
@@ -38513,127 +38527,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel" }, [
-    _c("div", { staticClass: "markers" }, [_vm._v("LOGIN")]),
-    _vm._v(" "),
-    _c("div", { staticClass: " bg-light py-5", attrs: { id: "login" } }, [
-      _c(
-        "div",
-        { staticClass: "text-center mt-5", attrs: { id: "login-text" } },
-        [
-          _c("h3", { staticClass: "my-5" }, [
-            _vm._v("Ready to read the world?")
-          ]),
-          _vm._v(" "),
-          _c(
-            "svg",
-            {
-              staticClass: "rounded mx-auto d-block my-2",
-              staticStyle: { height: "50px" },
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 512 512"
-              }
-            },
-            [
-              _c("defs", [
+  return _c(
+    "div",
+    { staticClass: "panel bg-light", attrs: { id: "loginBox" } },
+    [
+      _c("div", { staticClass: "markers" }, [_vm._v("LOGIN")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row justify-content-center py-5" }, [
+          _c("div", { staticClass: " col-sm-6", attrs: { id: "login" } }, [
+            _c(
+              "div",
+              {
+                staticClass: "text-center border rounded",
+                attrs: { id: "login-text" }
+              },
+              [
+                _c("h3", { staticClass: "my-5" }, [
+                  _vm._v("Ready to read the world?")
+                ]),
+                _vm._v(" "),
                 _c(
-                  "filter",
+                  "svg",
                   {
+                    staticClass: "rounded mx-auto d-block my-2",
+                    staticStyle: { height: "50px" },
                     attrs: {
-                      id: "shadow-1",
-                      height: "300%",
-                      width: "300%",
-                      x: "-100%",
-                      y: "-100%"
+                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 512 512"
                     }
                   },
                   [
-                    _c("feFlood", {
-                      attrs: {
-                        "flood-color": "rgba(255, 255, 255, 1)",
-                        result: "flood"
-                      }
-                    }),
-                    _c("feComposite", {
-                      attrs: {
-                        in: "flood",
-                        in2: "SourceGraphic",
-                        operator: "atop",
-                        result: "composite"
-                      }
-                    }),
-                    _c("feGaussianBlur", {
-                      attrs: {
-                        in: "composite",
-                        stdDeviation: "15",
-                        result: "blur"
-                      }
-                    }),
-                    _c("feOffset", {
-                      attrs: { dx: "1", dy: "1", result: "offset" }
-                    }),
-                    _c("feComposite", {
-                      attrs: {
-                        in: "SourceGraphic",
-                        in2: "offset",
-                        operator: "over"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _c(
-                "g",
-                {
-                  staticStyle: { "touch-action": "none" },
-                  attrs: { transform: "translate(0,0)" }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M96.18 22.49C264.6 98.36 403.1 214.8 40.11 270.5 153 268 191.6 291.1 64.12 382.6c230.18-128 331.68-189 318.98 106.9 30.5-54.4 114.6-241 36.4-268.3 6.2-7.4 15.5-19.4 22.1-31.9 13.1-5.7 22.6-13.6 30.3-23.7-8.7-2-16-2.5-22.8-2.3-.2-2.8-.8-5.5-2.1-7.9-8.7-16.5-48.1-13.7-62.4-12.1 4.7-81-226.8-117.09-288.42-120.81z",
-                      fill: "#ecd444",
-                      transform:
-                        "translate(0, 0) scale(1, 1) rotate(45, 256, 256)",
-                      "fill-opacity": "1",
-                      filter: "url(#shadow-1)"
-                    }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-outline-primary text-center btn-lg my-3",
-              attrs: { role: "button", href: "/login" }
-            },
-            [_vm._v("Log in here")]
-          ),
-          _vm._v(" "),
-          _c("h1", [_vm._v("or")]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-outline-primary text-center btn-lg my-3",
-              attrs: { role: "button", href: "/register" }
-            },
-            [_vm._v("Create new account here")]
-          ),
-          _vm._v(" "),
-          _c("br")
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
+                    _c("defs", [
+                      _c(
+                        "filter",
+                        {
+                          attrs: {
+                            id: "shadow-1",
+                            height: "300%",
+                            width: "300%",
+                            x: "-100%",
+                            y: "-100%"
+                          }
+                        },
+                        [
+                          _c("feFlood", {
+                            attrs: {
+                              "flood-color": "rgba(255, 255, 255, 1)",
+                              result: "flood"
+                            }
+                          }),
+                          _c("feComposite", {
+                            attrs: {
+                              in: "flood",
+                              in2: "SourceGraphic",
+                              operator: "atop",
+                              result: "composite"
+                            }
+                          }),
+                          _c("feGaussianBlur", {
+                            attrs: {
+                              in: "composite",
+                              stdDeviation: "15",
+                              result: "blur"
+                            }
+                          }),
+                          _c("feOffset", {
+                            attrs: { dx: "1", dy: "1", result: "offset" }
+                          }),
+                          _c("feComposite", {
+                            attrs: {
+                              in: "SourceGraphic",
+                              in2: "offset",
+                              operator: "over"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _c(
+                      "g",
+                      {
+                        staticStyle: { "touch-action": "none" },
+                        attrs: { transform: "translate(0,0)" }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M96.18 22.49C264.6 98.36 403.1 214.8 40.11 270.5 153 268 191.6 291.1 64.12 382.6c230.18-128 331.68-189 318.98 106.9 30.5-54.4 114.6-241 36.4-268.3 6.2-7.4 15.5-19.4 22.1-31.9 13.1-5.7 22.6-13.6 30.3-23.7-8.7-2-16-2.5-22.8-2.3-.2-2.8-.8-5.5-2.1-7.9-8.7-16.5-48.1-13.7-62.4-12.1 4.7-81-226.8-117.09-288.42-120.81z",
+                            fill: "#ecd444",
+                            transform:
+                              "translate(0, 0) scale(1, 1) rotate(45, 256, 256)",
+                            "fill-opacity": "1",
+                            filter: "url(#shadow-1)"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "btn btn-outline-primary text-center btn-lg my-3",
+                    attrs: { role: "button", href: "/login" }
+                  },
+                  [_vm._v("Log in here")]
+                ),
+                _vm._v(" "),
+                _c("h1", [_vm._v("or")]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "btn btn-outline-primary text-center btn-lg my-3",
+                    attrs: { role: "button", href: "/register" }
+                  },
+                  [_vm._v("Create new account here")]
+                ),
+                _vm._v(" "),
+                _c("br")
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -38672,36 +38699,62 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "panel bg-light-prime", attrs: { id: "newest" } },
+    { staticClass: " panel bg-light-prime", attrs: { id: "newest" } },
     [
       _c("div", { staticClass: "markers" }, [_vm._v("NEW")]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container text-center", attrs: { id: "new-content" } },
-        [
-          _c("h2", { staticClass: "revealStats pt-4" }, [
-            _vm._v("Now introducing: The Retweet")
-          ]),
-          _vm._v(" "),
-          _c("h4", { staticClass: "revealStats" }, [
-            _vm._v(
-              "Liking another Users tweets? Now you can re-tweet them to your own account."
-            )
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "my-5 img-fluid shadow-sm",
-            attrs: { src: _vm.image_src, alt: "The new retweeting function" }
-          }),
-          _vm._v(" "),
-          _c("p", { staticClass: "revealStats" }, [
-            _vm._v(
-              "We have always loved showing respect to our fellow tweeters. Do like us and make your friends messages clearer to your own followers"
-            )
-          ])
-        ]
-      )
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            staticClass: "container text-center",
+            attrs: { id: "new-content" }
+          },
+          [
+            _c("h2", { staticClass: "revealStats" }, [
+              _vm._v("Now introducing: The Retweet")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "revealStats" }, [
+              _vm._v(
+                "Liking another Users tweets? Now you can re-tweet them to your own account."
+              )
+            ]),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "my-5 img-fluid border rounded shadow-sm",
+              attrs: { src: _vm.image_src, alt: "The new retweeting function" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-sm-8 " }, [
+                _c("img", {
+                  staticClass:
+                    "rounded-circle align-self-center shadow float-left",
+                  staticStyle: { height: "130px", display: "inline-block" },
+                  attrs: {
+                    src: "/images/retweetFunction.png",
+                    alt: "Tweeters new retweet function"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "b",
+                  {
+                    staticClass: "revealStats align-self-center",
+                    staticStyle: { height: "130px", display: "inline" }
+                  },
+                  [
+                    _vm._v(
+                      "We have always loved showing respect to our fellow tweeters. Do like us and make your friends messages clearer to your own followers"
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ])
     ]
   )
 }
@@ -38771,21 +38824,23 @@ var render = function() {
   return _c("div", { staticClass: "panel", attrs: { id: "stats" } }, [
     _c("div", { staticClass: "markers" }, [_vm._v("STATS")]),
     _vm._v(" "),
-    _c("div", { staticClass: "container", attrs: { id: "statsContent" } }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "trigger1" } }),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "rounded mx-auto d-block",
-        attrs: {
-          id: "birdsOnWire",
-          src: "/images/birdonwire.png",
-          alt: "Flying Tweeters"
-        }
-      })
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "container", attrs: { id: "statsContent" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "trigger1" } }),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded mx-auto d-block",
+          attrs: {
+            id: "birdsOnWire",
+            src: "/images/birdonwire.png",
+            alt: "Flying Tweeters"
+          }
+        })
+      ])
     ])
   ])
 }
@@ -38800,6 +38855,10 @@ var staticRenderFns = [
         _vm._v(
           " has been the place to share thoughts and ideas since 2001, and it is not about to stop."
         )
+      ]),
+      _vm._v(" "),
+      _c("h4", { attrs: { id: "statsHeaderTwo" } }, [
+        _vm._v("Tweeter is the place to share thoughts")
       ])
     ])
   },
@@ -51865,8 +51924,7 @@ var revealElements = document.getElementsByClassName("revealStats");
 for (i = 0; i <= revealElements.length; i++) {
   new ScrollMagic.Scene({
     triggerElement: revealElements[i],
-    triggerHook: 0.9,
-    // show, when scrolled 10% into view
+    triggerHook: 0.95,
     duration: "90%",
     offset: 10
   }).setClassToggle(revealElements[i], "visible") // add class to reveal
@@ -51874,24 +51932,25 @@ for (i = 0; i <= revealElements.length; i++) {
 }
 
 $(function () {
-  // wait for document ready
   // init
-  var controller = new ScrollMagic.Controller({
-    globalSceneOptions: {
-      triggerHook: 'onLeave',
-      duration: "150%"
+  if ($(window).width() > 370) {
+    var controller = new ScrollMagic.Controller({
+      globalSceneOptions: {
+        triggerHook: 'onLeave',
+        duration: "170%"
+      }
+    }); // get all slides
+
+    var slides = document.getElementsByClassName("panel"); // create scene for every slide
+
+    for (var i = 0; i < slides.length; i++) {
+      new ScrollMagic.Scene({
+        triggerElement: slides[i]
+      }).setPin(slides[i], {
+        pushFollowers: false
+      }).addIndicators() // add indicators (requires plugin)
+      .addTo(controller);
     }
-  }); // get all slides
-
-  var slides = document.getElementsByClassName("panel"); // create scene for every slide
-
-  for (var i = 0; i < slides.length; i++) {
-    new ScrollMagic.Scene({
-      triggerElement: slides[i]
-    }).setPin(slides[i], {
-      pushFollowers: false
-    }).addIndicators() // add indicators (requires plugin)
-    .addTo(controller);
   }
 });
 

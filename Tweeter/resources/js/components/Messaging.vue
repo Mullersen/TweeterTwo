@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div id="messagesPage">
     <h2 class="text-center my-4">Your messages</h2>
     <h5 class="my-4">Click on a user below to start a conversation or add new users by following more</h5>
       <div class="row">
-          <div class="col-4">
+          <div class="col-sm-4">
               <ul class=" list-group list-group-flush">
                   <li v-for="(follow, index) in follows" :key="follow.followed_user" @click="loadMessages(index)" class="list-group-item">{{follow.followed_user}}</li>
               </ul>
           </div>
-          <div class="col-8 border rounded-sm">
+          <div class="col-sm-8 border rounded-sm">
               <div v-if="messageToggle == true">
                   <h2>Messages with {{otherUser}}</h2>
                   <div v-if="messages.length > -1">
@@ -68,12 +68,15 @@ export default {
 
                 })
                 .catch(error => {
-                     console.log(error.message); // change to error message on screen
+                     console.log(error.message);
+                     document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                     });
             }, 1000);
         },
         sendMessage: function(){
-
+            if(this.errors.length >=1){
+                    this.errors.splice(0,1);
+                };
             if(!this.messageContent){
                  this.errors.push("Write something to send a message");
             } else {
@@ -85,10 +88,10 @@ export default {
                     console.log(response.data);
                     this.messageContent = "";
                     this.loadMessages();
-                    this.errors.splice(0,1);
                 })
                 .catch(error => {
-                    console.log(error.message); // change to error message on screen
+                    console.log(error.message);
+                    document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                     });
             }
         }
@@ -100,7 +103,8 @@ export default {
                 this.follows = response.data.follows;
             })
             .catch(error => {
-                    console.log(error.message); // change to error message on screen
+                    console.log(error.message);
+                    document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                 });
     }
 }

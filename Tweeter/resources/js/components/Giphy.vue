@@ -13,7 +13,7 @@
             <div class="form-group mb-0">
                 <textarea class="form-control form-control-sm rounded-pill my-2" v-model="gifsearch" rows="1" placeholder="Search for a GIF"></textarea>
             </div>
-            <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 rounded-pill">Search for GIF</button>
+            <button @click="sendSearch" class="btn btn-primary btn-sm ml-2 rounded-pill">Search</button>
         </div>
         <div v-if="gridToggle == true">
             <div class="gifGrid bg-dark">
@@ -61,7 +61,8 @@ export default {
                 this.gridToggle = true;
             })
             .catch(error => {
-                console.log(error); // change to error message on screen
+                console.log(error);
+                document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                 });
         },
         clicked: function(){
@@ -85,7 +86,8 @@ export default {
                 }, 5000)
             })
             .catch(error => {
-                console.log(error); // change to error message on screen
+                console.log(error); 
+                document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                 });
         },
         deleteGif: function(){
@@ -97,7 +99,8 @@ export default {
                 this.gifToggle = false;
             })
             .catch(error => {
-                console.log(error.quote); // change to error message on screen
+                console.log(error.quote); 
+                document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                 });
         },
         slugify: function(text) {
