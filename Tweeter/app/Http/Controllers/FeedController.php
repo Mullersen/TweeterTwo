@@ -7,17 +7,23 @@ use Auth;
 
 class FeedController extends Controller
 {
-    function showAll(){
+    function showAll(Request $request){
         if (Auth::check()){
             $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
             $followCount = $follows->count();
             if ($followCount === 0){
                 return redirect('/discoveryFeed');
             } else {
-                $tweets = \App\Tweet::orderBy('created_at', 'DESC')->simplePaginate(5);
+                $tweets = \App\Tweet::orderBy('created_at', 'DESC')->paginate(5);
                 $comments = \App\Comment::all();
                 $gifs = \App\Gif::all();
                 $likes = \App\Like::where('user_id', Auth::user()->id)->get();
+
+                if ($request->ajax()){
+                    $view = view('partials.tweetGrid', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes, 'gifs' => $gifs])->render();
+                    return response()->json(['html' => $view]);
+                };
+
                 return view('tweetFeed', ['tweets' => $tweets, 'follows' => $follows, 'comments' => $comments, 'likes' => $likes, 'gifs' => $gifs]);
                 }
         } else {
