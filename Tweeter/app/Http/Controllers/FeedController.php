@@ -178,7 +178,7 @@ class FeedController extends Controller
     }
 
     function discover(){
-        $tweets = \App\Tweet::all()->sortBy('created_at')->reverse();
+        $tweets = \App\Tweet::orderBy('created_at', 'DESC')->simplePaginate(5);
         $follows = \App\Follow::where('user_id', Auth::user()->id)->get();
         $comments = \App\Comment::all();
         $likes = \App\Like::where('user_id', Auth::user()->id)->get();

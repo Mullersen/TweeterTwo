@@ -11,8 +11,10 @@ class UserController extends Controller
     function search(){
         return view("search");
     }
+
     function searchUsername(Request $request){
-        $searchedUser = \App\User::where(['name' => $request->username])->get();
+        $searchedUser = \App\User::where('name', 'LIKE', '%' . $request->username. '%')
+        ->orWhere('email', 'LIKE', '%'. $request->username . '%')->get();
         return response()->json(["users" => $searchedUser]);
     }
 

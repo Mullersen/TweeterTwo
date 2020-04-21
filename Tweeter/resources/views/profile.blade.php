@@ -4,7 +4,7 @@
 @guest
 <div class="row mb-1 justify-content-center">
     <div class="col-4">
-        <img class="mb-1" style="display:inline" width="100%" src="{{url('/images/feather.png')}}" alt="feather">
+        <img class="mb-1" style="display:inline" width="100%" src="/images/feather.png" alt="feather">
     </div>
 </div>
     <h3 class="text-center mb-4">{{$user->name}}'s profile</h3>
@@ -22,7 +22,7 @@
 @else
     <div class="row mb-1 justify-content-center">
         <div class="col-4">
-            <img class="mb-1" style="display:inline" width="100%" src="{{url('/images/feather.png')}}" alt="feather">
+            <img class="mb-1" style="display:inline" width="100%" src="/images/feather.png" alt="feather">
         </div>
     </div>
     @if ($user == Auth::user())

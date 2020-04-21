@@ -44,7 +44,7 @@
     @csrf
     <input type='hidden' name='user' value='{{Auth::user()->name}}'>
     <div class="form-group mb-0">
-        <textarea class="form-control form-control-sm rounded-pill" style="width: 100%" rows="1" id='content' name='content'></textarea>
+        <textarea class="form-control form-control-sm rounded-pill" style="width: 100%" rows="1" name='content'></textarea>
     </div>
     <button class="btn btn-primary btn-sm ml-2 rounded-pill"  name='id' value='{{$tweet->id}}'>Comment</button>
 </form>

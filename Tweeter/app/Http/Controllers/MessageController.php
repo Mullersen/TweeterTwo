@@ -27,8 +27,10 @@ class MessageController extends Controller
         $sentMessages = \App\Message::where($matchTheseToo)->get();
 
         $messages = $receivedMessages->concat($sentMessages);
+        $messages->all();
         $sorted = $messages->sortBy('created_at');
-        return response()->json(['messages' => $sorted, 'myUser' => Auth::user()->name]);
+        $resorted = $sorted->values()->all();
+        return response()->json(['messages' => $resorted, 'myUser' => Auth::user()->name]);
     }
 
     function sendMessage(Request $request){

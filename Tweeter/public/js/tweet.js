@@ -2169,12 +2169,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Messaging",
   data: function data() {
@@ -2200,10 +2194,13 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           console.log(response.data.messages);
           instance.messages = response.data.messages;
-          instance.myUser = response.data.myUser;
+          instance.myUser = response.data.myUser; // for (var i=0; i<= response.data.messages.length; i++){
+          //     if (response.data.messages[i].sender == instance.MyUser){
+          //     }
+          // }
         })["catch"](function (error) {
           console.log(error.message);
-          document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. Reload to try again</h1>" + error.message;
+          document.getElementById("messagesPage").innerHTML = "<h1>Oops there seem to have been an error. Reload to try again</h1>" + error.message;
         });
       }, 1000);
     },
@@ -2370,6 +2367,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Search",
   data: function data() {
@@ -2389,6 +2395,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/search/searchUsername', {
         username: this.searchedUsername
       }).then(function (response) {
+        console.log(response.data);
         console.log(response.data.users[0].id);
         _this.foundUsername = response.data.users[0].name;
         _this.foundUserId = response.data.users[0].id;
@@ -38767,7 +38774,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "messagesPage" } }, [
-    _c("h2", { staticClass: "text-center my-4" }, [_vm._v("Your messages")]),
+    _c("h2", { staticClass: "text-center my-4" }, [_vm._v("Your inbox")]),
     _vm._v(" "),
     _c("h5", { staticClass: "my-4" }, [
       _vm._v(
@@ -38809,27 +38816,42 @@ var render = function() {
                 { attrs: { id: "v-for-object" } },
                 _vm._l(_vm.messages, function(message) {
                   return _c("div", { key: message.id }, [
-                    message.sender === _vm.otherUser
-                      ? _c("div", [
-                          _c("h5", { staticClass: "text-right" }, [
-                            _c(
-                              "span",
-                              { staticClass: "badge badge-pill badge-light" },
-                              [_vm._v(_vm._s(message.message))]
-                            )
-                          ])
+                    message.sender == _vm.myUser
+                      ? _c("h5", [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-pill badge-light",
+                              staticStyle: {
+                                display: "block",
+                                "text-align": "left"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "From " +
+                                  _vm._s(message.sender) +
+                                  " " +
+                                  _vm._s(message.message) +
+                                  " " +
+                                  _vm._s(message.created_at)
+                              )
+                            ]
+                          )
                         ])
-                      : message.sender === _vm.myUser
-                      ? _c("div", [
-                          _c("h5", { staticClass: "text-left" }, [
-                            _c(
-                              "span",
-                              { staticClass: "badge badge-pill badge-light" },
-                              [_vm._v(_vm._s(message.message))]
-                            )
-                          ])
+                      : _c("h5", [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-pill badge-light",
+                              staticStyle: {
+                                display: "block",
+                                "text-align": "right"
+                              }
+                            },
+                            [_vm._v(_vm._s(message.message))]
+                          )
                         ])
-                      : _vm._e()
                   ])
                 }),
                 0
@@ -39046,51 +39068,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "search" } }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.searchedUsername,
-          expression: "searchedUsername"
-        }
-      ],
-      attrs: { type: "text", placeholder: "Search for users" },
-      domProps: { value: _vm.searchedUsername },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _c("div", { staticClass: "card", attrs: { id: "search" } }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h2", { staticClass: "my4" }, [
+        _vm._v("Search for a user by username or email")
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchedUsername,
+              expression: "searchedUsername"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Search for users" },
+          domProps: { value: _vm.searchedUsername },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.searchedUsername = $event.target.value
+            }
           }
-          _vm.searchedUsername = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.searchDB } }, [_vm._v("Search")]),
-    _vm._v(" "),
-    _vm.toggle
-      ? _c("div", [
-          _c("h1", [_vm._v(_vm._s(_vm.foundUsername))]),
-          _vm._v(" "),
-          _c("button", [
-            _c("a", { attrs: { href: _vm.url, id: _vm.url } }, [
-              _vm._v("Go to " + _vm._s(_vm.foundUsername) + "'s profile")
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.searchDB } },
+        [_vm._v("Search")]
+      ),
+      _vm._v(" "),
+      _vm.toggle
+        ? _c("div", { staticClass: "form-group" }, [
+            _c("h2", { staticClass: "my-3" }, [
+              _vm._v("Your search found the following user")
+            ]),
+            _vm._v(" "),
+            _c("ul", [
+              _c("li", [
+                _c("h3", { staticClass: "my-3" }, [
+                  _vm._v(_vm._s(_vm.foundUsername))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-light" }, [
+              _c("a", { attrs: { href: _vm.url, id: _vm.url } }, [
+                _vm._v("Go to " + _vm._s(_vm.foundUsername) + "'s profile")
+              ])
             ])
           ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.toggleTwo
-      ? _c("div", [
-          _c("h2", [
-            _vm._v(
-              "The username you searched for might not exist in the database. Try again."
-            )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.toggleTwo
+        ? _c("div", [
+            _c("h3", [
+              _vm._v(
+                "The user you searched for might not exist in the database. Try again."
+              )
+            ])
           ])
-        ])
-      : _vm._e()
+        : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = []

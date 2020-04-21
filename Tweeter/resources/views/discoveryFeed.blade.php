@@ -29,8 +29,18 @@
         @if (!checkUser(App\Tweet::find($tweet->id)->user->name, $follows) and Auth::user()->id !== $tweet->user_id)
             <div class="card mb-2">
                 <div class="card-body">
-                    <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">{{App\Tweet::find($tweet->id)->user->name}}</a></h5>
-                    <p class="card-text mb-2">{{$tweet->content}}</p>
+                    <h5 class="card-subtitle text-muted"><a href="/profile/show/{{{$tweet->user_id}}}">@ {{App\Tweet::find($tweet->id)->user->name}}</a></h5>
+                        @if ($tweet->is_retweet == 1)
+                            <p class="card-text mb-2">{{$tweet->content}}</p>
+                            <div class="card my-3">
+                                <div class="card-body bg-light">
+                                    <p class="card-subtitle mb-2">{{$tweet->original_author}}</p>
+                                    <p class="card-text text-muted mb-2">{{$tweet->original_content}}</p>
+                                </div>
+                            </div>
+                        @else
+                            <p class="card-text mb-2">{{$tweet->content}}</p>
+                        @endif
                     <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
                     @include('partials.followUnfollow')
                     <Like tweetid={{ $tweet->id }} likeCount={{App\Tweet::find($tweet->id)->like->count()}}></Like>
@@ -40,4 +50,5 @@
         @endforeach
     </div>
 </div>
+{{ $tweets->setPath('/discoveryFeed') }}
 @endsection

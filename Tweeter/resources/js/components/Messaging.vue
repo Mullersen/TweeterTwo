@@ -1,6 +1,6 @@
 <template>
   <div id="messagesPage">
-    <h2 class="text-center my-4">Your messages</h2>
+    <h2 class="text-center my-4">Your inbox</h2>
     <h5 class="my-4">Click on a user below to start a conversation or add new users by following more</h5>
       <div class="row">
           <div class="col-sm-4">
@@ -11,18 +11,12 @@
           <div class="col-sm-8 border rounded-sm">
               <div v-if="messageToggle == true">
                   <h2>Messages with {{otherUser}}</h2>
-
                       <div id="v-for-object">
                             <div v-for="message in messages" :key="message.id">
-                                <div v-if="message.sender === otherUser">
-                                    <h5 class="text-right"><span class="badge badge-pill badge-light">{{message.message}}</span></h5>
-                                </div>
-                                <div v-else-if="message.sender === myUser">
-                                    <h5 class="text-left"><span class="badge badge-pill badge-light">{{message.message}}</span></h5>
-                                </div>
+                                <h5 v-if="message.sender == myUser" ><span style="display:block; text-align:left" class="badge badge-pill badge-light">From {{message.sender}} {{message.message}} {{message.created_at}}</span></h5>
+                                <h5 v-else><span style="display:block; text-align:right" class="badge badge-pill badge-light">{{message.message}}</span></h5>
                             </div>
                       </div>
-
                   <div class="form-group">
                     <textarea class="form-control" id="newMessageText" v-model="messageContent" rows="3" placeholder="Write your message here"></textarea>
                     <button class="btn btn-outline-primary my-2" @click="sendMessage">Send</button>
@@ -67,11 +61,15 @@ export default {
                     console.log(response.data.messages);
                     instance.messages = response.data.messages;
                     instance.myUser = response.data.myUser;
+                    // for (var i=0; i<= response.data.messages.length; i++){
+                    //     if (response.data.messages[i].sender == instance.MyUser){
 
+                    //     }
+                    // }
                 })
                 .catch(error => {
                      console.log(error.message);
-                     document.getElementById("messagesPage").innerHTML = "<h1>OOps there seem to have been an error. Reload to try again</h1>" + error.message;
+                     document.getElementById("messagesPage").innerHTML = "<h1>Oops there seem to have been an error. Reload to try again</h1>" + error.message;
                     });
             }, 1000);
         },

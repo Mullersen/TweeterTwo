@@ -50,3 +50,4 @@ Route::post('/messages/getMessages', 'MessageController@getMessages')->middlewar
 Route::post('/messages/sendMessage', 'MessageController@sendMessage')->middleware('auth');
 
 Route::get('/', 'HomeController@index');
+

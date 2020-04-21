@@ -116,6 +116,6 @@
             </div>
         </div>
     @endguest
-    {{ $tweets->links() }}
+    {{ $tweets->setPath('/tweetFeed') }}
 
 @endsection
