@@ -1962,7 +1962,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var slugified = this.slugify(this.gifsearch);
-      axios.get("http://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6").then(function (response) {
+      axios.get("https://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6").then(function (response) {
         //console.log(response.data.data);
         var newGifArray = response.data.data.map(function (gif) {
           return gif.images.downsized_medium.url;
@@ -1971,7 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.gridToggle = true;
       })["catch"](function (error) {
         console.log(error);
-        document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+        document.getElementById("tweetGrid").innerHTML = "<h1>Oops there seem to have been an error. reload to try again</h1>" + error.message;
       });
     },
     clicked: function clicked() {},
