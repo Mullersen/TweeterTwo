@@ -61,6 +61,7 @@ export default {
                 });
         },
         likeTweet : function (){
+
             axios.post('/like/likeTweet', {
                 key : this.tweetid,
                 })
