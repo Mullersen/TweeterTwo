@@ -45,6 +45,9 @@ class FeedController extends Controller
         $tweet = new \App\Tweet;
         $tweet->user_id = Auth::user()->id;
         $tweet->content = $request->content;
+        $tweet->is_retweet = 0;
+        $tweet->original_author = "";
+        $tweet->original_content = "";
         $tweet->save();
         return redirect('/tweetFeed');
     }

@@ -51,7 +51,7 @@ export default {
     methods: {
         sendSearch: function(){
             var slugified = this.slugify(this.gifsearch);
-            axios.get("http://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6")
+            axios.get("https://api.giphy.com/v1/gifs/search?q=" + slugified + "&api_key=A58IGl1RDtLVlRaN69KZV7ndSBDWVhDR&limit=6")
             .then(response => {
                 //console.log(response.data.data);
                 let newGifArray = response.data.data.map(gif =>{
@@ -62,7 +62,7 @@ export default {
             })
             .catch(error => {
                 console.log(error);
-                document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
+                document.getElementById("tweetGrid").innerHTML = "<h1>Oops there seem to have been an error. reload to try again</h1>" + error.message;
                 });
         },
         clicked: function(){
@@ -86,7 +86,7 @@ export default {
                 }, 5000)
             })
             .catch(error => {
-                console.log(error); 
+                console.log(error);
                 document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                 });
         },
@@ -99,7 +99,7 @@ export default {
                 this.gifToggle = false;
             })
             .catch(error => {
-                console.log(error.quote); 
+                console.log(error.quote);
                 document.getElementById("tweetGrid").innerHTML = "<h1>OOps there seem to have been an error. reload to try again</h1>" + error.message;
                 });
         },
