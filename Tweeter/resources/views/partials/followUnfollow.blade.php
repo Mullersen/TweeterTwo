@@ -11,4 +11,7 @@
             <button class="btn btn-outline-primary btn-sm"  name='name' value='{{App\Tweet::find($tweet->id)->user->name}}'>Follow User</button>
         </form>
     @endif
+
+@else
+<button type="button" class="btn btn-outline-primary btn-sm mb-3" style="cursor:default" disabled>Follow</button>
 @endif

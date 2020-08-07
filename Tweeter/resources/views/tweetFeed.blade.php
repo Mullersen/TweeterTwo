@@ -102,9 +102,13 @@
                                     <div class="col-4 text-center">
                                         @include('partials.followUnfollow')
                                     </div>
-                                    @if ($tweet->is_retweet ==0)
+                                    @if ($tweet->is_retweet == 0)
                                         <div class="col-4 text-center">
                                             <Myretweet tweetid={{$tweet->id}} username={{ Auth::user()->name}} retweetcontent="{{$tweet->content}}" retweetauthor="{{App\Tweet::find($tweet->id)->user->name}}"/>
+                                        </div>
+                                    @else
+                                        <div class="col-4 text-center">
+                                            <button type="button" class="btn btn-outline-primary btn-sm mb-3" disabled>Retweet</button>
                                         </div>
                                     @endif
                                 </div>
@@ -116,6 +120,8 @@
             </div>
         </div>
     @endguest
-<button id="loadmore">Load more tweets</button>
+    <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary" id="loadmore">Load more tweets</button>
+    </div>
 @endsection
 

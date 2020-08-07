@@ -8,8 +8,9 @@
         <img class="my-5 img-fluid border rounded shadow-sm" :src="image_src" alt="The new retweeting function">
         <div class="row justify-content-center">
           <div class="col-sm-8 ">
-            <img class="rounded-circle align-self-center shadow float-left" style="height:130px; display:inline-block" :src="'/images/retweetFunction.png'" alt="Tweeters new retweet function">
-            <b class="revealStats align-self-center" style="height:130px; display:inline">We have always loved showing respect to our fellow tweeters. Do like us and make your friends messages clearer to your own followers</b>
+
+            <img class="rounded-circle shadow" style="height:130px; display:inline-block" :src="'/images/retweetFunction.png'" alt="Tweeters new retweet function">
+            <b class="revealStats" style="height:130px; float:left">We have always loved showing respect to our fellow tweeters. Do like us and make your friends messages clearer to your own followers</b>
           </div>
         </div>
       </div>

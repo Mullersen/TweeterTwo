@@ -42,8 +42,14 @@
                             <p class="card-text mb-2">{{$tweet->content}}</p>
                         @endif
                     <p class="card-text font-italic small mb-2">{{$tweet->created_at->diffForHumans()}}</p>
-                    @include('partials.followUnfollow')
-                    <Like tweetid={{ $tweet->id }} likeCount={{App\Tweet::find($tweet->id)->like->count()}}></Like>
+                    <div class="btn-toolbar">
+                        <div class="btn-group mr-2">
+                            @include('partials.followUnfollow')
+                        </div>
+                        <div class="btn-toolbar">
+                            <Like tweetid={{ $tweet->id }} likeCount={{App\Tweet::find($tweet->id)->like->count()}}></Like>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endif
